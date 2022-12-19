@@ -7,11 +7,11 @@ body {
     height: 100vh;
 }
 
-#home{
-    background-color: rgb(5, 48, 5);
+#slideMenu{
+    display: none;
 }
 
-.iconMenu{
-    width: 40px;
-    height: 40px;
+/* Homepage */
+#home{
+    background-color: rgb(5, 48, 5);
 }
