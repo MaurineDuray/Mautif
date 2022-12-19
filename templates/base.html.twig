@@ -9,11 +9,18 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+        
     </head>
     <body>
+        {% include "partials/header.html.twig" %}
+
         {% block body %}{% endblock %}
+        
+        {% include "partials/footer.html.twig" %}
+
+         {{ encore_entry_script_tags('app') }}
+        {% block javascripts %}
+           
+        {% endblock %}
     </body>
 </html>
