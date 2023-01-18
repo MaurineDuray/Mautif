@@ -9,11 +9,23 @@
                 <img src={{asset('images/Logo.png')}} id="homeLogo" alt="Logo">
                 <h2>Bienvenue dans la jungle aux motifs</h2>
             </div>
-            
+            <img src={{asset('images/click.png')}} alt="" id="click">
        </div>
+
+        <img id="feuille3" src={{asset('images/feuillage.png')}} alt="">
+        <img id="feuille1" src={{asset('images/feuilleTopLeft.png')}} alt="">
+        <div id="feuille2"></div>
+        <img id="feuille4" src={{asset('images/feuille4.png')}} alt="">
     </div>
     
+
     <div class="slide" id="about">
     
     </div>
+
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{encore_entry_script_tags('home')}}
 {% endblock %}
