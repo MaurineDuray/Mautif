@@ -1,21 +1,34 @@
 <nav class="mainMenu">
-    <div id="slideMenu">
-        <ul>
-            <li><a href="">Accueil</a></li>
-            <li><a href="">Comment ça marche ?</a></li>
-            <li><a href="">Galerie</a></li>
-        </ul>
-    </div>
+    
 
-    <a href="" id="burgerMenu" class="icons"><i class="fa-solid fa-bars fa-3x"></i></a>
+    <div id="burgerMenu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+  
     
     
     {# <a href="" class="" style="width: 40px; height: 40px"><img src="{{asset('build/images/zoom.png')}}" style="width: 50px; height: 50px" alt=""></a> #}
     <div id="account">
-        <a href="" class="icons"><i class="fa-solid fa-magnifying-glass fa-2x"></i></a>
-        <a href="" class="icons"><i class="fas fa-user fa-2x" style=""></i></a>
+        <div class="icons">
+            <i class="icon fa-solid fa-magnifying-glass fa-2x"></i>
+        </div>
+        <div class="icons">
+            <i class="icon fas fa-user fa-2x" ></i>
+        </div>
     </div>
-    
-    
-    
 </nav>
+
+<nav id="slideMenu">
+
+        <ul>
+            <li><a href={{path("homepage")}}#home>Accueil</a></li>
+            <li><a href={{path("homepage")}}#about>Comment ça marche&nbsp?</a></li>
+            <li><a href="">Patchwork</a></li>
+        </ul>
+</nav>
+
+{% block javascripts %}
+    {{encore_entry_script_tags('menu')}}
+{% endblock %}

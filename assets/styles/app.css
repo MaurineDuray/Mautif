@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+@font-face {
+  font-family: 'Inria';
+  src: url('../../public/fonts/InriaSerif-Regular.ttf') format('ttf');
+}
+
+:root{
+    --darkgreen: rgb(5, 48, 5);
+    --white: rgb(255, 255, 255);
+    --serif: font-family: 'Inria Serif', serif;
+}
 *{
     margin:0;
     padding: 0;
@@ -7,43 +19,221 @@ body {
 }
 
 
-/* Menu */
+/* Menu Responsive*/
 #slideMenu{
-    display: none;
+    display: block;
+    margin-left: -35%;
+    width: 30%;
+    height: 100vh;
+    position: fixed;
+    z-index: 1000;
+    background: linear-gradient(-135deg, rgba(255, 255, 255, 0),rgba(255, 255, 255, 0.272) );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px 0 rgb(9, 9, 9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 1s;
 }
+.open{
+    margin-left: 0% !important;
+}
+
+#slideMenu ul{
+    font-size: 20pt;
+}
+#slideMenu ul li{
+    list-style: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    
+}
+#slideMenu ul li a{
+    text-decoration: none;
+    color: white;
+}
+#slideMenu ul li a:hover{
+    color: rgba(255, 255, 255, 0.63);
+}
+
+/* Menu principal */
 .mainMenu{
-    background-color: rgb(2, 36, 2);
-    height: 120px;
+    z-index: 1500;
+    position: fixed;
+    top:0;
+    left: 0;
+    background-color: transparent;
+    height: 80px;
     width: 100%;
     display: flex;
-    color: white;
+    color: rgb(255, 255, 255);
     line-height: 70px;
     align-items: center;
     justify-content: space-between;
     padding-left: 20px;
     padding-right: 20px;
 }
+#burgerMenu{
+    margin-top: -20px;
+    cursor: pointer;
+}
+#burgerMenu .bar{
+    height: 3px;
+    width: 50px;
+    background-color: white;
+    margin-top: 10px;
+    transition: all 0.5s;
+}
+#burgerMenu .bar:nth-child(2){
+    width: 40px;
+    
+}
+
+#burgerMenu.open {
+    margin-top: 15px;
+}
+#burgerMenu.open .bar:nth-child(1){
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    top: 22px;
+    position: absolute;
+}
+#burgerMenu.open .bar:nth-child(2){
+    width: 0%;
+    opacity: 0;
+}
+#burgerMenu.open .bar:nth-child(3){
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    top: 22px;
+    position: absolute;
+}
+
+
+
+#account{
+    display: flex;
+}
 .icons{
     width: 50px;
     height: 50px;
-    color: white;
+    margin-left: 20px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
 }
-.icons i{
-    color:rgb(5, 48, 5);
+.icon{
+    color:rgb(18, 50, 18);
+    text-align: center;
 }
 
-.fa-magnifying-glass, .fa-user{
-    margin: 10px;
-}
+
+
 
 /* Default */
 .slide{
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+    color: white;
 }
 
 /* Homepage */
 #home{
     background-color: rgb(5, 48, 5);
+    background-image: url(../../public/images/HomeBackground.png);
+    background-size: cover;
+    
+}
+#homeContent{
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; 
+}
+#homeContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; 
+    text-align: center;
+}
+#homeContainer h2{
+    width: 100%;
+    margin-top: 50px;
+    font-size: 3vw;
+    font-family: var(--serif);
+}
+#homeLogo{
+    width: 50%;
 }
 
+/* About ************** */
+#about{
+    background-color: rgba(2, 2, 2, 1);
+}
+
+
+/* Footer */
+
+#pins{
+    position: fixed;
+    bottom: 0px;
+    right: 30px;
+    width: 30px;
+    height: 30px;
+    border-radius: 20px 20px 0px 0px;
+    background-color: white;
+    text-align: center;
+   
+    cursor: pointer;
+}
+#arrow{
+    width: 20px;
+    height: 30px;
+    color: black;
+}
+footer{
+    display: none; 
+    bottom: 0; 
+    /* à changer dans le JS pour faire apparaître */
+    position: absolute;
+    width: 100%;
+    background-color: rgb(255, 255, 255);   
+    z-index: 999;
+}
+
+#footContent {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 15px;
+}
+#footLogo{
+    height: 50px;
+}
+#conditions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+#conditions a{
+    width:100%;
+    text-align: center;
+}
+#copyright{
+    background-color: var(--darkgreen);
+    color: var(--white);
+    text-align: center;
+}
