@@ -28,4 +28,15 @@ items.forEach(item=>{
     }
 })
 
+let search = document.querySelector('#search')
+let input = document.querySelector('#research')
+let loupe = document.querySelector('#search #loupe')
+
+loupe.addEventListener('click',function(){
+    console.log('loupe')
+    input.classList.toggle('actif')
+
+    
+})
+
 })

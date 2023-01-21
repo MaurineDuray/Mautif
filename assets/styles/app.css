@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
 
 
@@ -9,6 +8,7 @@
     --serif: font-family: 'Inria Serif', serif;
     --normal: font-family: 'Barlow', sans-serif;
 }
+
 *{
     margin:0;
     padding: 0;
@@ -78,6 +78,8 @@ body {
 #burgerMenu{
     margin-top: -20px;
     cursor: pointer;
+    width: 55px;
+    height: 55px;
 }
 #burgerMenu .bar{
     height: 3px;
@@ -118,6 +120,7 @@ body {
 
 
 #account{
+    width: auto;
     display: flex;
 }
 .icons{
@@ -125,7 +128,7 @@ body {
     height: 50px;
     margin-left: 20px;
     background-color: rgb(255, 255, 255);
-    border-radius: 50%;
+    border-radius: 25px;
     text-align: center;
     cursor: pointer;
 }
@@ -133,15 +136,43 @@ body {
     color:rgb(18, 50, 18);
     text-align: center;
 }
+#search{
+    width: auto;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+#search .icon{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#research{
+    height: 55px;
+    width: 0px;
+    border: 1px solid black;
+    display: none;
+    padding-left: 5px;
+}
+#loupe{
+    width:50px;
+    height: 50px;
+}
 
+.actif{
+    display: block !important;
+    width: 250px !important;
+    padding-right: 5px !important;
+    border: 1px solid black;
+}
 
 
 
 /* Default */
 .slide{
-    width: 100%;
+    width: 100vw;
     min-height: 100vh;
     color: white;
+    
 }
 
 /* Homepage */
@@ -149,7 +180,7 @@ body {
     background-color: rgb(5, 48, 5);
     background-image: url(../../public/images/HomeBackground.png);
     background-size: cover;
-  
+    overflow-x: hidden;
     
 }
 #homeContent{
@@ -183,6 +214,7 @@ body {
     bottom: 100px;
     text-align: center;
     justify-content: center;
+    z-index: 1001;
 }
 #click img{
     width: 50px;
@@ -246,6 +278,7 @@ body {
     text-align: center;
     font-family: var(--serif);
     padding-top: 100px;
+    padding-bottom: 20px
 }
 
 .aboutContainer{
@@ -298,6 +331,7 @@ body {
     margin-left: 50%;
     transform: translateX(-50%);
     margin-top: 30px;
+    margin-bottom: 50px;
 }
 /* Footer */
 
@@ -305,12 +339,12 @@ body {
     position: fixed;
     bottom: 0px;
     right: 30px;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 20px 20px 0px 0px;
     background-color: white;
     text-align: center;
-   
+    padding-top: 10px;
     cursor: pointer;
 }
 #arrow{
@@ -323,12 +357,12 @@ body {
     position: absolute;
     top: -30px;
     right: 30px;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 20px 20px 0px 0px;
     background-color: var(--white);
-    text-align: center;
-    
+    text-align: center;  
+    padding-top: 10px; 
 }
 footer{
     bottom: -50%; 
@@ -371,9 +405,23 @@ footer{
 
 
 /* Media Queries */
-
+@media all and (max-width: 750px){
+    #slideMenu{
+        width: 100%;
+        margin-left: -100%;
+    }
+    .aboutContainer{
+        display: block;
+        width: 80%;
+        margin: 0 auto;
+    }
+    .right,.left{
+        width: 100%;
+    }
+}
 @media all and (max-width: 700px){
     #feuille1, #feuille2, #feuille3, #feuille4{
         display: none;
     }
 }
+
