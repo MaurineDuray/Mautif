@@ -7,18 +7,22 @@
     --white: rgb(255, 255, 255);
     --serif: font-family: 'Inria Serif', serif;
     --normal: font-family: 'Barlow', sans-serif;
+    --fond: rgb(10,45,24)
 }
 
 *{
     margin:0;
     padding: 0;
 }
-body {
-    background-color: lightgray;
+body{
+   
     overflow-x: hidden;
     font-family: var(--normal);
+    overflow-y:scroll;
 }
-
+html{
+    background-color: #020202;
+}
 
 /* Menu Responsive*/
 #slideMenu{
@@ -240,7 +244,7 @@ body {
     background-size: contain;
     background-position: top right;
     background-image: url(../../public/images/feuillage2.png);
-    transition: all 2s;
+  
 }
 
 #feuille1{
@@ -285,7 +289,7 @@ body {
     width: 80%;
     margin: 0 auto;
     display: flex;
-
+    z-index: 5000;
 }
 .left, .right{
     width: 50%;
@@ -332,7 +336,10 @@ body {
     transform: translateX(-50%);
     margin-top: 30px;
     margin-bottom: 50px;
+    cursor: pointer;
 }
+
+
 /* Footer */
 
 #pins{
@@ -404,6 +411,99 @@ footer{
 }
 
 
+/*  Introduction de pages ************  */
+#intro{
+    height: auto;
+    padding-top: 80px;
+    padding-bottom: 50px;
+    background-image: url(../../public/images/Header.png);
+    background-size: 100%;
+    background-position: top center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+}
+#intro img{
+    width: 40%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+.fil{
+    background-color: var(--fond);
+}
+.fil h2{
+    width: 100%;
+    text-align: center;
+    margin-top: -40px;
+    position: absolute;
+    font-size: 18pt;
+}
+.filter{
+    margin-left: 50%;
+    transform:translateX(-50%);
+    padding-top: 20px;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.filter select{
+    border: 1px white solid;
+    color: var(--darkgreen);
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.592);
+    border-radius: 25px;
+    height: 40px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.filter input[type='submit']{
+    border-radius: 25px;
+    padding: 5px;
+    border: 1px white solid;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.filContainer{
+    width:70%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding-top: 40px;
+}
+.instax{
+    background-color: aliceblue;
+    color: black;
+    text-align: center;
+    
+}
+.instax img{
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+}
+.instaxContent{
+    width: 85%;
+    display: flex;
+    margin-left: 15%;
+}
+.instaxTitle{
+    width: 85%;
+}
+.heart{
+    width: 15%;
+    cursor:pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+}
+.heart .fa-heart{
+    width: 30px;
+    top: 50%;
+}
+
 /* Media Queries */
 @media all and (max-width: 750px){
     #slideMenu{
@@ -423,5 +523,17 @@ footer{
     #feuille1, #feuille2, #feuille3, #feuille4{
         display: none;
     }
+    .filter{
+        width: 90%;
+    }
 }
+@media all and (max-width: 500px){
+    .filter{
+       width: 90%;
+       margin-left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+
 

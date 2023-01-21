@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Patterns{% endblock %}
+
+{% block body %}
+    {% include "partials/intro.html.twig" %}
+
+    <div class="slide fil">
+        <h2>Bienvenue dans le patchwork !</h2>
+        {% include "partials/form.html.twig" %}
+
+        <div class="filContainer">
+            <div class="instax">
+                <img src={{asset('images/HomeBackground.png')}} alt="">
+                <div class="instaxContent">
+                    <div class="instaxTitle">
+                    <h6>Title</h6>
+                    <p>Pseudo Auteur</p>
+                    </div>
+                    <div class="heart"><i class="fa-regular fa-heart"></i></div>
+                </div>
+            </div>
+            <div class="instax">
+                <img src={{asset('images/HomeBackground.png')}} alt="">
+                <div class="instaxContent">
+                    <div class="instaxTitle">
+                    <h6>Title</h6>
+                    <p>Pseudo Auteur</p>
+                    </div>
+                    <div class="heart"><i class="fa-regular fa-heart"></i></div>
+                </div>
+            </div>
+            <div class="instax">
+                <a href=""><img src={{asset('images/HomeBackground.png')}} alt="image du motif"></a>
+                <div class="instaxContent">
+                    <div class="instaxTitle">
+                    <h6>Title</h6>
+                    <p>Pseudo Auteur</p>
+                    </div>
+                    <div class="heart"><i class="fa-regular fa-heart"></i></div>
+                </div>
+            </div>
+
+            <div class="instax">
+                <img src={{asset('images/HomeBackground.png')}} alt="">
+                <div class="instaxContent">
+                    <div class="instaxTitle">
+                    <h6>Title</h6>
+                    <p>Pseudo Auteur</p>
+                    </div>
+                    <div class="heart"><i class="fa-regular fa-heart"></i></div>
+                </div>
+            </div>
+            <div class="instax">
+                <img src={{asset('images/HomeBackground.png')}} alt="">
+                <div class="instaxContent">
+                    <div class="instaxTitle">
+                    <h6>Title</h6>
+                    <p>Pseudo Auteur</p>
+                    </div>
+                    <div class="heart"><i class="fa-regular fa-heart"></i></div>
+                </div>
+            </div>
+            <div class="instax">
+                <a href=""><img src={{asset('images/HomeBackground.png')}} alt="image du motif"></a>
+                <div class="instaxContent">
+                    <div class="instaxTitle">
+                    <h6>Title</h6>
+                    <p>Pseudo Auteur</p>
+                    </div>
+                    <div class="heart"><i class="fa-regular fa-heart"></i></div>
+                </div>
+            </div>
+           
+        </div>
+
+    </div>
+
+    
+{% endblock %}
