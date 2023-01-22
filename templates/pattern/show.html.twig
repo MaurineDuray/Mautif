@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Motif...{% endblock %}
+
+{% block body %}
+   
+    {% include "partials/intro.html.twig" %}
+    <div class="slide fil">
+        <h2>Motif ...</h2>
+        <button class="backButton">Retour à la galerie</button>
+        <div class="showContent">
+            <div class="left">
+                {% include "pattern/_instax.html.twig" %}
+            </div>
+            <div class="right">
+                <h6>THÈME</h6>
+                <h4>Nom de collection</h4>
+                <h5><i><a href="">Auteur</a></i></h5>
+                <h6>Description</h6>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio error reiciendis dolorem beatae distinctio nemo cupiditate temporibus tenetur voluptates doloremque.</p>
+                <p>Licence :<b>Gratuit pour usage personnel</b></p>
+                <button>Télécharger</button>
+            </div>
+        </div>
+
+        <hr class="sep" >
+
+        <div class="galery">
+            <h5>Galerie d'inspirations</h5>
+            <div class="slider">
+                <div class="picture"></div>
+                <div class="picture"></div>
+                <div class="picture"></div>
+            </div>
+        </div>
+    </div>
+   
+{% endblock %}
+

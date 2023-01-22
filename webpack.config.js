@@ -32,6 +32,7 @@ Encore
     .addEntry('app', './assets/app.js')
     .addEntry('menu', './assets/js/menu.js')
     .addEntry('home', './assets/js/home.js')
+    .addEntry('like', './assets/js/like.js')
     .addEntry('footer', './assets/js/footer.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)

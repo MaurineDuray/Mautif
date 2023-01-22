@@ -7,68 +7,64 @@
 
     <div class="slide fil">
         <h2>Bienvenue dans le patchwork !</h2>
-        {% include "partials/form.html.twig" %}
+        {% include "partials/filter.html.twig" %}
 
         <div class="filContainer">
+       
             <div class="instax">
-                <img src={{asset('images/HomeBackground.png')}} alt="">
+                <a href={{path('pattern_show')}}><img src={{asset('images/motif.jpeg')}} alt="image de "></a>
                 <div class="instaxContent">
                     <div class="instaxTitle">
-                    <h6>Title</h6>
-                    <p>Pseudo Auteur</p>
+                    <h6>Végétaux de Noël</h6>
+                    <p><i>MDsign</i></p>
                     </div>
-                    <div class="heart"><i class="fa-regular fa-heart"></i></div>
+                    <div class="heart"><i class="coeur fa-regular fa-heart"></i></div>
                 </div>
             </div>
             <div class="instax">
-                <img src={{asset('images/HomeBackground.png')}} alt="">
+                <img src={{asset('images/motif.jpeg')}} alt="">
                 <div class="instaxContent">
                     <div class="instaxTitle">
                     <h6>Title</h6>
-                    <p>Pseudo Auteur</p>
+                    <p><i>Pseudo Auteur</i></p>
                     </div>
-                    <div class="heart"><i class="fa-regular fa-heart"></i></div>
+                    <div class="heart"><i class="coeur fa-regular fa-heart"></i></div>
                 </div>
-            </div>
-            <div class="instax">
-                <a href=""><img src={{asset('images/HomeBackground.png')}} alt="image du motif"></a>
+            </div> <div class="instax">
+                <img src={{asset('images/motif.jpeg')}} alt="">
                 <div class="instaxContent">
                     <div class="instaxTitle">
                     <h6>Title</h6>
-                    <p>Pseudo Auteur</p>
+                    <p><i>Pseudo Auteur</i></p>
                     </div>
-                    <div class="heart"><i class="fa-regular fa-heart"></i></div>
+                    <div class="heart"><i class="coeur fa-regular fa-heart"></i></div>
                 </div>
-            </div>
-
-            <div class="instax">
-                <img src={{asset('images/HomeBackground.png')}} alt="">
+            </div> <div class="instax">
+                <img src={{asset('images/motif.jpeg')}} alt="">
                 <div class="instaxContent">
                     <div class="instaxTitle">
                     <h6>Title</h6>
-                    <p>Pseudo Auteur</p>
+                    <p><i>Pseudo Auteur</i></p>
                     </div>
-                    <div class="heart"><i class="fa-regular fa-heart"></i></div>
+                    <div class="heart"><i class="coeur fa-regular fa-heart"></i></div>
                 </div>
-            </div>
-            <div class="instax">
-                <img src={{asset('images/HomeBackground.png')}} alt="">
+            </div> <div class="instax">
+                <img src={{asset('images/motif.jpeg')}} alt="">
                 <div class="instaxContent">
                     <div class="instaxTitle">
                     <h6>Title</h6>
-                    <p>Pseudo Auteur</p>
+                    <p><i>Pseudo Auteur</i></p>
                     </div>
-                    <div class="heart"><i class="fa-regular fa-heart"></i></div>
+                    <div class="heart"><i class="coeur fa-regular fa-heart"></i></div>
                 </div>
-            </div>
-            <div class="instax">
-                <a href=""><img src={{asset('images/HomeBackground.png')}} alt="image du motif"></a>
+            </div> <div class="instax">
+                <img src={{asset('images/motif.jpeg')}} alt="">
                 <div class="instaxContent">
                     <div class="instaxTitle">
                     <h6>Title</h6>
-                    <p>Pseudo Auteur</p>
+                    <p><i>Pseudo Auteur</i></p>
                     </div>
-                    <div class="heart"><i class="fa-regular fa-heart"></i></div>
+                    <div class="heart"><i class="coeur fa-regular fa-heart"></i></div>
                 </div>
             </div>
            
@@ -76,5 +72,9 @@
 
     </div>
 
+    
+{% endblock %}
+
+{% block javascripts %}
     
 {% endblock %}
