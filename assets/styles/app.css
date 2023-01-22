@@ -24,6 +24,7 @@ html{
     background-color: #020202;
 }
 
+
 /* Menu Responsive*/
 #slideMenu{
     display: block;
@@ -39,7 +40,7 @@ html{
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 1s;
+    
 }
 .open{
     margin-left: 0% !important;

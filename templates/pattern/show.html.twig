@@ -7,7 +7,7 @@
     {% include "partials/intro.html.twig" %}
     <div class="slide fil">
         <h2>Motif ...</h2>
-        <button class="backButton">Retour à la galerie</button>
+        <a href={{path('patterns_index')}}><button class="backButton">Retour à la galerie</button></a>
         <div class="showContent">
             <div class="left">
                 {% include "pattern/_instax.html.twig" %}
