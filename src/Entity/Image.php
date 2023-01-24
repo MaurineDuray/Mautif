@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 class Image
@@ -14,13 +15,16 @@ class Image
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"L'image doit être mentionnée")]
     private ?string $image = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(max:255, maxMessage:"Le caption ne peut dépasser 255 caractères")]
     private ?string $caption = null;
 
     #[ORM\ManyToOne(inversedBy: 'images')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(message:"Le pattern doit être mentionné")]
     private ?Pattern $id_pattern = null;
 
   

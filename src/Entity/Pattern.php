@@ -2,12 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\PatternRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Cocur\Slugify\Slugify;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PatternRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
+#[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: PatternRepository::class)]
 class Pattern
 {
@@ -17,27 +20,39 @@ class Pattern
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Le titre du motif doit être mentionné")]
+    #[Assert\Length(min: 2, max:255, minMessage:"Le titre doit faire au minimum 2 caractères", maxMessage: "Le titre ne peut dépasser 255 caractères")]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Le thème du motif doit être mentionné")]
+    #[Assert\Length(min: 2, max:255, minMessage:"Le thème du motif doit faire au minimum 2 caractères", maxMessage: "Le thème du motif ne peut dépasser 255 caractères")]
     private ?string $theme = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"La couleur dominante du motif doit être mentionnée")]
+    #[Assert\Length(min: 2, max:255, minMessage:"La couleur dominante du motif doit faire au minimum 2 caractères", maxMessage: "La couleur dominante du motif ne peut dépasser 255 caractères")]
     private ?string $dominantColor = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\NotBlank(message:"La date de création doit être mentionnée")]
     private ?\DateTimeInterface $creationDate = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank("L'image représentant le motif doit être mentionnée")]
     private ?string $cover = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Le type de licence accordée doit être mentionnée")]
+    #[Assert\Choice(choices:['GRATUIT','COMMERCIAL','PERSONNEL'])]
     private ?string $license = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:'LE slug doit être mentionné')]
+    #[Assert\Length(min:2, max:255, minMessage:"Le slug doit posséder au minimum deux caractères", maxMessage:"Le slug ne peut atteindre plue de 255 caractères")]
     private ?string $slug = null;
 
     #[ORM\ManyToOne(inversedBy: 'patterns')]
@@ -57,6 +72,20 @@ class Pattern
     {
         $this->images = new ArrayCollection();
         $this->comments = new ArrayCollection();
+    }
+
+    /**
+     * Initialisation automatique du slug 
+     *
+     * @return void
+     */
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function initializeSlug():void{
+        if (empty($this->slug)){
+            $slugify = new Slugify();
+            $this->slug = $slugify->slugify($this->title.''.$this->theme);
+        }
     }
 
     public function getId(): ?int
