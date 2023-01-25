@@ -1,9 +1,9 @@
  <div class="instax">
-                <a href={{path('pattern_show')}}><img src={{asset('images/motif.jpeg')}} alt="image de "></a>
+               <a href={{path('pattern_show',  {'slug':pattern.slug})}}><img src="/uploads/{{pattern.cover}}" alt="image de "></a>
                 <div class="instaxContent">
                     <div class="instaxTitle">
-                    <h6>Végétaux de Noël</h6>
-                    <p><i>MDsign</i></p>
+                    <h6>Collection - {{pattern.title}}</h6>
+                    <p><i>par {{pattern.idUser.pseudo}}</i></p>
                     </div>
                     <div class="heart"><i class="coeur fa-regular fa-heart"></i></div>
                 </div>

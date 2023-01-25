@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Patterns{% endblock %}
+
+{% block body %}
+    
+    {% include "partials/intro.html.twig" %}
+    <div class="slide">
+        <div class="addContainer">
+            
+            <div class="left">
+              
+            </div>
+            <div class="right">
+                {{form_start(myform)}}
+                {{form_end(myform)}}
+                
+
+            </div>
+        </div>
+        
+       
+    </div>
+    
+{% endblock %}
+
+{% block javascripts %}
+    
+{% endblock %}

@@ -600,8 +600,23 @@ footer{
     padding-right: 20px;
 }
 
-
-
+/* Add pattern page */
+.addContainer{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.addContainer .left{
+    width: 50%;
+}
+.addContainer .right{
+    width: 50%;
+    margin-left: 50%;
+}
+.addContainer form{
+    position: absolute;
+    margin: 0%;
+}
 /* Media Queries */
 
 @media all and (max-width: 1000px){

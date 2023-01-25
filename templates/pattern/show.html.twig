@@ -1,24 +1,24 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Motif...{% endblock %}
+{% block title %}Motif {{pattern.title}}{% endblock %}
 
 {% block body %}
    
     {% include "partials/intro.html.twig" %}
     <div class="slide fil">
-        <h2>Motif ...</h2>
+        <h2>{{pattern.title}} <i>par {{pattern.idUser.pseudo}}</i></h2>
         <a href={{path('patterns_index')}}><button class="backButton">Retour à la galerie</button></a>
         <div class="showContent">
             <div class="left">
                 {% include "pattern/_instax.html.twig" %}
             </div>
             <div class="right">
-                <h6>THÈME</h6>
-                <h4>Nom de collection</h4>
-                <h5><i><a href="">Auteur</a></i></h5>
+                <h6>{{pattern.theme}}</h6>
+                <h4>Collection - {{pattern.title}}</h4>
+                <h5><i>par <a href="">{{pattern.idUser.pseudo}}</a></i></h5>
                 <h6>Description</h6>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio error reiciendis dolorem beatae distinctio nemo cupiditate temporibus tenetur voluptates doloremque.</p>
-                <p>Licence :<b>Gratuit pour usage personnel</b></p>
+                <p>{{pattern.description}}</p>
+                <p>Licence :<b></br>{{pattern.license}}</b></p>
                 <button>Télécharger</button>
             </div>
         </div>

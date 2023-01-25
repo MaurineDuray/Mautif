@@ -20,9 +20,10 @@ class RegistrationType extends ApplicationType
             ->add('password', PasswordType::class, $this->getConfiguration("Mot de passe", "Votre mot de passe"))
             ->add('passwordConfirm', PasswordType::class, $this->getConfiguration("Confirmation du mot de passe", "Veuillez confirmer votre mot de passe"))
             ->add('pseudo', TextType::class, $this->getConfiguration("Votre pseudo", "Votre pseudonyme"))
-            ->add('avatar',FileType::class)
-            ->add('introduction', TextType::class, $this->getConfiguration("Introduction", "Présentation rapide"))
-        ;
+            ->add('avatar',FileType::class, [
+                'required' => false
+            ])
+            ->add('introduction', TextType::class, $this->getConfiguration("Introduction", "Présentation rapide"));
     }
 
     public function configureOptions(OptionsResolver $resolver): void

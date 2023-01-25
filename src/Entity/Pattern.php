@@ -36,13 +36,14 @@ class Pattern
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotBlank(message:"La date de création doit être mentionnée")]
+    #[Assert\LessThan("today", message:'Doit être ultérieure à aujourd\'hui', groups:['front'])]
+    #[Assert\Type('datetime')]
     private ?\DateTimeInterface $creationDate = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank("L'image représentant le motif doit être mentionnée")]
     private ?string $cover = null;
 
     #[ORM\Column(length: 255)]
@@ -73,6 +74,8 @@ class Pattern
         $this->images = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
+
+  
 
     /**
      * Initialisation automatique du slug 

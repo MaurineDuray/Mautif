@@ -10,19 +10,10 @@
         {% include "partials/filter.html.twig" %}
 
         <div class="filContainer">
-       
-            {% include "pattern/_instax.html.twig" %}
-            {% include "pattern/_instax.html.twig" %}
-            {% include "pattern/_instax.html.twig" %}
-            {% include "pattern/_instax.html.twig" %}
-            {% include "pattern/_instax.html.twig" %}
-            {% include "pattern/_instax.html.twig" %}
-            {% include "pattern/_instax.html.twig" %}
-            {% include "pattern/_instax.html.twig" %}
-            {% include "pattern/_instax.html.twig" %}
- 
+            {% for pattern in patterns %}
+                {% include "pattern/_instax.html.twig" %}
+            {% endfor %}
         </div>
-
     </div>
 
     
