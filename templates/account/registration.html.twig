@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Inscription au site {% endblock %}
+{% block body %}
+    <div class="slide" id="connexion">
+        <div class="inscriptionContent">
+            <h1>Inscription</h1>
+            {{form_start(myform)}}
+                {{form_widget(myform)}}
+                <input type="submit" class="btn btn-success" value="Confirmer mon inscription"> 
+            {{form_end(myform)}}
+        </div>
+        
+    </div>
+{% endblock %}

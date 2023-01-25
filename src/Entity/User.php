@@ -25,7 +25,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180, unique: true)]
     #[Assert\NotBlank(message:"L'email doit être renseigné")]
     #[Assert\Email(message:"Le format de l'email n'est pas correct")]
-    #[UniqueEntity(fields:['email'],message:"Un utilisateur ayant cette adresse E-mail existe déjà")]
+    
     private ?string $email = null;
 
     #[ORM\Column]
@@ -38,6 +38,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank(message: "Le mot de passe est obligatoire")]
     private ?string $password = null;
 
+    #[Assert\EqualTo(propertyPath:"password", message:"Vous n'avez pas correctement confirmé votre mot de passe")]
+    public ?string $passwordConfirm = null;
+
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Le pseudo est obligatoire")]
     private ?string $pseudo = null;
@@ -46,7 +49,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $avatar = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Le slug est obligatoire")]
+   
     private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
