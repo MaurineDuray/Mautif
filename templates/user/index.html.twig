@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de {{user.pseudo}}{% endblock %}
+
+{% block body %}
+    {% include "partials/intro.html.twig" %}
+    <div class="slide fil">
+        {% if user.email == app.user.email %}
+            <h2>Votre profil</h2>
+        {% else %}
+             <h2> Profil de <i>{{user.pseudo}}</i></h2>
+        {% endif %}
+       
+        <div class="profileContent">
+            <div class="left">
+                <p>test</p>
+            </div>
+            <div class="right">
+                <p>test</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

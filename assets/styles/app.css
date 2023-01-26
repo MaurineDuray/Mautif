@@ -142,6 +142,29 @@ html{
     color:rgb(18, 50, 18);
     text-align: center;
 }
+#accountBlock{
+    display: none;
+    position: fixed;
+    background-color: rgb(255, 255, 255);
+    width: 250px;
+    flex-wrap: wrap;
+    justify-content: center;
+    right: 20px;
+    top: 75px;
+    border-radius: 10px;
+    color: var(--darkgreen);
+    z-index: 1010;
+}
+.account{
+    display: flex !important;
+}
+#accountBlock a{
+    width:100%;
+    text-align: center;
+    padding: 10px;
+    color: var(--darkgreen);
+    text-decoration: none;
+}
 #search{
     width: auto;
     display: flex;
@@ -484,6 +507,9 @@ footer{
     padding-top: 40px;
     padding-bottom: 70px;
 }
+.fil instax{
+    cursor:copy;
+}
 .instax{
     background-color: aliceblue;
     color: black;
@@ -502,6 +528,27 @@ footer{
 }
 .instaxTitle{
     width: 85%;
+}
+.btnactions{
+    width: 150px;
+    height: 50px;
+    top: 50%;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    padding-top: 10px;
+}
+.btnactions a{
+    background-color: aliceblue;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    color: red;
+    font-size: 20pt;
 }
 .heart{
     width: 15%;
@@ -617,6 +664,15 @@ footer{
     position: absolute;
     margin: 0%;
 }
+
+/* Admin pattern */
+.vignette{
+    width: 50px;
+    height: 50px;
+}
+
+
+
 /* Media Queries */
 
 @media all and (max-width: 1000px){

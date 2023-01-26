@@ -2,13 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Pattern;
 use App\Form\PatternType;
 use App\Repository\PatternRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
@@ -24,6 +27,19 @@ class PatternController extends AbstractController
         ]);
     }
 
+    #[Route('/mypattern', name:"mypattern")]
+    #[IsGranted('ROLE_USER')]
+    public function userPattern(PatternRepository $repo):Response
+    {
+
+        $patterns = $repo->findAll();
+
+        return $this->render('pattern/mypattern.html.twig', [
+            'user' => $this->getUser(),
+            'patterns'=> $patterns
+        ]);
+    }
+
     /**
      * Permet d'ajouter un motif au site
      *
@@ -32,6 +48,7 @@ class PatternController extends AbstractController
      * @return Response
      */
     #[Route('pattern/add', name:"pattern_add")]
+    #[IsGranted("ROLE_USER")]
     public function addPattern(Request $request, EntityManagerInterface $manager):Response
     {
         $pattern = new Pattern();
@@ -66,6 +83,7 @@ class PatternController extends AbstractController
             }
             /*** */
             $pattern->setIdUser($this->getUser());
+            $pattern->setCreationDate(new \DateTime());
 
             $manager->persist($pattern);
             $manager->flush();
@@ -97,5 +115,19 @@ class PatternController extends AbstractController
         return $this->render('pattern/show.html.twig', [
             'pattern' => $pattern,
         ]);
+    }
+
+    #[Route('/pattern/{slug}/delete', name:"pattern_delete")]
+    public function patternDelete(Pattern $pattern, EntityManagerInterface $manager)
+    {
+        $this->addFlash(
+            "success",
+            "Le motif {$pattern->getId()} a bien été supprimé"
+        );
+
+        $manager->remove($pattern);
+        $manager->flush();
+
+        return $this->redirectToRoute("mypattern");
     }
 }

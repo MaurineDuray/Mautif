@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Mes créations{% endblock %}
+{% block body %}
+    {% include "partials/intro.html.twig" %}
+    <div class="slide fil">
+        <h2>Vos créations - {{user.pseudo}} </h2>
+        <div class="filContainer">
+            {% for pattern in patterns %}
+                {% if pattern.idUser == app.user %}
+                    {% include "admin/partials/_accountinstax.html.twig" %}
+                {% endif %}
+            {% endfor %}
+        </div>
+       
+    </div>
+{% endblock %}

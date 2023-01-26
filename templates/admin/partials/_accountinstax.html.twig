@@ -1,4 +1,8 @@
  <div class="instax">
+                <div class="btnactions">
+                    <a href="#" ><i class="fas fa-edit"></i></a>
+                    <a href="{{path('pattern_delete', {'slug': pattern.slug})}}" ><i class="fas fa-trash"></i></a>
+                </div>
                <a href={{path('pattern_show',  {'slug':pattern.slug})}}><img src="/uploads/{{pattern.cover}}" alt="image de "></a>
                 <div class="instaxContent">
                     <div class="instaxTitle">
@@ -11,9 +15,8 @@
                     {% else %}
                         <div class="heart" unlike="true"><i class="coeur fa-regular fa-heart"></i></div>
                     {% endif %}
-                    
-                    
                 </div>
+                
 </div>
 
 {% block javascripts %}

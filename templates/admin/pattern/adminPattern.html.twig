@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Patterns{% endblock %}
+
+{% block body %}
+    {% include "partials/intro.html.twig" %}
+    <div class="slide fil">
+        <h2>Bienvenue dans l'administration <i>{{app.user.pseudo}} !</i></h2>
+        <h1>Gestion des mautifs</h1>
+         <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Vignette</th>
+                        <th>Titre</th>
+                        <th>Auteur</th>
+                        <th>Date de création</th>
+                        
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pattern in patterns %}
+                        <tr>
+                            <td>{{pattern.id}}</td>
+                            <td><img class="vignette" src="../uploads/{{pattern.cover}}" alt=""></td>
+                            <td>{{pattern.title}}</td>
+                            <td>{{pattern.idUser.pseudo}}</td>
+                            <td>{{pattern.creationDate | date('d/m/Y')}}</td>
+                            <td class="text-center">
+                                <a href="#" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                <a href="{{path('admin_pattern_delete', {'slug': pattern.slug})}}" ><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% for pattern in patterns %}
+            
+        {% endfor %}
+    </div>
+   
+{% endblock %}

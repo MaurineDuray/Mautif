@@ -21,7 +21,9 @@
             
         </div>
         <div class="icons">
-            <i class="icon fas fa-user fa-2x" ></i>
+            <div id="user">
+                <i class="icon fas fa-user fa-2x" ></i>
+            </div>  
         </div>
     </div>
 </nav>
@@ -34,6 +36,24 @@
             <li><a href={{path("patterns_index")}}>Patchwork</a></li>
         </ul>
 </nav>
+
+<div id="accountBlock">
+    {% if app.user %}
+        <a href="{{path('pattern_add')}}">Publier un motif</a>
+        <a href="{{path('myaccount')}}">Mon compte</a>
+        <a href="{{path('mypattern')}}">Mes créations</a>
+        <a href="">Mes favoris</a>
+        {% if is_granted('ROLE_ADMIN') %}
+             <a href="{{path('admin_pattern')}}">ADMINISTRATION</a>
+        {% endif %}
+        <a href="{{path('account_logout')}}" id="logout"><b>DÉCONNEXION</b></a>
+       
+    {% else %}
+        <a href="{{path('account_login')}}">Connexion</a>
+        <a href="{{path('account_register')}}">Créer un compte</a>
+    {% endif %}
+</div>
+
 
 {% block javascripts %}
     {{encore_entry_script_tags('menu')}}

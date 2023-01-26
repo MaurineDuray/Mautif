@@ -1,3 +1,5 @@
+const body = document.body
+
 const burger = document.querySelector("#burgerMenu")
 const menuResponsive = document.querySelector('#slideMenu')
 
@@ -8,6 +10,9 @@ let search = document.querySelector('#search')
 let input = document.querySelector('#research')
 let loupe = document.querySelector('#search #loupe')
 
+let login = document.querySelector('#user')
+let accountBlock = document.querySelector('#accountBlock')
+console.log(accountBlock)
 
 // gestion du menu burger 
 burger.addEventListener('click', function(){
@@ -51,5 +56,13 @@ loupe.addEventListener('click',function(){
         menuResponsive.style.transition="all 1s";
     
 })
+
+login.addEventListener('click', function(){
+    console.log('login click')
+
+    accountBlock.classList.toggle('account')
+})
+
+
 
 })

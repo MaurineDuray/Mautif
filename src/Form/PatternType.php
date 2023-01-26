@@ -47,7 +47,6 @@ class PatternType extends ApplicationType
                     'Ecru'=>"Ecru"
                 ]
             ] )
-            ->add('creationDate',DateType::class, $this->getConfiguration("Date de création","Date"))
             ->add('description', TextType::class, $this->getConfiguration("Description","Ecrivez ici une petite description de votre motif"))
             ->add('cover', FileType::class, $this->getConfiguration("Téléchargez votre motif","votre motif"))
             ->add('license',ChoiceType::class, [

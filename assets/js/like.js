@@ -9,15 +9,19 @@ hearts.forEach(item => {
         console.log('click')
         let noeud = item.childNodes[0]
         console.log(noeud)
-
-        // Activer ou non le like (rempli le coeur)
-        if(noeud.getAttribute('like')=="true"){
-            noeud.classList.add('fa-regular')
-            noeud.setAttribute('like', 'false')
+        if(item.getAttribute('unlike')){
+            alert('Vous devez être connectés sur le site pour pouvoir liker les patterns')
         }else{
-            noeud.classList.add('fa-solid')
-            noeud.setAttribute('like', 'true')
+             // Activer ou non le like (rempli le coeur)
+            if(noeud.getAttribute('like')=="true"){
+                noeud.classList.add('fa-regular')
+                noeud.setAttribute('like', 'false')
+            }else{
+                noeud.classList.add('fa-solid')
+                noeud.setAttribute('like', 'true')
+            }
         }
+       
        
     })
 });
