@@ -11,12 +11,10 @@
              <h2> Profil de <i>{{user.pseudo}}</i></h2>
         {% endif %}
 
-         <a href={{path('patterns_index')}}><button class="backButton">Retour à la galerie</button></a>
-
         {% if user.id == app.user.id %}
             <a href="#"><button>Modifier mes informations </button></a>
         {% endif %}
-
+        
        
         <div class="profileContent">
             <div class="left">
@@ -40,29 +38,16 @@
         <div id="create">
             <h4>Créations récentes</h4>
              <div class="container">
-             {% if app.user.id == user.id %}
-                {% if patterns | length %}
-                    <p>Vous n'avez pas encore de créations</p>
-                    <p>Vous pouvez soit découvrir comment créer <a href="{{path('homepage')}}#about">ICI</a> ou bien poster votre toute première création !</p>
-                    <a href="{{path('pattern_add')}}"><button>Postez votre première création</button></a>
-                {% else %}
-                    {% for pattern in patterns %}
-                        {% if pattern.idUser.id == user.id %}
-                            {% include "pattern/_instax.html.twig" %}
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-            {% else %}
                 <div class="filContainer">
                     {% for pattern in patterns %}
                         {% if pattern.idUser.id == user.id %}
                             {% include "pattern/_instax.html.twig" %}
                         {% endif %}
                     {% endfor %}
+                    {% if patterns | length==[] %}
+                        <p>Pas de créations à afficher</p>
+                    {% endif %}
                 </div> 
-            {% endif %}
-             
-               
              </div>
            
         </div>

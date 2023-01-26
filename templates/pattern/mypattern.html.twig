@@ -6,14 +6,6 @@
     <div class="slide fil">
         <h2>Vos créations - {{user.pseudo}} </h2>
          <a href={{path('patterns_index')}}><button class="backButton">Retour à la galerie</button></a>
-            {% if patterns | length %}
-                <div class="container">
-                    <p>Vous n'avez pas encore de créations</p>
-                    <p>Vous pouvez soit découvrir comment créer <a href="{{path('homepage')}}#about">ICI</a> ou bien poster votre toute première création !</p>
-                    <a href="{{path('pattern_add')}}"><button>Postez votre première création</button></a>
-                </div>
-                
-            {% else %}
                 <div class="filContainer" id="mypatternContent">
                     {% for pattern in patterns %}
                         {% if pattern.idUser == app.user %}
@@ -21,9 +13,5 @@
                         {% endif %}
                     {% endfor %}
                 </div>
-            {% endif %}
-            
-            
-       
     </div>
 {% endblock %}

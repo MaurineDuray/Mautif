@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class UserController extends AbstractController
 {
     /**
-     * Permet d'afficher le profil d'un utilisateur et le compte de l'utilisateur connecté
+     * Permet d'afficher le profil d'un utilisateur et le compte de use
      */
     #[Route('/user/{slug}', name: 'user_profile')]
     public function index(User $user, PatternRepository $repo): Response

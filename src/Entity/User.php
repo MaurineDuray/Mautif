@@ -84,7 +84,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function initializeSlug():void{
         if (empty($this->slug)){
             $slugify = new Slugify();
-            $this->slug = $slugify->slugify($this->pseudo);
+            $this->slug = $slugify->slugify($this->pseudo.'-'.rand());
         }
     }
 
