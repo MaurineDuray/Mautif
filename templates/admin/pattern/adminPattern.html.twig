@@ -6,6 +6,7 @@
     {% include "partials/intro.html.twig" %}
     <div class="slide fil">
         <h2>Bienvenue dans l'administration <i>{{app.user.pseudo}} !</i></h2>
+         <a href={{path('admin')}}><button class="backButton">Retour au tableau de bord</button></a>
         <h1>Gestion des mautifs</h1>
          <table class="table table-hover">
                 <thead>

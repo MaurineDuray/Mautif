@@ -10,10 +10,22 @@
         {% else %}
              <h2> Profil de <i>{{user.pseudo}}</i></h2>
         {% endif %}
+
+         <a href={{path('patterns_index')}}><button class="backButton">Retour à la galerie</button></a>
+
+        {% if user.id == app.user.id %}
+            <a href="#"><button>Modifier mes informations </button></a>
+        {% endif %}
+
        
         <div class="profileContent">
             <div class="left">
-                <img src="../uploads/{{user.avatar}}" alt="">
+                {% if user.avatar %}
+                    <img src="../uploads/{{user.avatar}}" alt="">
+                {% else %}
+                    <img src="../images/director.png" alt="">
+                {% endif %}
+                
             </div>
             <div class="right">
                 <p>{{user.pseudo}}</p>
@@ -26,19 +38,39 @@
 
         <hr class="sep" >
         <div id="create">
-            <h4>Vos créations récentes</h4>
-             <div class="filContainer">
-                {% for pattern in patterns %}
-                    {% include "pattern/_instax.html.twig" %}
-                {% endfor %}
+            <h4>Créations récentes</h4>
+             <div class="container">
+             {% if app.user.id == user.id %}
+                {% if patterns | length %}
+                    <p>Vous n'avez pas encore de créations</p>
+                    <p>Vous pouvez soit découvrir comment créer <a href="{{path('homepage')}}#about">ICI</a> ou bien poster votre toute première création !</p>
+                    <a href="{{path('pattern_add')}}"><button>Postez votre première création</button></a>
+                {% else %}
+                    {% for pattern in patterns %}
+                        {% if pattern.idUser.id == user.id %}
+                            {% include "pattern/_instax.html.twig" %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% else %}
+                <div class="filContainer">
+                    {% for pattern in patterns %}
+                        {% if pattern.idUser.id == user.id %}
+                            {% include "pattern/_instax.html.twig" %}
+                        {% endif %}
+                    {% endfor %}
+                </div> 
+            {% endif %}
+             
+               
              </div>
            
         </div>
         <hr class="sep" >
         <div id="favorites">
-            <h4>Vos derniers motifs favoris</h4>
+            <h4>Derniers likes </h4>
             <div class="filContainer">
-            
+
             </div>
         </div>
     </div>

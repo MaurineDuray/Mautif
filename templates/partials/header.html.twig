@@ -44,7 +44,7 @@
         <a href="{{path('mypattern')}}">Mes créations</a>
         {# <a href="">Mes favoris</a> #}
         {% if is_granted('ROLE_ADMIN') %}
-             <a href="{{path('admin_pattern')}}">ADMINISTRATION</a>
+             <a href="{{path('admin')}}">ADMINISTRATION</a>
         {% endif %}
         <a href="{{path('account_logout')}}" id="logout"><b>DÉCONNEXION</b></a>
        

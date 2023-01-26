@@ -21,7 +21,14 @@ body{
 html{
     background-color: #020202;
 }
-
+.container{
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+.container a{
+    color: greenyellow
+}
 
 /* Menu Responsive*/
 #slideMenu{

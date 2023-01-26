@@ -26,7 +26,9 @@ class PatternController extends AbstractController
     #[Route('/patterns', name: 'patterns_index')]
     public function index(PatternRepository $repo): Response
     {
-        $patterns=$repo->findAll();
+        $patterns=$repo->findBy(
+            array(), array('id'=>'DESC')
+        );
 
         return $this->render('pattern/index.html.twig', [
             'patterns' => $patterns,
@@ -140,6 +142,8 @@ class PatternController extends AbstractController
             "Le motif {$pattern->getId()} a bien été supprimé"
         );
 
+        unlink($this->getParameter('uploads_directory').'/'.$pattern->getCover());
+            
         $manager->remove($pattern);
         $manager->flush();
 
