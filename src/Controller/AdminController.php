@@ -8,6 +8,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AdminController extends AbstractController
 {
+    /**
+     * Permet d'afficher le dashboard de l'administration
+     *
+     * @return Response
+     */
     #[Route('/admin', name: 'app_admin')]
     public function index(): Response
     {

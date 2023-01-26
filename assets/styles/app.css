@@ -671,6 +671,12 @@ footer{
     height: 50px;
 }
 
+/* Profile */
+.profileContent{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
 
 
 /* Media Queries */

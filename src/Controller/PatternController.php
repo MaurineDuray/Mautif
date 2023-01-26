@@ -17,6 +17,12 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class PatternController extends AbstractController
 {
+    /**
+     * Permet d'afficher la page reprenant tous les motifs 
+     *
+     * @param PatternRepository $repo
+     * @return Response
+     */
     #[Route('/patterns', name: 'patterns_index')]
     public function index(PatternRepository $repo): Response
     {
@@ -27,6 +33,12 @@ class PatternController extends AbstractController
         ]);
     }
 
+    /**
+     * Permet d'afficher les patterns de l'utilisateur connecté
+     *
+     * @param PatternRepository $repo
+     * @return Response
+     */
     #[Route('/mypattern', name:"mypattern")]
     #[IsGranted('ROLE_USER')]
     public function userPattern(PatternRepository $repo):Response
@@ -107,7 +119,7 @@ class PatternController extends AbstractController
     }
 
     /**
-     * Permet d'afficher un motif 
+     * Permet d'afficher un motif individuel à partir du slug
      */
     #[Route('/pattern/{slug}', name:'pattern_show')]
     public function show(string $slug, Pattern $pattern ):Response
@@ -117,6 +129,9 @@ class PatternController extends AbstractController
         ]);
     }
 
+    /**
+     * Permet de supprimer un motif
+     */
     #[Route('/pattern/{slug}/delete', name:"pattern_delete")]
     public function patternDelete(Pattern $pattern, EntityManagerInterface $manager)
     {

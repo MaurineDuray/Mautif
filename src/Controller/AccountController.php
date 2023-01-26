@@ -33,6 +33,11 @@ class AccountController extends AbstractController
         ]);
     }
 
+    /**
+     * Permet la déconnexion de l'utilisateur
+     *
+     * @return void
+     */
     #[Route("/logout", name:"account_logout")]
     public function logout():void
     {

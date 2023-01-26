@@ -13,10 +13,32 @@
        
         <div class="profileContent">
             <div class="left">
-                <p>test</p>
+                <img src="../uploads/{{user.avatar}}" alt="">
             </div>
             <div class="right">
-                <p>test</p>
+                <p>{{user.pseudo}}</p>
+                <h5>{{user.email}}</h5>
+                <h5>Description</h5>
+                <p>{{user.introduction}}</p>
+                <p>{{user.slug}}</p>
+            </div>
+        </div>
+
+        <hr class="sep" >
+        <div id="create">
+            <h4>Vos créations récentes</h4>
+             <div class="filContainer">
+                {% for pattern in patterns %}
+                    {% include "pattern/_instax.html.twig" %}
+                {% endfor %}
+             </div>
+           
+        </div>
+        <hr class="sep" >
+        <div id="favorites">
+            <h4>Vos derniers motifs favoris</h4>
+            <div class="filContainer">
+            
             </div>
         </div>
     </div>

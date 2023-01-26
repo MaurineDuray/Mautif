@@ -13,6 +13,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminPatternController extends AbstractController
 {
+    /**
+     * Affiche la liste des patterns contenu sur le site
+     *
+     * @param PatternRepository $repo
+     * @return Response
+     */
     #[Route('/admin/pattern', name: 'admin_pattern')]
     #[IsGranted("ROLE_ADMIN")]
     public function index(PatternRepository $repo): Response
@@ -24,7 +30,11 @@ class AdminPatternController extends AbstractController
         ]);
     }
 
+    /**
+     * Permet de supprimer un pattern à partir de l'administration (liste des motifs)
+     */
     #[Route('/admin/pattern/{slug}/delete', name:"admin_pattern_delete")]
+    #[IsGranted('ROLE_ADMIN')]
     public function patternDelete(Pattern $pattern, EntityManagerInterface $manager)
     {
         $this->addFlash(
