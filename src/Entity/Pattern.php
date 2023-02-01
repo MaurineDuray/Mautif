@@ -44,6 +44,7 @@ class Pattern
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Image(maxSize:"2000000", mimeTypesMessage:"Votre fichier n'est pas un format correct", maxSizeMessage: "Votre fichier est trop lourd et dépasse les 2Mo, veuillez choisir un fichier plus petit ! ")]
     private ?string $cover = null;
 
     #[ORM\Column(length: 255)]
