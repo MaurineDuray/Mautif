@@ -1,0 +1,78 @@
+/* **********Show pattern ****** */
+.backButton{
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+.showContent{
+    display: flex;
+    padding-top: 30px;
+    width: 80%;
+    margin: 0 auto;
+    padding-bottom: 30px;
+    flex-wrap: wrap;
+}
+.showContent a{
+    color : greenyellow;
+}
+.showContent #theme{
+    font-size: 12pt;
+}
+.showContent h3 b{
+    font-size: 18pt;
+    font-family: var(--normal);
+    font-weight: 100;
+    margin-bottom: 10px;
+}
+.showContent h4{
+    font-size: 20pt;
+    font-family: var(--serif);
+}
+.showContent .right h6{
+    font-size: 14pt;
+    margin-bottom: 40px;
+}
+.showContent .license{
+    margin-top: 15px;
+}
+.showContent .left .instax{
+    width: 80%;
+}
+
+.showContent .right{
+    padding-top: 50px;
+    text-align: center;
+}
+#uploadBtn{
+    margin: 0 auto;
+    transform: translateX(1%);
+    margin-top: 30px;
+}
+.sep{
+    width: 80vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+.galery{
+    padding-top: 50px;
+    width: 90%;
+    margin: 0 auto;
+    padding-bottom: 40px;
+
+}
+.galery h5{
+    width: 100%;
+    text-align: center;
+    font-family: var(--serif);
+    font-size: 18pt;
+}
+.slider{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding-top: 30px;
+}
+.picture{
+    background-color: rgb(169, 219, 187);
+    height: 200px;
+}
+

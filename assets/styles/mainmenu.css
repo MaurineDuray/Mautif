@@ -1,0 +1,133 @@
+/* Menu principal */
+.mainMenu{
+    z-index: 1500;
+    position: fixed;
+    top:0;
+    left: 0;
+    background-color: transparent;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    color: rgb(255, 255, 255);
+    line-height: 70px;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+}
+#burgerMenu{
+    margin-top: -20px;
+    cursor: pointer;
+    width: 55px;
+    height: 55px;
+}
+#burgerMenu .bar{
+    height: 3px;
+    width: 50px;
+    background-color: white;
+    margin-top: 10px;
+    transition: all 0.5s;
+}
+#burgerMenu .bar:nth-child(2){
+    width: 40px;
+    
+}
+
+#burgerMenu.open {
+    margin-top: 15px;
+}
+#burgerMenu.open .bar:nth-child(1){
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    top: 22px;
+    position: absolute;
+}
+#burgerMenu.open .bar:nth-child(2){
+    width: 0%;
+    opacity: 0;
+}
+#burgerMenu.open .bar:nth-child(3){
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    top: 22px;
+    position: absolute;
+}
+
+
+
+#account{
+    width: auto;
+    display: flex;
+    margin-left: -200px;
+}
+.icons{
+    width: 50px;
+    height: 50px;
+    margin-left: 20px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 25px;
+    text-align: center;
+    cursor: pointer;
+}
+.icon{
+    color:rgb(18, 50, 18);
+    text-align: center;
+}
+#accountBlock{
+    display: none;
+    position: fixed;
+    background-color: rgb(255, 255, 255);
+    width: 250px;
+    flex-wrap: wrap;
+    justify-content: center;
+    right: 20px;
+    top: 75px;
+    border-radius: 10px;
+    color: var(--darkgreen);
+    z-index: 1010;
+}
+.account{
+    display: flex !important;
+}
+#accountBlock a{
+    width:100%;
+    text-align: center;
+    padding: 10px;
+    color: var(--darkgreen);
+    text-decoration: none;
+}
+#search{
+    width: auto;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+#search .icon{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#research{
+    height: 55px;
+    width: 0px;
+    border: 1px solid black;
+    display: none;
+    padding-left: 5px;
+}
+#loupe{
+    width:50px;
+    height: 50px;
+}
+
+.actif{
+    display: block !important;
+    width: 250px !important;
+    padding-right: 5px !important;
+    border: 1px solid black;
+}
+
+

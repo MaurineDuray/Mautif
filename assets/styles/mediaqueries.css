@@ -1,0 +1,62 @@
+/* Media Queries */
+
+@media all and (max-width: 1000px){
+    .filContainer{
+        width:90%;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;  
+    }
+    .profileContent{
+        width: 100%;
+    }
+}
+@media all and (max-width: 750px){
+    #slideMenu{
+        width: 100%;
+        margin-left: -100%;
+    }
+    .aboutContainer{
+        display: block;
+        width: 80%;
+        margin: 0 auto;
+    }
+    .addContainer{
+        width: 100%;
+        flex: wrap;
+    }
+    .addContainer.left, addContainer.right{
+        width:100%;
+    }
+    
+    .right,.left{
+        width: 100%;
+    }
+    .slider{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 40px;
+        padding-top: 30px;
+    }
+}
+@media all and (max-width: 700px){
+    #feuille1, #feuille2, #feuille3, #feuille4{
+        display: none;
+    }
+    .filter{
+        width: 90%;
+    }
+    .filContainer{
+        width:75%;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;  
+    }
+}
+@media all and (max-width: 500px){
+    .filter{
+       width: 90%;
+       margin-left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+

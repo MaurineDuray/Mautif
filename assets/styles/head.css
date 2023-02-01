@@ -1,0 +1,16 @@
+#intro{
+    height: auto;
+    padding-top: 80px;
+    padding-bottom: 50px;
+    background-image: url(../../public/images/Header.png);
+    background-size: 100%;
+    background-position: top center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+}
+#intro img{
+    width: 40%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}

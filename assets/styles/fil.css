@@ -1,0 +1,122 @@
+/*  Header de pages secondaires ************  */
+
+.fil{
+    background-color: var(--fond);
+}
+.fil button{
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    padding: 0px 20px 0px 20px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-weight:bold;
+}
+.fil h2{
+    width: 100%;
+    text-align: center;
+    margin-top: -40px;
+    position: absolute;
+    font-size: 18pt;
+    font-family: var(--serif);
+}
+.filter{
+    margin-left: 50%;
+    transform:translateX(-50%);
+    padding-top: 20px;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.filter select{
+    border: 1px white solid;
+    color: var(--darkgreen);
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.592);
+    border-radius: 25px;
+    height: 40px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.filter input[type='submit']{
+    border-radius: 25px;
+    padding: 5px;
+    border: 1px white solid;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.filContainer{
+    width:70%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding-top: 40px;
+    padding-bottom: 70px;
+}
+.fil instax{
+    cursor:copy;
+}
+.instax{
+    background-color: aliceblue;
+    color: black;
+    text-align: center;
+    padding-bottom: 20px;
+}
+.instax img{
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+    box-sizing: border-box;
+}
+.instaxContent{
+    width: 85%;
+    display: flex;
+    margin-left: 15%;
+}
+.instaxTitle{
+    width: 85%;
+}
+.instax h6{
+    font-size: 15pt;
+    font-weight:500;
+}
+.instax p{
+    font-size: 12pt;
+    font-weight:100;
+}
+.btnactions{
+    width: 150px;
+    height: 50px;
+    top: 50%;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    padding-top: 10px;
+}
+.btnactions a{
+    background-color: aliceblue;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    color: red;
+    font-size: 20pt;
+}
+.heart{
+    width: 15%;
+    cursor:pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: red ;
+    font-size: 20pt;
+    padding-right: 20px;
+}

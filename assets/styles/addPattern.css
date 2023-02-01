@@ -1,0 +1,26 @@
+/* Add pattern page */
+.addContainer{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 20px;
+}
+.addContainer .left p{
+    width: 100%;
+}
+
+.addContainer .right{
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.addContainer .right div{
+    width: 100%;
+    margin-top: 20px;
+}
+.addContainer .right input, .addContainer .right select, .addContainer .left input{
+    height: 30px;
+    padding: 0px 5px 0px 5px;
+    border-radius: 20px;
+    margin-left: 10px;
+}

@@ -113,6 +113,30 @@ class PatternController extends AbstractController
         ]);
     }
 
+    #[Route('/pattern/{slug}/edit', name: 'pattern_edit')]
+    public function editPattern(Pattern $pattern, Request $request, EntityManagerInterface $manager):Response
+    {
+        $form = $this->createForm(PatternType::class, $pattern);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $manager->persist($pattern);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "Le motif a bien été modifié"
+            );
+        }
+
+        return $this->render("pattern/show.html.twig",[
+            "pattern"=>$pattern,
+            "myform"=>$form->createView()
+        ]);
+
+    }
+
 
     /**
      * Permet de supprimer un motif
