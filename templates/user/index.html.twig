@@ -19,18 +19,20 @@
         <div class="profileContent">
             <div class="left">
                 {% if user.avatar %}
-                    <img src="../uploads/{{user.avatar}}" alt="">
+                    <img id="avatar" src="../uploads/{{user.avatar}}" alt="">
                 {% else %}
-                    <img src="../images/director.png" alt="">
+                    <img id="avatar" src="../images/director.png" alt="">
                 {% endif %}
                 
             </div>
             <div class="right">
+                <h5>Pseudo</h5>
                 <p>{{user.pseudo}}</p>
-                <h5>{{user.email}}</h5>
-                <h5>Description</h5>
+                <h5>Email</h5>
+                <p>{{user.email}}</p>
+                <h5>Introduction</h5>
                 <p>{{user.introduction}}</p>
-                <p>{{user.slug}}</p>
+                
             </div>
         </div>
 
@@ -41,21 +43,31 @@
                 <div class="filContainer">
                     {% for pattern in patterns %}
                         {% if pattern.idUser.id == user.id %}
-                            {% include "pattern/_instax.html.twig" %}
+                            {% include "admin/partials/_accountinstax.html.twig" %}
                         {% endif %}
                     {% endfor %}
                     {% if patterns | length==[] %}
                         <p>Pas de créations à afficher</p>
                     {% endif %}
                 </div> 
+                {% if app.user.id == user.id %}
+                    <a href="{{path('mypattern')}}">En voir plus</a>
+                {% else %}
+                     <a href="#">En voir plus</a>
+                {% endif %}
+                
+                
              </div>
            
         </div>
         <hr class="sep" >
         <div id="favorites">
             <h4>Derniers likes </h4>
-            <div class="filContainer">
+            <div class="container">
+                <div class="filContainer">
 
+                </div>
+                <a href="#">En voir plus</a>
             </div>
         </div>
     </div>

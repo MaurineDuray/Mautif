@@ -5,8 +5,8 @@
 :root{
     --darkgreen: rgb(5, 48, 5);
     --white: rgb(255, 255, 255);
-    --serif: font-family: 'Inria Serif', serif;
-    --normal: font-family: 'Barlow', sans-serif;
+    --serif: 'Inria Serif', serif;
+    --normal:'Barlow', sans-serif;
     --fond: rgb(10,45,24)
 }
 
@@ -17,6 +17,7 @@
 body{
     overflow-x: hidden;
     overflow-y:scroll;
+    font-family: var(--normal);
 }
 html{
     background-color: #020202;
@@ -303,6 +304,7 @@ html{
 }
 #more p{
     padding-bottom: 15px;
+    font-family: var(--normal);
 }
 
 /* About ************** */
@@ -332,6 +334,8 @@ html{
 }
 .right h5{
     margin-top: 50px;
+    font-family: var(--serif);
+    font-size: 18pt;
 }
 .left{
     display: flex;
@@ -356,16 +360,22 @@ html{
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    font-family: var(--normal);
 }
 #about h3{
     width: 100%;
     text-align: center;
     margin-top: 100px;
+    font-family: var(--serif);
+    font-size: 20pt;
+    padding-bottom: 15px;
 }
 #about #emploi{
     width: 80%;
     margin: 0 auto;
     text-align: center;
+    display: block;
+    font-family: var(--normal);
 }
 #about button{
     border: 1px solid white;
@@ -452,7 +462,7 @@ footer{
 }
 
 
-/*  Introduction de pages ************  */
+/*  Header de pages secondaires ************  */
 #intro{
     height: auto;
     padding-top: 80px;
@@ -472,12 +482,25 @@ footer{
 .fil{
     background-color: var(--fond);
 }
+.fil button{
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    padding: 0px 20px 0px 20px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-weight:bold;
+}
 .fil h2{
     width: 100%;
     text-align: center;
     margin-top: -40px;
     position: absolute;
     font-size: 18pt;
+    font-family: var(--serif);
 }
 .filter{
     margin-left: 50%;
@@ -536,6 +559,14 @@ footer{
 .instaxTitle{
     width: 85%;
 }
+.instax h6{
+    font-size: 15pt;
+    font-weight:500;
+}
+.instax p{
+    font-size: 12pt;
+    font-weight:100;
+}
 .btnactions{
     width: 150px;
     height: 50px;
@@ -582,6 +613,29 @@ footer{
     padding-bottom: 30px;
     flex-wrap: wrap;
 }
+.showContent a{
+    color : greenyellow;
+}
+.showContent #theme{
+    font-size: 12pt;
+}
+.showContent h3 b{
+    font-size: 18pt;
+    font-family: var(--normal);
+    font-weight: 100;
+    margin-bottom: 10px;
+}
+.showContent h4{
+    font-size: 20pt;
+    font-family: var(--serif);
+}
+.showContent .right h6{
+    font-size: 14pt;
+    margin-bottom: 40px;
+}
+.showContent .license{
+    margin-top: 15px;
+}
 .showContent .left .instax{
     width: 80%;
 }
@@ -589,6 +643,11 @@ footer{
 .showContent .right{
     padding-top: 50px;
     text-align: center;
+}
+#uploadBtn{
+    margin: 0 auto;
+    transform: translateX(1%);
+    margin-top: 30px;
 }
 .sep{
     width: 80vw;
@@ -605,6 +664,8 @@ footer{
 .galery h5{
     width: 100%;
     text-align: center;
+    font-family: var(--serif);
+    font-size: 18pt;
 }
 .slider{
     display: grid;
@@ -616,6 +677,8 @@ footer{
     background-color: rgb(169, 219, 187);
     height: 200px;
 }
+
+
 /* Connexion */
 #connexion{
     min-height: 100vh;
@@ -659,6 +722,7 @@ footer{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    padding-bottom: 20px;
 }
 .addContainer .left{
     width: 50%;
@@ -666,10 +730,18 @@ footer{
 .addContainer .right{
     width: 50%;
     margin-left: 50%;
+    display: flex;
+    flex-wrap: wrap;
 }
-.addContainer form{
-    position: absolute;
-    margin: 0%;
+.addContainer .right div{
+    width: 80%;
+    margin-top: 20px;
+}
+.addContainer .right input, .addContainer .right select, .addContainer .left input{
+    height: 30px;
+    padding: 0px 5px 0px 5px;
+    border-radius: 20px;
+    margin-left: 10px;
 }
 
 /* Admin pattern */
@@ -682,8 +754,29 @@ footer{
 .profileContent{
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 30px;
+    padding-bottom: 20px;
 }
+.profileContent .right{
+    text-align: center;
+
+}
+#avatar{
+    border-radius: 50%;
+    width: 300px;
+    background-color: white;
+    margin-bottom: 30px;
+}
+
+#create h4, #favorites h4{
+    text-align: center;
+    font-size: 20pt;
+    font-family: var(--serif);
+    padding-top: 15px;
+}
+
 
 
 /* Media Queries */
@@ -693,6 +786,9 @@ footer{
         width:90%;
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;  
+    }
+    .profileContent{
+        width: 100%;
     }
 }
 @media all and (max-width: 750px){
@@ -705,6 +801,7 @@ footer{
         width: 80%;
         margin: 0 auto;
     }
+    
     .right,.left{
         width: 100%;
     }
