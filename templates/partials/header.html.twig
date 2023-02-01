@@ -41,7 +41,7 @@
     {% if app.user %}
         <a href="{{path('pattern_add')}}">Publier un motif</a>
         <a href="{{path('user_profile',{'slug': app.user.slug})}}">Mon compte</a>
-        <a href="{{path('mypattern')}}">Mes créations</a>
+        <a href="{{path('user_patterns',{'slug': app.user.slug})}}">Mes créations</a>
         {# <a href="">Mes favoris</a> #}
         {% if is_granted('ROLE_ADMIN') %}
              <a href="{{path('admin')}}">ADMINISTRATION</a>

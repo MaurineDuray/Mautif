@@ -87,7 +87,7 @@ class Pattern
     public function initializeSlug():void{
         if (empty($this->slug)){
             $slugify = new Slugify();
-            $this->slug = $slugify->slugify($this->title.''.$this->theme);
+            $this->slug = $slugify->slugify($this->title.'-'.rand());
         }
     }
 

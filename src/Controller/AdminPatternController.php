@@ -33,7 +33,7 @@ class AdminPatternController extends AbstractController
     /**
      * Permet de supprimer un pattern à partir de l'administration (liste des motifs)
      */
-    #[Route('/admin/pattern/{slug}/delete', name:"admin_pattern_delete")]
+    #[Route('/adminpattern/{slug}/delete', name:"admin_pattern_delete")]
     #[IsGranted('ROLE_ADMIN')]
     public function patternDelete(Pattern $pattern, EntityManagerInterface $manager)
     {
@@ -42,10 +42,12 @@ class AdminPatternController extends AbstractController
             "Le motif {$pattern->getId()} a bien été supprimé"
         );
 
+        unlink($this->getParameter('uploads_directory').'/'.$pattern->getCover());
+            
         $manager->remove($pattern);
         $manager->flush();
 
-        return $this->redirectToRoute("admin/pattern/adminPattern.html.twig");
+        return $this->redirectToRoute("admin_pattern");
     }
 
 

@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Mes créations{% endblock %}
+{% block body %}
+    {% include "partials/intro.html.twig" %}
+    <div class="slide fil">
+
+            {% if not app.user %}
+                <h2>Les créations de {{user.pseudo}}</h2>
+                {% else %}
+                {% if app.user.id == user.id %}
+                        <h2>Vos créations</h2>
+                    {% else %}
+                        <h2>Les créations de {{user.pseudo}}</h2>
+                {% endif %}
+                    
+            {% endif %}
+            
+
+
+            <a href={{path('patterns_index')}}><button class="backButton">Retour à la galerie</button></a>
+            <div class="filContainer" id="mypatternContent">
+
+                {% if not app.user %}
+                    {% for pattern in patterns %}
+                        {% if pattern.idUser.slug == user.slug %}
+                            {% include "pattern/_instax.html.twig" %}
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                {% if app.user.id == user.id %}
+                       {% for pattern in patterns %}
+                            {% if pattern.idUser.slug == user.slug %}
+                                {% include "admin/partials/_accountinstax.html.twig" %}
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {% for pattern in patterns %}
+                            {% if pattern.idUser.slug == user.slug %}
+                                {% include "pattern/_instax.html.twig" %}
+                            {% endif %}
+                        {% endfor %}
+                {% endif %}
+                    
+                {% endif %}
+
+            </div>
+    </div>
+{% endblock %}

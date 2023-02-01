@@ -10,7 +10,9 @@
         <a href={{path('patterns_index')}}><button class="backButton">Retour à la galerie</button></a>
         <div class="showContent">
             <div class="left">
+                <a href="uploads/{{pattern.cover}}" target="_blank">
                 {% include "pattern/_instax.html.twig" %}
+                </a>
             </div>
             <div class="right">
                 <p class="theme">{{pattern.theme}}</p>
@@ -21,7 +23,7 @@
                 <h3><b>Description</b></h3>
                 <p>{{pattern.description}}</p>
                 <p class="license">Licence :<b></br>{{pattern.license}}</b></p>
-                <button id="uploadBtn">Télécharger le motif</button>
+                <a href="uploads/{{pattern.cover}}" download="{{pattern.title}}.jpg"><button id="uploadBtn">Télécharger le motif</button></a>
             </div>
         </div>
 
