@@ -44,12 +44,13 @@ class Pattern
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Image(maxSize:"2000000", mimeTypesMessage:"Votre fichier n'est pas un format correct", maxSizeMessage: "Votre fichier est trop lourd et dépasse les 2Mo, veuillez choisir un fichier plus petit ! ")]
+    #[Assert\Image(mimeTypes:["image/png","image/jpeg","image/jpg"], mimeTypesMessage:"Vous devez upload un fichier jpg, jpeg, png ou gif")]
+    #[Assert\Image(maxSize:"2000000", maxSizeMessage:"Votre fichier dépasse le poid maximal autorisé")]
     private ?string $cover = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Le type de licence accordée doit être mentionnée")]
-    #[Assert\Choice(choices:['GRATUIT','COMMERCIAL','PERSONNEL'])]
+    #[Assert\Choice(choices:['GRATUIT','COMMERCIALE','PERSONNELLE'])]
     private ?string $license = null;
 
     #[ORM\Column(length: 255)]

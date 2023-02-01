@@ -114,13 +114,39 @@ class PatternController extends AbstractController
     }
 
     #[Route('/pattern/{slug}/edit', name: 'pattern_edit')]
+    #[IsGranted("ROLE_USER")]
     public function editPattern(Pattern $pattern, Request $request, EntityManagerInterface $manager):Response
     {
-        $form = $this->createForm(PatternType::class, $pattern);
+        $form = $this->createForm(PatternType::class, $pattern, [
+            'validation_groups'=>['Default']
+        ]);
         $form->handleRequest($request);
 
+        // if($form['cover']){
+        //     unlink($this->getParameter('uploads_directory').'/'.$pattern->getCover());
+        // }
+        
+
         if($form->isSubmitted() && $form->isValid())
-        {
+        {        
+
+            $file = $form['cover']->getData();
+            if (!empty($file)) {
+
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin;Latin-ASCII;[^A-Za-z0-9_]remove;Lower()', $originalFilename);
+                $newFilename = $safeFilename . "-" . uniqid() . "." . $file->guessExtension();
+                try {
+                    $file->move(
+                        $this->getParameter('uploads_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    return $e->getMessage();
+                }
+                $pattern->setCover($newFilename);
+            }
+
             $manager->persist($pattern);
             $manager->flush();
 
@@ -128,9 +154,12 @@ class PatternController extends AbstractController
                 'success',
                 "Le motif a bien été modifié"
             );
+
+            return $this->redirectToRoute('pattern_show',['slug'=>$pattern->getSlug()]);
+           
         }
 
-        return $this->render("pattern/show.html.twig",[
+        return $this->render("pattern/editPattern.html.twig",[
             "pattern"=>$pattern,
             "myform"=>$form->createView()
         ]);
@@ -142,6 +171,7 @@ class PatternController extends AbstractController
      * Permet de supprimer un motif
      */
     #[Route('/pattern/{slug}/delete', name:"pattern_delete")]
+    #[IsGranted("ROLE_USER")]
     public function patternDelete(Pattern $pattern, EntityManagerInterface $manager)
     {
         $this->addFlash(

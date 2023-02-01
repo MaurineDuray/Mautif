@@ -18,7 +18,7 @@ class PatternType extends ApplicationType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('submit', SubmitType::class,['label' => 'Enregistrer ma création et poster'])
+            ->add('submit', SubmitType::class,['label' => 'Enregistrer'])
             ->add('title', TextType::class, $this->getConfiguration("Titre", "Titre du motif"))
             ->add('theme', ChoiceType::class,[
                 'choices'=>[
@@ -48,12 +48,15 @@ class PatternType extends ApplicationType
                 ]
             ] )
             ->add('description', TextType::class, $this->getConfiguration("Description","Ecrivez ici une petite description de votre motif"))
-            ->add('cover', FileType::class, $this->getConfiguration("Téléchargez votre motif","votre motif"))
+            ->add('cover', FileType::class, [
+                "data_class" =>  null,
+                "label"=>"Téléchargez votre motif"
+            ])
             ->add('license',ChoiceType::class, [
                 'choices'=>[
-                    'commercial'=>"Licence gratuite à usage commercial",
-                    'personnel'=>"License gratuite pour usage personnel",
-                    'gratuit'=>"licence totalement gratuite"
+                    'COMMERCIALE'=>"COMMERCIALE",
+                    'PERSONNELLE'=>"PERSONNELLE",
+                    'GRATUITE'=>"GRATUITE"
                 ]
             ])
         ;
