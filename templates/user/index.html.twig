@@ -5,17 +5,16 @@
 {% block body %}
     {% include "partials/intro.html.twig" %}
     <div class="slide fil">
-        {% if user.email == app.user.email %}
-            <h2>Votre profil</h2>
-        {% else %}
-             <h2> Profil de <i>{{user.pseudo}}</i></h2>
-        {% endif %}
-
-        {% if user.id == app.user.id %}
-            <a href="#"><button>Modifier mes informations </button></a>
-        {% endif %}
         
-       
+        {% if is_granted('ROLE_USER') %}
+            {% if app.user.id == user.id %}
+                <a href="#"><button>Modifier mes informations </button></a>
+               
+            {% endif %}
+        {% endif %}
+         
+        <a href={{path('patterns_index')}}><button class="backButton">Retour à la galerie</button></a>
+        
         <div class="profileContent">
             <div class="left">
                 {% if user.avatar %}
@@ -41,20 +40,17 @@
             <h4>Créations récentes</h4>
              <div class="container">
                 <div class="filContainer">
-                    {% for pattern in patterns %}
-                        {% if pattern.idUser.id == user.id %}
-                            {% include "admin/partials/_accountinstax.html.twig" %}
+                        {% for pattern in patterns %}
+                            {% if pattern.idUser.id == user.id %}
+                                {% include "pattern/_instax.html.twig" %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if patterns | length==[] %}
+                            <p>Pas de créations à afficher</p>
                         {% endif %}
-                    {% endfor %}
-                    {% if patterns | length==[] %}
-                        <p>Pas de créations à afficher</p>
-                    {% endif %}
-                </div> 
-                {% if app.user.id == user.id %}
-                    <a href="{{path('mypattern')}}">En voir plus</a>
-                {% else %}
-                     <a href="#">En voir plus</a>
-                {% endif %}
+                </div>  
+                <a href="#">En voir plus</a>
+                
                 
                 
              </div>
