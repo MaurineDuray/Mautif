@@ -35,7 +35,7 @@ class AdminPatternController extends AbstractController
      */
     #[Route('/adminpattern/{slug}/delete', name:"admin_pattern_delete")]
     #[IsGranted('ROLE_ADMIN')]
-    public function patternDelete(Pattern $pattern, EntityManagerInterface $manager)
+    public function patternAdminDelete(Pattern $pattern, EntityManagerInterface $manager)
     {
         $this->addFlash(
             "success",

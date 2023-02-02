@@ -13,8 +13,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ShowPatternController extends AbstractController
 {
    
-
-  
     /**
      * Permet d'afficher les patterns de l'utilisateur connecté
      *

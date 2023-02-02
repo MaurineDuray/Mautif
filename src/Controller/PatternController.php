@@ -5,12 +5,13 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Pattern;
 use App\Form\PatternType;
-use App\Repository\PatternRepository;
 use App\Repository\UserRepository;
+use App\Repository\PatternRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -102,9 +103,9 @@ class PatternController extends AbstractController
         ]);
     }
 
-            /**
-     * Permet d'afficher un motif individuel à partir du slug
-     */
+    /**
+    * Permet d'afficher un motif individuel à partir du slug
+    */
     #[Route('/pattern/{slug}', name:'pattern_show')]
     public function show(string $slug, Pattern $pattern ):Response
     {
@@ -113,8 +114,11 @@ class PatternController extends AbstractController
         ]);
     }
 
+    /**
+     * Permet d'afficher le formulaire pour éditer un motif
+     */
     #[Route('/pattern/{slug}/edit', name: 'pattern_edit')]
-    #[IsGranted("ROLE_USER")]
+    #[Security("(is_granted('ROLE_USER') and user === pattern.getIdUser()) or is_granted('ROLE_ADMIN')", message:"Cette annonce ne vous appartient pas, vous ne pouvez pas la modifier")]
     public function editPattern(Pattern $pattern, Request $request, EntityManagerInterface $manager):Response
     {
         $form = $this->createForm(PatternType::class, $pattern, [
@@ -171,7 +175,7 @@ class PatternController extends AbstractController
      * Permet de supprimer un motif
      */
     #[Route('/pattern/{slug}/delete', name:"pattern_delete")]
-    #[IsGranted("ROLE_USER")]
+    #[Security("(is_granted('ROLE_USER') and user === pattern.getIdUser()) or is_granted('ROLE_ADMIN')", message:"Cette annonce ne vous appartient pas, vous ne pouvez pas la supprimer")]
     public function patternDelete(Pattern $pattern, EntityManagerInterface $manager)
     {
         $this->addFlash(
