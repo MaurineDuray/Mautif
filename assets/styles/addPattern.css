@@ -5,6 +5,10 @@
     flex-wrap: wrap;
     padding-bottom: 20px;
 }
+.addContainer .left{
+    display: flex;
+    flex-wrap: wrap;
+}
 .addContainer .left p{
     width: 100%;
 }
@@ -23,4 +27,7 @@
     padding: 0px 5px 0px 5px;
     border-radius: 20px;
     margin-left: 10px;
+}
+.addContainer .instax{
+   width: 40%;
 }

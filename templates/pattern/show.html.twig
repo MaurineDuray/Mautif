@@ -23,7 +23,10 @@
                 <h3><b>Description</b></h3>
                 <p>{{pattern.description}}</p>
                 <p class="license">Licence :<b></br>{{pattern.license}}</b></p>
+
+                {% if pattern.license == "COMMERCIALE" or pattern.license == "PRIVÉE" %}
                 <a href="uploads/{{pattern.cover}}" download="{{pattern.title}}.jpeg"><button id="uploadBtn">Télécharger le motif</button></a>
+                {% endif%}
             </div>
         </div>
 

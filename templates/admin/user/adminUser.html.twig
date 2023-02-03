@@ -7,15 +7,17 @@
     <div class="slide fil">
         <h2>Bienvenue dans l'administration <i>{{app.user.pseudo}} !</i></h2>
          <a href={{path('admin')}}><button class="backButton">Retour au tableau de bord</button></a>
-        <h1>Gestion des mautifs</h1>
+        <h1>Gestion des utilisateurs</h1>
          <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Avatar</th>
+                        {# <th>Avatar</th> #}
                         <th>Pseudo</th>
                         <th>Email</th>
-                        <th>Rôle(s)</th>
+                        {# <th>Rôle(s)</th> #}
+                        <th>Le profil</th>
+                        <th>Les créations</th>
                         
                         <th class="text-center">Actions</th>
                     </tr>
@@ -24,14 +26,21 @@
                     {% for user in users %}
                         <tr>
                             <td>{{user.id}}</td>
-                            <td><img class="vignette" src="../uploads/{{user.avatar}}" alt=""></td>
-                            <td><a href="{{path('user_patterns',{'slug': user.slug })}}">{{user.pseudo}}</a></td>
+                            {# <td><img class="vignette" src="../uploads/{{user.avatar}}" alt=""></td> #}
+                            <td>{{user.pseudo}}</td>
                             <td>{{user.email}}</td>
-                            <td>{{user.roles[0]}}</td>
-                            <td class="text-center">
-                                <a href="" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                            {# <td>{{user.roles[0]}}</td> #}
+                            <td> 
+                            <a href="{{path('user_profile',{'slug': user.slug })}}" class="btn-green"><i class="fa-solid fa-eye"></i></a>
+                            </td>
+                            <td> 
+                            <a href="{{path('user_patterns',{'slug': user.slug })}}" class="btn-green"><i class="fa-solid fa-eye"></i></a>
+                            </td>
+                            
+                            <td class="actions">
+                                <a href="" class="btn-yellow"><i class="fas fa-edit"></i></a>
                                 {% if user.roles[0] == "ROLE_USER" or not app.user.id == user.id %}
-                                    <a href="{{path('admin_user_delete',{'slug': user.slug })}}" ><i class="fas fa-trash"></i></a>
+                                    <a href="{{path('admin_user_delete',{'slug': user.slug })}}" class="btn-red" ><i class="fas fa-trash"></i></a>
                                 {% endif %}
                             </td>
                         </tr>

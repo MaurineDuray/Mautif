@@ -2,6 +2,9 @@
 
 .fil{
     background-color: var(--fond);
+    padding-bottom: 150px;
+    box-sizing: border-box;
+    color: white;
 }
 .fil button{
     height: 40px;
@@ -22,6 +25,10 @@
     position: absolute;
     font-size: 18pt;
     font-family: var(--serif);
+}
+.fil h1{
+    text-align: center;
+    width: 100%;
 }
 .filter{
     margin-left: 50%;

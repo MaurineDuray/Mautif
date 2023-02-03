@@ -6,9 +6,9 @@
     {% include "partials/intro.html.twig" %}
     <div class="slide fil">
         
-        {% if is_granted('ROLE_USER') %}
-            {% if app.user.id == user.id %}
-                <a href="#"><button>Modifier mes informations </button></a>
+        {% if is_granted('ROLE_USER')  %}
+            {% if app.user.id == user.id or app.user.roles[0]=="ROLE_ADMIN" %}
+                <a href="#"><button>Modifier les informations </button></a>
                
             {% endif %}
         {% endif %}

@@ -50,7 +50,7 @@ class Pattern
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Le type de licence accordée doit être mentionnée")]
-    #[Assert\Choice(choices:['GRATUIT','COMMERCIALE','PERSONNELLE'])]
+    #[Assert\Choice(choices:['PRIVÉE','COMMERCIALE','PROTÉGÉE'])]
     private ?string $license = null;
 
     #[ORM\Column(length: 255)]

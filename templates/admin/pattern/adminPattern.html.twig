@@ -13,9 +13,10 @@
                     <tr>
                         <th>ID</th>
                         <th>Vignette</th>
-                        <th>Titre</th>
+                        <th>Titre du motif</th>
                         <th>Auteur</th>
-                        <th>Date de création</th>
+                        <th>Voir le profil</th>
+                        {# <th>Date de création</th> #}
                         
                         <th class="text-center">Actions</th>
                     </tr>
@@ -27,10 +28,13 @@
                             <td><img class="vignette" src="../uploads/{{pattern.cover}}" alt=""></td>
                             <td>{{pattern.title}}</td>
                             <td>{{pattern.idUser.pseudo}}</td>
-                            <td>{{pattern.creationDate | date('d/m/Y')}}</td>
-                            <td class="text-center">
-                                <a href="{{path('pattern_edit',{'slug': pattern.slug })}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                                <a href="{{path('admin_pattern_delete',{'slug': pattern.slug })}}" ><i class="fas fa-trash"></i></a>
+                            <td> 
+                            <a href="{{path('user_profile',{'slug': pattern.idUser.slug })}}" class="btn-green"><i class="fa-solid fa-eye"></i></a>
+                            </td>
+                            {# <td>{{pattern.creationDate | date('d/m/Y')}}</td> #}
+                            <td class="actions">
+                                <a href="{{path('pattern_edit',{'slug': pattern.slug })}}" class="btn-yellow"><i class="fas fa-edit"></i></a>
+                                <a href="{{path('admin_pattern_delete',{'slug': pattern.slug })}}" class="btn-red" ><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                     {% endfor %}

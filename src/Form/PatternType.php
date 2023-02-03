@@ -55,8 +55,8 @@ class PatternType extends ApplicationType
             ->add('license',ChoiceType::class, [
                 'choices'=>[
                     'COMMERCIALE'=>"COMMERCIALE",
-                    'PERSONNELLE'=>"PERSONNELLE",
-                    'GRATUITE'=>"GRATUITE"
+                    'PRIVÉE'=>"PRIVÉE",
+                    'PROTÉGÉE'=>"PROTÉGÉE"
                 ]
             ])
         ;

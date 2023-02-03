@@ -34,6 +34,7 @@ body{
 }
 html{
     background-color: #020202;
+    overflow-x: hidden;
 }
 .container{
     width: 90%;
@@ -48,6 +49,7 @@ html{
     width: 100vw;
     min-height: 100vh;
     color: white;
+    overflow-x: hidden !important;
     
 }
 

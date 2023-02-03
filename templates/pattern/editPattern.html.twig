@@ -7,14 +7,15 @@
     {% include "partials/intro.html.twig" %}
     <div class="slide fil">
         <h2>Modification du motif</h2>
-        
+        <a href={{path('patterns_index')}}><button class="backButton">Retour à la galerie</button></a>
         {{form_start(myform)}}
         {{form_widget(myform.submit)}}
 
         <div class="addContainer">
             
             <div class="left">
-                 {{form_row(myform.cover)}} 
+                {# {% include "pattern/_instax.html.twig" %} #}
+                
             </div>
             <div class="right">
                 {{form_row(myform.title)}}

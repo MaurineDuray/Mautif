@@ -4,11 +4,16 @@
 
 {% block body %}
     {% include "partials/intro.html.twig" %}
-    <div class="slide fil">
+    <div class="fil slide">
+        <h2>Bienvenue dans l'administration <i>{{app.user.pseudo}}</i></h2>
         <a href={{path('patterns_index')}}><button class="backButton">Retour à la galerie</button></a>
-        <h1>ADMINISTRATION</h1>
-        <a href="{{path('admin_pattern')}}">Gestion des mautifs</a>
-        <a href="{{path('admin_user')}}">Gestion des utilisateurs</a>
+        <div class="dashboard">
+            <h1>ADMINISTRATION</h1>
+            <p><i>du site</i></p>
+            <a href="{{path('admin_pattern')}}">Gestion des mautifs</a>
+            <a href="{{path('admin_user')}}">Gestion des utilisateurs</a>
+        </div>
+       
     </div>
 {% endblock %}
 
