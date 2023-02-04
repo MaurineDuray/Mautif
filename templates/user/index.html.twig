@@ -38,25 +38,38 @@
         <hr class="sep" >
         <div id="create">
             <h4>Créations récentes</h4>
-             <div class="container">
-                <div class="filContainer">
+               <div class="wrapper">
+                <div class="arrows" id="left">
+                    <i  class="fa-solid fa-angle-left"></i>
+                </div>
+                    
+                    <div class="caroussel">
                         {% for pattern in patterns %}
-                            {% if pattern.idUser.id == user.id %}
-                                {% include "pattern/_instax.html.twig" %}
-                            {% endif %}
+                                {% if pattern.idUser.id == user.id %}
+                                    <img src="/uploads/{{pattern.cover}}" alt="" draggable="false">
+                                {% endif %}
                         {% endfor %}
+                            
                         {% if patterns | length==[] %}
                             <p>Pas de créations à afficher</p>
                         {% endif %}
-                </div>  
+                    </div> 
+                <div class="arrows" id="right">
+                    <i  class="fa-solid fa-angle-right"></i>
+                </div>
+                </div>
+                        
+                
                 <a href="{{path('user_patterns', {'slug': user.slug})}}">En voir plus</a>
                 
                 
                 
-             </div>
+             
            
         </div>
         <hr class="sep" >
+
+
 
         {# <div id="favorites">
             <h4>Derniers likes </h4>
@@ -68,5 +81,11 @@
             </div>
         </div> #}
 
+
+
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{encore_entry_script_tags('slider')}}
 {% endblock %}

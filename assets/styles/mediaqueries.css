@@ -9,6 +9,9 @@
     .profileContent{
         width: 100%;
     }
+    .caroussel img{
+        width: calc(100% /2);
+    }
 }
 @media all and (max-width: 750px){
     #slideMenu{
@@ -56,6 +59,9 @@
        width: 90%;
        margin-left: 50%;
         transform: translateX(-50%);
+    }
+    .caroussel img{
+        width: 100%;
     }
 }
 

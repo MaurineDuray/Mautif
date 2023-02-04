@@ -24,3 +24,59 @@
     font-family: var(--serif);
     padding-top: 15px;
 }
+
+.wrapper{
+    max-width: 90%;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    position: relative;
+}
+.arrows{
+    width: 45px;
+    height: 45px;
+    background-color: white;
+    color: var(--darkgreen);
+    cursor: pointer;
+    text-align: center;
+    line-height: 45px;
+    border-radius:50%;
+    font-size: 1.2rem;
+    position: absolute;
+}
+.arrows .i{
+    background-color: white;
+}
+.wrapper .arrows:first-child{
+    left: -23px;
+    display: none;
+}
+.wrapper .arrows:last-child{
+    right: -23px;
+}
+.wrapper .caroussel{
+    scroll-behavior: smooth;
+    cursor: pointer; 
+    white-space: nowrap;
+    overflow: hidden;
+}
+.caroussel.dragging{
+    pointer-events: none;
+}
+.caroussel.dragging img{
+    scroll-behavior: smooth;
+    cursor: grab;
+}
+.caroussel img{
+    height: 340px;
+    object-fit: cover;
+    width: calc(100% /3);
+    margin-left: 14px;
+    padding: 0;
+}
+.caroussel img:first-child{
+    margin-left: -14px;
+}
+
+
+

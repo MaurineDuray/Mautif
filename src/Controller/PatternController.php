@@ -10,6 +10,7 @@ use App\Repository\PatternRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -121,35 +122,21 @@ class PatternController extends AbstractController
     #[Security("(is_granted('ROLE_USER') and user === pattern.getIdUser()) or is_granted('ROLE_ADMIN')", message:"Cette annonce ne vous appartient pas, vous ne pouvez pas la modifier")]
     public function editPattern(Pattern $pattern, Request $request, EntityManagerInterface $manager):Response
     {
-        $form = $this->createForm(PatternType::class, $pattern, [
-            'validation_groups'=>['Default']
-        ]);
-        $form->handleRequest($request);
+        $user = $this->getUser(); //récupération de l'utilisateur connecté
 
-        // if($form['cover']){
-        //     unlink($this->getParameter('uploads_directory').'/'.$pattern->getCover());
-        // }
-        
+        $fileName = $pattern->getCover();
+        if(!empty($fileName)){
+            $pattern->setCover(new File($this->getParameter('uploads_directory').'/'.$pattern->getCover()));
+        }
+
+        $form = $this->createForm(PatternType::class, $pattern);
+        $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
         {        
 
-            $file = $form['cover']->getData();
-            if (!empty($file)) {
-
-                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = transliterator_transliterate('Any-Latin;Latin-ASCII;[^A-Za-z0-9_]remove;Lower()', $originalFilename);
-                $newFilename = $safeFilename . "-" . uniqid() . "." . $file->guessExtension();
-                try {
-                    $file->move(
-                        $this->getParameter('uploads_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    return $e->getMessage();
-                }
-                $pattern->setCover($newFilename);
-            }
+            $pattern-> setCover($fileName);
+            
 
             $manager->persist($pattern);
             $manager->flush();

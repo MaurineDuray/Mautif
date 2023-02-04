@@ -16,7 +16,9 @@ class UserController extends AbstractController
     #[Route('/user/{slug}', name: 'user_profile')]
     public function index(User $user, PatternRepository $repo): Response
     {
-        $patterns = $repo->findAll();
+        $patterns=$repo->findBy(
+            array(), array('id'=>'DESC')
+        );
 
         return $this->render('user/index.html.twig', [
             'user' => $user,
