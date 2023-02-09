@@ -9,7 +9,7 @@
         {% if is_granted('ROLE_USER')  %}
             {% if app.user.id == user.id or app.user.roles[0]=="ROLE_ADMIN" %}
                 <a href="{{path('account_profile',{'slug' : user.slug})}}"><button>Modifier les informations </button></a>
-                <a href="#"><button>Modifier l'avatar</button></a>
+                <a href="{{path('avatar_edit', {'slug': user.slug})}}"><button>Modifier l'avatar</button></a>
                
             {% endif %}
         {% endif %}
