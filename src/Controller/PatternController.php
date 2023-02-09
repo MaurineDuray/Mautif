@@ -137,7 +137,6 @@ class PatternController extends AbstractController
 
             $pattern-> setCover($fileName);
             
-
             $manager->persist($pattern);
             $manager->flush();
 

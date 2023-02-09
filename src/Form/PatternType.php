@@ -50,7 +50,7 @@ class PatternType extends ApplicationType
             ->add('description', TextType::class, $this->getConfiguration("Description","Ecrivez ici une petite description de votre motif"))
             ->add('cover', FileType::class, [
                 "data_class" =>  null,
-                "label"=>"Téléchargez votre motif"
+                "label"=>"+"
             ])
             ->add('license',ChoiceType::class, [
                 'choices'=>[

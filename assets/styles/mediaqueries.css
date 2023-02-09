@@ -27,11 +27,21 @@
         width: 100%;
         flex: wrap;
     }
-    .addContainer.left, addContainer.right{
+    .addContainer.left, .addContainer.right{
         width:100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
     }
+
+    .addContainer .right div{
+        margin-left: 50%;
+        width: auto;
+        
+    }
+
     
-    .right,.left{
+    .right, .left{
         width: 100%;
     }
     .slider{
