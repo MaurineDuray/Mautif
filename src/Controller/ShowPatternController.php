@@ -20,7 +20,7 @@ class ShowPatternController extends AbstractController
      * @return Response
      */
     #[Route('/patterns/{slug}/galery', name:"user_patterns")]
-    #[IsGranted('ROLE_USER')]
+
     public function userPattern(User $user, PatternRepository $repo, string $slug):Response
     {
         $patterns = $repo->findAll();

@@ -33,6 +33,7 @@ const autoSlide = () => {
 
     console.log(positionDiff);
 }
+
 const dragStart = (e) =>{
     isDragStart = true; 
     prevPageX = e.pageX || e.touched[0].pageX;

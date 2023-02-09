@@ -18,12 +18,32 @@
     margin-bottom: 30px;
 }
 
+
 #create h4, #favorites h4{
     text-align: center;
     font-size: 20pt;
     font-family: var(--serif);
     padding-top: 15px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
 }
+#create a{
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    text-align: center;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    margin-bottom: 20px;
+
+    margin-top: 10px;
+    border: 1px white solid;
+    padding: 10px;
+}
+
+
 
 .wrapper{
     max-width: 90%;
@@ -55,28 +75,28 @@
     right: -23px;
 }
 .wrapper .caroussel{
-    scroll-behavior: smooth;
-    cursor: pointer; 
     white-space: nowrap;
+    cursor: pointer;
+    font-size: 0px;
     overflow: hidden;
+    scroll-behavior: smooth;
 }
 .caroussel.dragging{
-    pointer-events: none;
-}
-.caroussel.dragging img{
-    scroll-behavior: smooth;
     cursor: grab;
+    scroll-behavior: auto;
 }
+.caroussel.dragging img{ 
+    pointer-events: none;
+} 
 .caroussel img{
-    height: 340px;
+    height: calc(100vh /3);
     object-fit: cover;
-    width: calc(100% /3);
+    width: calc(100vw /3);
     margin-left: 14px;
     padding: 0;
 }
 .caroussel img:first-child{
     margin-left: -14px;
 }
-
 
 

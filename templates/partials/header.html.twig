@@ -6,10 +6,7 @@
         <div class="bar"></div>
         <div class="bar"></div>
     </div>
-  
-    
-    
-    {# <a href="" class="" style="width: 40px; height: 40px"><img src="{{asset('build/images/zoom.png')}}" style="width: 50px; height: 50px" alt=""></a> #}
+
     <div id="account">
         <div class="icons" id="search">
             <div id="loupe">
@@ -39,6 +36,7 @@
 
 <div id="accountBlock">
     {% if app.user %}
+        <p>Bonjour, <i><b>{{app.user.pseudo}}</b></i></p>
         <a href="{{path('pattern_add')}}">Publier un motif</a>
         <a href="{{path('user_profile',{'slug': app.user.slug})}}">Mon compte</a>
         <a href="{{path('user_patterns',{'slug': app.user.slug})}}">Mes créations</a>

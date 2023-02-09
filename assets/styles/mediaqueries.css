@@ -45,6 +45,12 @@
     #feuille1, #feuille2, #feuille3, #feuille4{
         display: none;
     }
+    #click{
+        display: none;
+    }
+    #more{
+        display: block;
+    }
     .filter{
         width: 90%;
     }

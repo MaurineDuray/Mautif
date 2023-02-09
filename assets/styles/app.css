@@ -28,10 +28,11 @@
     margin:0;
     padding: 0;
 }
-body{
+body, html{
     overflow-x: hidden;
     overflow-y:scroll;
     font-family: var(--normal);
+    scroll-behavior: smooth;
 }
 html{
     background-color: #020202;

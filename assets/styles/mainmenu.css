@@ -94,6 +94,12 @@
 .account{
     display: flex !important;
 }
+#accountBlock p{
+    width:100%;
+    text-align: center;
+    padding: 10px;
+    color: var(--darkgreen);
+}
 #accountBlock a{
     width:100%;
     text-align: center;
