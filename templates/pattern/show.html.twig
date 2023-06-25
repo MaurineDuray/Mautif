@@ -11,7 +11,7 @@
         <div class="showContent">
             <div class="left">
                 <a href="uploads/{{pattern.cover}}" target="_blank">
-                {% include "pattern/_instax.html.twig" %}
+                {% include "partials/_instax.html.twig" %}
                 </a>
             </div>
             <div class="right">
@@ -25,7 +25,7 @@
                 <p class="license">Licence :<b></br>{{pattern.license}}</b></p>
 
                 {% if pattern.license == "COMMERCIALE" or pattern.license == "PRIVÉE" %}
-                <a href="/uploads/{{pattern.cover}}" download="{{pattern.title}}.jpeg"><button id="uploadBtn">Télécharger le motif</button></a>
+                <a href="/uploads/{{pattern.cover}}" download="{{pattern.title}}.jpeg"><button id="uploadBtn"><i class="fa-solid fa-arrow-up-from-bracket"></i> Télécharger le motif </button></a>
                 {% endif%}
             </div>
         </div>

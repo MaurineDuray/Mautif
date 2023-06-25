@@ -54,7 +54,7 @@ class Pattern
     private ?string $license = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:'LE slug doit être mentionné')]
+    #[Assert\NotBlank(message:'Le slug doit être mentionné')]
     #[Assert\Length(min:2, max:255, minMessage:"Le slug doit posséder au minimum deux caractères", maxMessage:"Le slug ne peut atteindre plue de 255 caractères")]
     private ?string $slug = null;
 
@@ -71,10 +71,14 @@ class Pattern
     #[ORM\OneToMany(mappedBy: 'id_pattern', targetEntity: Comment::class)]
     private Collection $comments;
 
+    #[ORM\OneToMany(mappedBy: 'pattern', targetEntity: Like::class, orphanRemoval: true,cascade:["persist"])]
+    private Collection $likes;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
   
@@ -272,6 +276,36 @@ class Pattern
             // set the owning side to null (unless already changed)
             if ($comment->getIdPattern() === $this) {
                 $comment->setIdPattern(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Like>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+            $like->setPattern($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getPattern() === $this) {
+                $like->setPattern(null);
             }
         }
 

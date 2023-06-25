@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\AvatarModify;
 use App\Entity\User;
 use App\Form\AccountType;
+use App\Entity\AvatarModify;
+use App\Entity\PasswordUpdate;
 use App\Form\AvatarModifyType;
+use App\Form\PasswordUpdateType;
 use App\Repository\UserRepository;
+use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AdminUserController extends AbstractController
 {
@@ -134,6 +138,54 @@ class AdminUserController extends AbstractController
         ]);
     }
 
+     /**
+     * Permet de changer de mot de passe 
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param UserPasswordHasherInterface $hasher
+     * @return Response
+     */
+    #[Route("/account/password-update", name:'account_password')]
+    #[IsGranted("ROLE_USER")]
+    public function updatePassword(Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $hasher): Response
+    {
+        $passwordUpdate = new PasswordUpdate();
+        $user = $this->getUser();
+        $form = $this->createForm(PasswordUpdateType::class, $passwordUpdate);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            // vérifier que le mot de passe correspond à l'ancien
+            if(!password_verify($passwordUpdate->getOldPassword(),$user->getPassword()))
+            {
+                // gérer l'erreur
+                $form->get('oldPassword')->addError(new FormError("Le mot de passe que vous avez tapé n'est pas votre mot de passe actuel"));
+            }else{
+                $newPassword = $passwordUpdate->getNewPassword();
+                $hash = $hasher->hashPassword($user, $newPassword);
+
+                $user->setPassword($hash);
+                $manager->persist($user);
+                $manager->flush();
+
+                $this->addFlash(
+                    'success',
+                    "Votre mot de passe a bien été modifié"
+                );
+
+                return $this->redirectToRoute('admin_user');
+            }
+        }
+
+
+        return $this->render("account/password.html.twig",[
+            'myform' => $form->createView()
+        ]);
+    }
+
+    
     /**
      * Permet de supprimer un user à partir de l'administration (liste des motifs)
      */

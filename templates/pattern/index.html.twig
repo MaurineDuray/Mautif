@@ -3,7 +3,9 @@
 {% block title %}Patterns{% endblock %}
 
 {% block body %}
-    {% include "partials/intro.html.twig" %}
+    <div class="noContextMenu">
+        {% include "partials/intro.html.twig" %}
+    </div>
 
     <div class="slide fil">
         <h2>Bienvenue dans le patchwork !</h2>
@@ -11,7 +13,7 @@
 
         <div class="filContainer">
             {% for pattern in patterns %}
-                {% include "pattern/_instax.html.twig" %}
+                {% include "partials/_instax.html.twig" %}
             {% endfor %}
         </div>
     </div>
@@ -20,5 +22,19 @@
 {% endblock %}
 
 {% block javascripts %}
-    
+   
+            <script>
+            console.log('test js')
+            
+               const noContext = document.querySelectorAll(".noContextMenu");
+
+                noContext.forEach(elem=>{
+                    elem.addEventListener("contextmenu", (e) => {
+                    e.preventDefault();
+                    });
+                })
+                
+           
+            </script>
+
 {% endblock %}

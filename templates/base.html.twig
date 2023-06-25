@@ -23,7 +23,19 @@
 
          {{ encore_entry_script_tags('app') }}
         {% block javascripts %}
+            <script>
+            console.log('test js')
+            
+               const noContext = document.querySelectorAll(".noContextMenu");
+
+                noContext.forEach(elem=>{
+                    elem.addEventListener("contextmenu", (e) => {
+                    e.preventDefault();
+                    });
+                })
+                
            
+            </script>
         {% endblock %}
     </body>
 </html>

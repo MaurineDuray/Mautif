@@ -7,7 +7,7 @@
     {% include "partials/intro.html.twig" %}
     <div class="slide fil">
         <h2>Ajout d'un motif</h2>
-        
+        <a href={{path('patterns_index')}}><button class="backButton"> <i class="fa-solid fa-camera-retro"></i> Retour à la galerie</button></a>
         {{form_start(myform)}}
         {{form_widget(myform.submit)}}
 
