@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class LikeController extends AbstractController
 {
     /**
-     * Permet de liker une recette 
+     * Permet de liker un motif 
      */
     #[Route('/like/{id}', name: 'like')]
     #[IsGranted("ROLE_USER")]
@@ -40,7 +40,7 @@ class LikeController extends AbstractController
     }
 
     /**
-     * Permet de retirer le like sur une recette
+     * Permet de retirer le like d'un motif
      */
     #[Route('/unlike/{id}', name: 'unlike')]
     #[IsGranted("ROLE_USER")]

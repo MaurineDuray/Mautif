@@ -96,6 +96,12 @@
     font-size: 12pt;
     font-weight:100;
 }
+.instax a{
+    color: red;
+    font-size: 20pt;
+    margin-right: 5px;
+}
+
 .btnactions{
     width: 150px;
     height: 50px;
