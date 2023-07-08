@@ -12,10 +12,11 @@
         {% include "partials/filter.html.twig" %}
 
         <div class="filContainer">
-            {% for pattern in patterns %}
+            {% for pattern in pagination.data %}
                 {% include "partials/_instax.html.twig" %}
             {% endfor %}
         </div>
+         {{pagination.display()}}
     </div>
 
     

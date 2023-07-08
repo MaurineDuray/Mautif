@@ -11,7 +11,7 @@
         <div class="showContent">
             <div class="left">
                 <a href="uploads/{{pattern.cover}}" target="_blank">
-                {% include "partials/_instax.html.twig" %}
+                {% include "partials/_instaxProtect.html.twig" %}
                 </a>
             </div>
             <div class="right">
@@ -34,11 +34,58 @@
 
         <div class="galery">
             <h5>Galerie d'inspirations</h5>
-            <div class="slider">
+
+            {# <div class="slider">
                 <div class="picture"></div>
                 <div class="picture"></div>
                 <div class="picture"></div>
-            </div>
+            </div> #}
+
+            {% if pattern.galeries | length > 0 %}
+                <div id="carouselExampleCaptions" class="carousel"  data-bs-ride="false">
+                    <div class="carousel-indicators">
+                    {% for galery in pattern.galeries %}
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{loop.index0}}" {% if loop.first %} class="active" aria-current="true" {% endif %} aria-label="Slide {{loop.index}}"></button>
+                    {% endfor %} 
+                    
+                    </div>
+                    <div class="carousel-inner">
+                        {% for galery in pattern.galeries %}
+                        
+                            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                {% if app.user %}
+                                    {% if app.user == galery.author or app.user.roles[0] == "ROLE_ADMIN"%}
+                                        <a href="{{path('delete_galery',{'id': galery.id})}}" class="btn btn-danger mx-3 my-3" style="z-index:500; position:absolute"><i class="fa-solid fa-trash"></i></a>    
+                                    {% endif %}
+                                {% endif %}
+                                <img src="../uploads/{{galery.picture}}" class="d-block w-100" alt="image de {{pattern.title}}" >
+                                
+                            </div>
+                            
+                        {% endfor %}
+                    
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            {% else %}
+                <p>Aucun créateur n'a posté d'inspiration pour l'instant !</p>
+                <p><b>Sois le premier à poster une de tes réalisations !</b></p>
+                {% if app.user %}
+                    <button><a href="" style="color: black; text-decoration: none">Ajouter une inspiration</a></button>
+                {% else %}
+                    <button><a href="{{path('account_login')}}" style="color: black; text-decoration: none">Je me connecte</a></button>
+                    <button><a href="{{path('account_register')}}" style="color: black; text-decoration: none">Je n'ai pas de compte</a></button>
+                {% endif %}
+                
+            {% endif %}
+
         </div>
     </div>
    

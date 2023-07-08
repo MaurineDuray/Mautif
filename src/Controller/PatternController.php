@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Like;
 use App\Entity\User;
 use App\Entity\Pattern;
 use App\Form\PatternType;
 use App\Repository\UserRepository;
+use App\Service\PaginationService;
 use App\Repository\PatternRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,15 +28,20 @@ class PatternController extends AbstractController
      * @param PatternRepository $repo
      * @return Response
      */
-    #[Route('/patterns', name: 'patterns_index')]
-    public function index(PatternRepository $repo): Response
+    #[Route('/patterns/{page<\d+>?1}', name: 'patterns_index')]
+    public function index(PatternRepository $repo, PaginationService $pagination, $page, Request $request, EntityManagerInterface $manager): Response
     {
-        $patterns=$repo->findBy(
-            array(), array('id'=>'DESC')
-        );
+        $pagination -> setEntityClass(Pattern::class)
+        ->setPage($page)
+        ->setLimit(12);
+
+        $user = $this->getUser();
+        $likes = $manager->getRepository(Like::class)->findAll();
 
         return $this->render('pattern/index.html.twig', [
-            'patterns' => $patterns,
+           'pagination'=> $pagination,
+           'user'=> $user,
+            'likes'=>$likes
         ]);
     }
 

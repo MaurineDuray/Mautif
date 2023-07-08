@@ -99,7 +99,7 @@
 .instax a{
     color: red;
     font-size: 20pt;
-    margin-right: 5px;
+   
 }
 
 .btnactions{
@@ -133,4 +133,18 @@
     color: red ;
     font-size: 20pt;
     padding-right: 20px;
+}
+
+.pagination{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.pagination li{
+    list-style: none;
+}
+.pagination li a{
+    color: white;
+    padding: 5px;
+    text-decoration: none;
 }

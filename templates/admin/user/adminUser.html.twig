@@ -38,7 +38,7 @@
                             </td>
                             
                             <td class="actions">
-                                <a href="" class="btn-yellow"><i class="fas fa-edit"></i></a>
+                                
                                 {% if user.roles[0] == "ROLE_USER" or not app.user.id == user.id %}
                                     <a href="{{path('admin_user_delete',{'slug': user.slug })}}" class="btn-red" ><i class="fas fa-trash"></i></a>
                                 {% endif %}

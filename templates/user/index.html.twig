@@ -9,11 +9,16 @@
         {% if is_granted('ROLE_USER')  %}
             {% if app.user.id == user.id or app.user.roles[0]=="ROLE_ADMIN" %}
                 <a href="{{path('account_profile',{'slug' : user.slug})}}"><button><i class="fa-solid fa-pen-to-square"></i> Modifier les informations </button></a>
-                <a href="{{path('account_password',{'slug' : user.slug})}}"><button><i class="fa-solid fa-pen-to-square"></i> Modifier le password </button></a>
                 <a href="{{path('avatar_edit', {'slug': user.slug})}}"><button><i class="fa-solid fa-user"></i> Modifier l'avatar</button></a>
                
             {% endif %}
         {% endif %}
+        {% if app.user.id == user.id %}
+            <a href="{{path('account_password',{'slug' : user.slug})}}"><button><i class="fa-solid fa-pen-to-square"></i> Modifier le mot de passe </button></a>
+        {% else %}
+             <a href="{{path('account_password',{'slug' : user.slug})}}"><button><i class="fa-solid fa-pen-to-square"></i> Envoyer un nouveau mot de passe </button></a>
+        {% endif %}
+       
          
         <a href={{path('patterns_index')}}><button class="backButton"> <i class="fa-solid fa-camera-retro"></i> Retour à la galerie</button></a>
         

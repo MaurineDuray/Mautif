@@ -71,11 +71,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Like::class, orphanRemoval: true)]
     private Collection $likes;
 
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Galery::class, orphanRemoval: true)]
+    private Collection $galeries;
+
     public function __construct()
     {
         $this->patterns = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->likes = new ArrayCollection();
+        $this->galeries = new ArrayCollection();
     }
 
     /**
@@ -320,6 +324,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($like->getUser() === $this) {
                 $like->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Galery>
+     */
+    public function getGaleries(): Collection
+    {
+        return $this->galeries;
+    }
+
+    public function addGalery(Galery $galery): self
+    {
+        if (!$this->galeries->contains($galery)) {
+            $this->galeries->add($galery);
+            $galery->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGalery(Galery $galery): self
+    {
+        if ($this->galeries->removeElement($galery)) {
+            // set the owning side to null (unless already changed)
+            if ($galery->getAuthor() === $this) {
+                $galery->setAuthor(null);
             }
         }
 
