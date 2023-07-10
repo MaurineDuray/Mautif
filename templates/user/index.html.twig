@@ -13,11 +13,14 @@
                
             {% endif %}
         {% endif %}
-        {% if app.user.id == user.id %}
-            <a href="{{path('account_password',{'slug' : user.slug})}}"><button><i class="fa-solid fa-pen-to-square"></i> Modifier le mot de passe </button></a>
-        {% else %}
-             <a href="{{path('account_password',{'slug' : user.slug})}}"><button><i class="fa-solid fa-pen-to-square"></i> Envoyer un nouveau mot de passe </button></a>
+        {% if is_granted('ROLE_USER') %}
+             {% if app.user.id == user.id %}
+                <a href="{{path('account_password',{'slug' : user.slug})}}"><button><i class="fa-solid fa-pen-to-square"></i> Modifier le mot de passe </button></a>
+            {% else %}
+                <a href="{{path('account_password',{'slug' : user.slug})}}"><button><i class="fa-solid fa-pen-to-square"></i> Envoyer un nouveau mot de passe </button></a>
+            {% endif %}
         {% endif %}
+       
        
          
         <a href={{path('patterns_index')}}><button class="backButton"> <i class="fa-solid fa-camera-retro"></i> Retour à la galerie</button></a>
@@ -35,7 +38,7 @@
                 <h5>Pseudo</h5>
                 <p>{{user.pseudo}}</p>
                 <h5>Email</h5>
-                <p>{{user.email}}</p>
+                <a href="" style="color: white">Contacter l'utilisateur</a>
                 <h5>Introduction</h5>
                 <p>{{user.introduction}}</p>
                 
@@ -45,45 +48,21 @@
         <hr class="sep" >
         <div id="create">
             <h4>Créations récentes</h4>
-               <div class="wrapper">
-                <div class="arrows" id="left">
-                    <i  class="fa-solid fa-angle-left"></i>
-                </div>
-                    
-                    <div class="caroussel">
-                        {% for pattern in patterns %}
-                                {% if pattern.idUser.id == user.id %}
-                                    <img src="/uploads/{{pattern.cover}}" alt="" draggable="false">
-                                {% endif %}
-                        {% endfor %}
-                            
-                        {% if patterns | length==[] %}
-                            <p>Pas de créations à afficher</p>
-                        {% endif %}
-                    </div> 
-                <div class="arrows" id="right">
-                    <i  class="fa-solid fa-angle-right"></i>
-                </div>
+            
+               <div class="filContainer">
+                    {% for pattern in patterns %}
+                        {% include "./partials/_instax.html.twig" %}
+                    {% endfor %}
                 </div>
                         
-                <a href="{{path('user_patterns', {'slug': user.slug})}}">Voir toutes ses créations > </a>
+                <a href="{{path('user_patterns', {'slug': user.slug})}}" id="userCreation">Voir toutes ses créations > </a>
                 
         </div>
       
 
 
 
-        {# <div id="favorites">
-            <h4>Derniers likes </h4>
-            <div class="container">
-                <div class="filContainer">
-
-                </div>
-                <a href="#">En voir plus</a>
-            </div>
-        </div> #}
-
-
+        
 
     </div>
 {% endblock %}

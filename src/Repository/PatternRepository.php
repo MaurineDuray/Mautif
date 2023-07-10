@@ -39,6 +39,22 @@ class PatternRepository extends ServiceEntityRepository
         }
     }
 
+   /**
+    * @return Pattern[] Returns an array of Pattern objects
+    */
+   public function findLastByUser($value): array
+   {
+       return $this->createQueryBuilder('p')
+           ->andWhere('p.id_user = :val')
+           ->setParameter('val', $value)
+           ->orderBy('p.id', 'ASC')
+           ->setMaxResults(3)
+           ->getQuery()
+           ->getResult()
+       ;
+   }
+
+
 //    /**
 //     * @return Pattern[] Returns an array of Pattern objects
 //     */

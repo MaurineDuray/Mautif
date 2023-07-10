@@ -45,11 +45,12 @@ h6 a{
     padding-top: 50px;
     text-align: center;
 }
-#uploadBtn{
-    margin: 0 auto;
-    transform: translateX(1%);
-    margin-top: 30px;
+.uploadBtn{
+    margin: 0 auto !important;
+    transform: translateX(1%) !important;
+    margin-top: 30px !important;
 }
+
 .sep{
     width: 80vw;
     margin-left: 50%;
@@ -82,4 +83,8 @@ h6 a{
     background-color: rgb(169, 219, 187);
     height: 200px;
 }
+
+
+/* carousel */
+
 

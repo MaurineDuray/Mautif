@@ -2,6 +2,8 @@
 
 {% block title %}Motif {{pattern.title}}{% endblock %}
 
+
+
 {% block body %}
    
     {% include "partials/intro.html.twig" %}
@@ -25,7 +27,9 @@
                 <p class="license">Licence :<b></br>{{pattern.license}}</b></p>
 
                 {% if pattern.license == "COMMERCIALE" or pattern.license == "PRIVÉE" %}
-                <a href="/uploads/{{pattern.cover}}" download="{{pattern.title}}.jpeg"><button id="uploadBtn"><i class="fa-solid fa-arrow-up-from-bracket"></i> Télécharger le motif </button></a>
+                    <a href="/uploads/{{pattern.cover}}" download="{{pattern.title}}.jpeg"><button class="uploadBtn"><i class="fa-solid fa-arrow-up-from-bracket"></i> Télécharger le motif </button></a>
+                {% else %}
+                    <a href="" ><button class="uploadBtn">Contacter {{pattern.idUser.pseudo}}</button></a>
                 {% endif%}
             </div>
         </div>
@@ -40,7 +44,7 @@
                 <div class="picture"></div>
                 <div class="picture"></div>
             </div> #}
-
+            <div class="container">
             {% if pattern.galeries | length > 0 %}
                 <div id="carouselExampleCaptions" class="carousel"  data-bs-ride="false">
                     <div class="carousel-indicators">
@@ -78,16 +82,21 @@
                 <p>Aucun créateur n'a posté d'inspiration pour l'instant !</p>
                 <p><b>Sois le premier à poster une de tes réalisations !</b></p>
                 {% if app.user %}
-                    <button><a href="" style="color: black; text-decoration: none">Ajouter une inspiration</a></button>
+                    <a  href="{{path('add_galery',{"slug":pattern.slug})}}" style="color: black; text-decoration: none"><button class="uploadBtn">Ajouter une inspiration</button></a>
+                      
                 {% else %}
-                    <button><a href="{{path('account_login')}}" style="color: black; text-decoration: none">Je me connecte</a></button>
-                    <button><a href="{{path('account_register')}}" style="color: black; text-decoration: none">Je n'ai pas de compte</a></button>
+                    <a href="{{path('account_login')}}" style="color: black; text-decoration: none"><button>Je me connecte</button></a>
+                    <a href="{{path('account_register')}}" style="color: black; text-decoration: none"><button>Je n'ai pas de compte</button></a>
                 {% endif %}
                 
             {% endif %}
-
+            </div>
         </div>
     </div>
    
+{% endblock %}
+
+{% block javascripts %}
+    {{encore_entry_script_tags('galery')}}
 {% endblock %}
 

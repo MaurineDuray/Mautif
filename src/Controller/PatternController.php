@@ -4,8 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Like;
 use App\Entity\User;
+use App\Entity\Galery;
 use App\Entity\Pattern;
+use App\Form\GaleryType;
 use App\Form\PatternType;
+use App\Form\PatternUpdateType;
+use App\Entity\PatternImgModify;
+use App\Form\PatternImgType;
 use App\Repository\UserRepository;
 use App\Service\PaginationService;
 use App\Repository\PatternRepository;
@@ -39,8 +44,8 @@ class PatternController extends AbstractController
         $likes = $manager->getRepository(Like::class)->findAll();
 
         return $this->render('pattern/index.html.twig', [
-           'pagination'=> $pagination,
-           'user'=> $user,
+            'pagination'=> $pagination,
+            'user'=> $user,
             'likes'=>$likes
         ]);
     }
@@ -122,6 +127,86 @@ class PatternController extends AbstractController
         ]);
     }
 
+     /**
+     * Permet dd'ajouter une photo à la galerie de résultat
+     */
+    #[Route('/pattern/{slug}/galery', name:'add_galery')]
+    #[IsGranted("ROLE_USER")]
+    public function addGalery(string $slug, Pattern $pattern, Request $request,EntityManagerInterface $manager):Response
+    {
+
+        $galery = new Galery();
+        $form = $this->createForm(GaleryType::class, $galery);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+
+            $file = $form['picture']->getData();
+            if (!empty($file)) {
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin;Latin-ASCII;[^A-Za-z0-9_]remove;Lower()', $originalFilename);
+                $newFilename = $safeFilename . "-" . uniqid() . "." . $file->guessExtension();
+                try {
+                    $file->move(
+                        $this->getParameter('uploads_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    return $e->getMessage();
+                }
+                $galery->setPicture($newFilename);
+            }
+
+            $galery ->setPattern($pattern)
+                ->setAuthor($this->getUser());
+        
+            $manager->persist($galery);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "La photo de votre inspiration a bien été enregistrée!"
+            );
+
+            return $this->redirectToRoute('pattern_show', [
+                'slug' => $pattern->getSlug(),
+            ]);
+        }
+
+        return $this->render('pattern/addGalery.html.twig',[
+            'pattern'=> $pattern,
+            'myform' => $form->createView(),
+            
+        ]);
+    
+        
+    }
+
+    /**
+     * PErmet de supprimer une image de galerie 
+     */
+    #[Route ('admin/galery/{id}/delete', name:"delete_galery")]
+    #[Security("(is_granted('ROLE_USER') and user === galery.getAuthor()) or is_granted('ROLE_ADMIN')", message:"Ce résultat ne vous appartient pas, vous ne pouvez pas le supprimer")]
+    public function deleteGalery(Galery $galery, EntityManagerInterface $manager):Response
+    {
+        $this->addFlash(
+            'success',
+            "Votre image a bien été supprimée"
+        );
+        
+       
+        unlink($this->getParameter('uploads_directory').'/'.$galery->getPicture());
+
+        $manager->remove($galery);
+        $manager->flush();
+
+        $pattern = $galery->getPattern()->getSlug();
+
+        return $this->redirectToRoute('pattern_show',[
+            'slug'=>$pattern
+        ]);
+
+    }
+
     /**
      * Permet d'afficher le formulaire pour éditer un motif
      */
@@ -136,13 +221,14 @@ class PatternController extends AbstractController
             $pattern->setCover(new File($this->getParameter('uploads_directory').'/'.$pattern->getCover()));
         }
 
-        $form = $this->createForm(PatternType::class, $pattern);
+        $form = $this->createForm(PatternUpdateType::class, $pattern);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
         {        
 
-            $pattern-> setCover($fileName);
+            $pattern-> setCover($fileName)
+                    ->setIdUser($this->getUser());
             
             $manager->persist($pattern);
             $manager->flush();
@@ -161,6 +247,66 @@ class PatternController extends AbstractController
             "myform"=>$form->createView()
         ]);
 
+    }
+
+     /**
+     * Permet de modifier l'image du motif
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
+    #[Route("/pattern/{slug}/imgmodify", name:"pattern_img")]
+    public function imgModify(Pattern $pattern, Request $request, EntityManagerInterface $manager): Response
+    {
+        $imgModify = new PatternImgModify();
+        $form = $this->createForm(PatternImgType::class, $imgModify);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            // supprimer l'image dans le dossier
+            if(!empty($pattern->getCover()))
+            {
+                unlink($this->getParameter('uploads_directory').'/'.$pattern->getCover());
+            }
+
+            $file = $form['newCover']->getData();
+            if(!empty($file))
+            {
+                $originalFilename = pathinfo($file->getClientOriginalName(),PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin;Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename."-".uniqid().".".$file->guessExtension();
+                try{
+                    $file->move(
+                        $this->getParameter('uploads_directory'),
+                        $newFilename
+                    );
+                }catch(FileException $e)
+                {
+                    return $e->getMessage();
+                }
+                $pattern->setCover($newFilename);
+            }
+
+            $manager->persist($pattern);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'L\'image de du motif a bien été modifiée'
+            );
+
+            return $this->redirectToRoute('pattern_show', [
+                'slug' => $pattern->getSlug()
+            ]);
+
+        }
+
+        return $this->render("pattern/imgModify.html.twig",[
+            'myform' => $form->createView(),
+            'pattern'=>$pattern
+        ]);
     }
 
 

@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{# Page du formulaire de l'ajout d'un véhicule au showroom (formulaire) #}
+{% block title %}Modification {% endblock %}
+
+
+
+{% block body %}
+    {% include "./partials/intro.html.twig" %}
+    <div class="slide fil ">
+        <h1 style="margin-bottom: 50px; margin-top: 30px; text-align:center;">Modification de l'image du motif {{pattern.title}}</h1>
+    
+            <img src="../uploads/{{pattern.cover}}" alt="" class="card-img img-fluid" style="width: 200px">
+        
+        <a href="{{path('pattern_edit', {'slug': pattern.slug})}}"><button class="btn btn-warning m-3">
+            <i class="fa-solid fa-arrow-left"></i> Retour à l'édition </button></a>
+        {{form_start(myform)}}
+            <div class="container" style="background-color:  rgba(255, 170, 22, 0.1); padding: 20px; border-radius: 20px;">
+                <div>
+                    
+                    {{form_widget(myform)}}
+
+                </div>
+                <button type="submit" class="btn btn-warning mt-3 uploadBtn"><i class="fa-solid fa-check"></i>Modifier la photo</button>
+            </div>
+            
+        {{form_end(myform)}}
+    </div>
+{% endblock %}
+
+
+

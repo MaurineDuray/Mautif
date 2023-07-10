@@ -36,7 +36,7 @@ class Pattern
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotBlank(message:"La date de création doit être mentionnée")]
-    #[Assert\LessThan("today", message:'Doit être ultérieure à aujourd\'hui', groups:['front'])]
+   
     #[Assert\Type('datetime')]
     private ?\DateTimeInterface $creationDate = null;
 
@@ -45,7 +45,7 @@ class Pattern
 
     #[ORM\Column(length: 255)]
     #[Assert\Image(mimeTypes:["image/png","image/jpeg","image/jpg"], mimeTypesMessage:"Vous devez upload un fichier jpg, jpeg, png ou gif")]
-    #[Assert\Image(maxSize:"2000000", maxSizeMessage:"Votre fichier dépasse le poid maximal autorisé")]
+    #[Assert\Image(maxSize:"1024k", maxSizeMessage:"Votre fichier dépasse le poid maximal autorisé")]
     private ?string $cover = null;
 
     #[ORM\Column(length: 255)]

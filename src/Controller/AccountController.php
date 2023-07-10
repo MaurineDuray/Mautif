@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Like;
 use App\Entity\User;
 use App\Form\AccountType;
 use App\Form\RegistrationType;
+use App\Repository\LikeRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\File;
@@ -46,6 +49,20 @@ class AccountController extends AbstractController
         //
     }
 
+    /**
+     * Afficher les likes de l'utilisateur connecté
+     *
+     * @return Response
+     */
+    #[Route("/profile/likes", name:"user_likes")]
+    public function myLikes():Response
+    {
+        return $this->render('user/likes.html.twig',[
+            'user'=>$this->getUser()
+        ]);
+    }
+
+    
     /**
      * Permet d'afficher le formulaire d'inscription d'un utilisateur et de l'ajouter à la base de données
      *

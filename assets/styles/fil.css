@@ -73,9 +73,26 @@
     color: black;
     text-align: center;
     padding-bottom: 20px;
-    width:100%
+    width:100%;
+    position: relative;
 }
+.instax .nblikes{
+    position: absolute;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: white;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
 .instax img{
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+    box-sizing: border-box;
+}
+
+.filigrane{
+    position: absolute;
     width: 100%;
     padding: 10px 10px 10px 10px;
     box-sizing: border-box;

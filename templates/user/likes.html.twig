@@ -1,22 +1,39 @@
- <div class="instax noContextMenu">
-               <a href={{path('pattern_show',  {'slug':pattern.slug})}} class="noContextMenu" style="cursor: unset">
+{% extends "base.html.twig" %}
+
+{% block title %} Mes likes{% endblock %}
+
+{% block body %}
+
+    {% include "partials/intro.html.twig" %}
+    <div class="slide fil">
+    <h2>Vos likes </h2>
+    <div class="filContainer">
+    {% if user.likes | length > 0 %}
+        {% for pattern in user.likes %}
+        
+             <div class="instax noContextMenu">
+                <div class="nblikes">
+                    {{pattern.pattern.likes | length}}  <i class="fa-solid fa-heart"></i>
+                </div>
+
+               <a href={{path('pattern_show',  {'slug':pattern.pattern.slug})}} class="noContextMenu">
                <img class="filigrane" src="../../images/filigrane.png" alt="">
-               <img class="noContextMenu" src="../../uploads/{{pattern.cover}}" alt="image de "></a>
+               <img class="noContextMenu" src="../../uploads/{{pattern.pattern.cover}}" alt="image de "></a>
                 <div class="instaxContent">
                     <div class="instaxTitle">
-                    <h6>Collection - {{pattern.title}}</h6>
-                    <p><i>par {{pattern.idUser.pseudo}}</i></p>
+                    <h6>Collection - {{pattern.pattern.title}}</h6>
+                    <p><i>par {{pattern.pattern.idUser.pseudo}}</i></p>
                     </div>
                     
                     {% if app.user %}
-                        {% if pattern.likes | length==0 %}
-                            <a href="{{path('like', {'id': pattern.id})}}">
+                        {% if pattern.pattern.likes | length==0 %}
+                            <a href="{{path('like', {'id': pattern.pattern.id})}}">
                                 <div class="like">
                                     <i class="fa-regular fa-heart"></i>
                                 </div>
                             </a>
                         {% else %}
-                            {% for like in pattern.likes %}
+                            {% for like in pattern.pattern.likes %}
                                 {% if like.user.id == app.user.id%}
                                     <a href="{{path('unlike', {'id': like.id})}}">
                                         <div class="like">
@@ -24,7 +41,7 @@
                                         </div>
                                     </a>
                                 {% else %}
-                                    <a href="{{path('like', {'id': pattern.id})}}">
+                                    <a href="{{path('like', {'id': pattern.pattern.id})}}">
                                         <div class="like">
                                             <i class="fa-regular fa-heart"></i>
                                         </div>
@@ -39,6 +56,10 @@
                 </div>
 </div>
 
-{% block javascripts %}
-    {{encore_entry_script_tags('like')}}
+
+        {% endfor %}
+    {% endif %}
+    </div>
+    </div>
+    </div>
 {% endblock %}

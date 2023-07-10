@@ -34,8 +34,9 @@ Encore
     .addEntry('home', './assets/js/home.js')
     .addEntry('like', './assets/js/like.js')
     .addEntry('slider', './assets/js/slider.js')
+    .addEntry('galery', './assets/js/galery.js')
     .addEntry('footer', './assets/js/footer.js')
-    .addEntry('footer', './assets/js/galery.js')
+
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
