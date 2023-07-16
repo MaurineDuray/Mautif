@@ -1,4 +1,4 @@
-<form class="filter" action="">
+<form class="filter" action="{{path('pattern_index')}}">
             <select name="theme" id="theme" name="theme">
                 <option value="" disabled selected>Type de motifs</option>
                 <option value="Nature">Nature</option>
@@ -25,9 +25,9 @@
             </select>
             <select name="license" id="license" name="license">
                 <option value="" disabled selected>Type de license</option>
-                <option value="gratuite">Gratuite</option>
-                <option value="personnel">Gratuit pour usage personnel</option>
-                <option value="commercial">Gratuit pour usage commercial</option>
+                <option value="PROTÉGÉE">Protégée</option>
+                <option value="PRIVÉE">Gratuit pour usage privé</option>
+                <option value="COMMERCIAL">Gratuit pour usage commercial</option>
             </select>
             <input type="submit" value="Filtrer">
 

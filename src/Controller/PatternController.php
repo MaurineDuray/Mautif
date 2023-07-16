@@ -35,7 +35,7 @@ class PatternController extends AbstractController
      * @return Response
      */
     #[Route('/patterns/{page<\d+>?1}', name: 'patterns_index')]
-    public function index(PatternRepository $repo, PaginationService $pagination, $page, Request $request, EntityManagerInterface $manager): Response
+    public function home(PatternRepository $repo, PaginationService $pagination, $page, Request $request, EntityManagerInterface $manager): Response
     {
         $searchForm = $this->createForm(SearchType::class);
 
@@ -70,21 +70,55 @@ class PatternController extends AbstractController
     }
 
      /**
-     * Afficher les motifs d'une catégorie 
+     * Afficher les motifs triés
      */
-    #[Route('patterns?theme={theme}&color={color}&license={license}', name:'pattern_theme')]
-    public function showCategory(PatternRepository $repo, Request $request, EntityManagerInterface $manager):Response
+   
+    public function index(PatternRepository $repo, Request $request, EntityManagerInterface $manager):Response
     {
-        $theme=$request->get('theme');
-        $color=$request->get('color');
-        $license= $request->get('license');
+       
+        $theme = $request->query->get('theme');
+    $color = $request->query->get('color');
+    $license = $request->query->get('license');
 
-        $pattern = $repo->findByCategory($theme, $color, $license);
+    $repository = $manager->getRepository(Pattern::class);
+    $queryBuilder = $repository->createQueryBuilder('p');
+
+    $queryBuilder
+        ->orderBy("p.creationDate", "ASC");
+
+    if ($theme) {
+        $queryBuilder
+            ->andWhere('p.theme = :theme')
+            ->setParameter('theme', $theme);
+    }
+
+    if ($color) {
+        $queryBuilder
+            ->andWhere('p.dominantColor = :color')
+            ->setParameter('color', $color);
+    }
+
+    if ($license) {
+        $queryBuilder
+            ->andWhere('p.license = :license')
+            ->setParameter('license', $license);
+    }
+
+    $patterns = $queryBuilder->getQuery()->getResult();
+
+    $user = $this->getUser();
+    $likes = $manager->getRepository(Like::class)->findAll();
+
+    return $this->render('pattern/sort.html.twig', [
+        'patterns' => $patterns,
+        'user' => $user,
+        'likes' => $likes
+    ]);
+
         $user = $this->getUser();
         $likes = $manager->getRepository(Like::class)->findAll();
-        
-        return $this->render('patterns/index.html.twig', [
-            'pattern' => $pattern,
+        return $this->render('pattern/sort.html.twig', [
+            'patterns' => $pattern,
             'user'=> $user,
             'likes'=>$likes
         ]);

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Patterns{% endblock %}
+
+{% block body %}
+    <div class="noContextMenu">
+        {% include "partials/intro.html.twig" %}
+    </div>
+
+    <div class="slide fil">
+        <h2>Bienvenue dans le patchwork !</h2>
+
+        {% include "partials/filter.html.twig" %}
+
+        {% if patterns is not empty %} 
+            <div class="filContainer">
+                {% for pattern in patterns %}
+                    {% include "partials/_instax.html.twig" %}
+                {% endfor %}
+            </div>
+        {% else %}
+            
+                <p style="width: 100%; text-align: center; margin-top: 50px">Il n'y a pas de résultat correspondant à votre recherche !</p>
+            
+        {% endif %}
+            
+      
+        
+    </div>
+
+    
+{% endblock %}
+
+{% block javascripts %}
+   
+            <script>
+            console.log('test js')
+            
+               const noContext = document.querySelectorAll(".noContextMenu");
+
+                noContext.forEach(elem=>{
+                    elem.addEventListener("contextmenu", (e) => {
+                    e.preventDefault();
+                    });
+                })
+                
+           
+            </script>
+
+{% endblock %}

@@ -38,10 +38,15 @@
                 <h5>Pseudo</h5>
                 <p>{{user.pseudo}}</p>
                 <h5>Email</h5>
-                {% if app.user.id == user.id  %}
-                    {{user.email}}
+                {% if app.user %}
+                    {% if app.user.id == user.id  %}
+                        {{user.email}}
+                    {% else %}
+                        <a href="" style="color: white"><button class="uploadBtn">Contacter l'utilisateur</button></a>
+                    {% endif %} 
                 {% else %}
-                    <a href="" style="color: white">Contacter l'utilisateur</a>
+                         <a href="" style="color: white"><button class="uploadBtn">Contacter l'utilisateur</button></a>
+                
                 {% endif %}
                 
                 <h5>Introduction</h5>
@@ -63,12 +68,6 @@
                 <a href="{{path('user_patterns', {'slug': user.slug})}}" id="userCreation">Voir toutes ses créations > </a>
                 
         </div>
-      
-
-
-
-        
-
     </div>
 {% endblock %}
 
