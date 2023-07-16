@@ -13,6 +13,7 @@
                     <tr>
                         <th>ID</th>
                         {# <th>Avatar</th> #}
+                        <th>Role</th>
                         <th>Pseudo</th>
                         <th>Email</th>
                         {# <th>Rôle(s)</th> #}
@@ -27,6 +28,7 @@
                         <tr>
                             <td>{{user.id}}</td>
                             {# <td><img class="vignette" src="../uploads/{{user.avatar}}" alt=""></td> #}
+                            <td>{{user.roles[0]}}</td>
                             <td>{{user.pseudo}}</td>
                             <td>{{user.email}}</td>
                             {# <td>{{user.roles[0]}}</td> #}
@@ -40,8 +42,20 @@
                             <td class="actions">
                                 
                                 {% if user.roles[0] == "ROLE_USER" or not app.user.id == user.id %}
-                                    <a href="{{path('admin_user_delete',{'slug': user.slug })}}" class="btn-red" ><i class="fas fa-trash"></i></a>
+                                    
+                                   
                                 {% endif %}
+                                {% if user.id != 11 %}
+
+                                    <a href="{{path('admin_user_delete',{'slug': user.slug })}}" class="btn-red" ><i class="fas fa-trash"></i></a>
+
+                                    {% if user.roles[0] == "ROLE_ADMIN" %}
+                                        <a href="{{path('user_change', {'slug':user.slug})}}" style="color: white"><i class="fa-solid fa-arrows-spin"></i></a>
+                                    {% else %}
+                                         <a href="{{path('role_change', {'slug':user.slug})}}" style="color: white"><i class="fa-solid fa-arrows-spin"></i></a>
+                                    {% endif %}
+                                {% endif %}
+                                 
                             </td>
                         </tr>
                     {% endfor %}

@@ -147,7 +147,6 @@ class AdminUserController extends AbstractController
      * @return Response
      */
     #[Route("/account/password-update", name:'account_password')]
-    #[IsGranted("ROLE_USER")]
     public function updatePassword(Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $hasher): Response
     {
         $passwordUpdate = new PasswordUpdate();
@@ -170,12 +169,16 @@ class AdminUserController extends AbstractController
                 $manager->persist($user);
                 $manager->flush();
 
+                $slug= $user->getSlug();
+
                 $this->addFlash(
                     'success',
                     "Votre mot de passe a bien été modifié"
                 );
 
-                return $this->redirectToRoute('admin_user');
+                return $this->redirectToRoute('user_profile',[
+                    'slug'=> $slug
+                ]);
             }
         }
 
@@ -186,6 +189,43 @@ class AdminUserController extends AbstractController
     }
 
     
+    #[Route('/adminuser/{slug}/change', name:"role_change")]
+    #[IsGranted('ROLE_ADMIN')]
+    public function adminChange(User $user, EntityManagerInterface $manager)
+    {
+
+        $this->addFlash(
+            "success",
+            "Le rôle de {$user->getPseudo()} a bien été changé"
+        );
+
+       
+            $user->setRoles(["ROLE_ADMIN"]);
+            $manager->persist($user);
+            $manager->flush();
+        
+
+        return $this->redirectToRoute("admin_user");
+    }
+
+    #[Route('/adminuser/{slug}/d', name:"user_change")]
+    #[IsGranted('ROLE_ADMIN')]
+    public function userChange(User $user, EntityManagerInterface $manager)
+    {
+
+        $this->addFlash(
+            "success",
+            "Le rôle de {$user->getPseudo()} a bien été changé"
+        );
+
+            $user->setRoles(["ROLE_USER"]);
+            $manager->persist($user);
+            $manager->flush();
+        
+
+        return $this->redirectToRoute("admin_user");
+    }
+
     /**
      * Permet de supprimer un user à partir de l'administration (liste des motifs)
      */
@@ -205,4 +245,6 @@ class AdminUserController extends AbstractController
 
         return $this->redirectToRoute("admin_user");
     }
+
+    
 }

@@ -8,7 +8,12 @@
         <div id="conditions">
             <a href="{{path('legacy')}}">Conditions générales</a>
             <a href="{{path('legacy')}}">Confidentialité</a>
-            <a href="{{path('legacy')}}">Gestion des données</a>
+            {% if app.user %}
+                {% if app.user.id != 11 %}
+                    <a href="{{path('unsub',{'slug':app.user.slug})}}">Me désinscrire</a>
+                {% endif %}
+            {% endif %}
+            
         </div>
         <div id="socialMedia"> Réseaux Sociaux</div>
     </div>

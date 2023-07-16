@@ -121,6 +121,20 @@ class AccountController extends AbstractController
 
     }
 
-    
+    #[Route('/user/{slug}/delete', name:"unsub")]
+    public function userAdminDelete(User $user, EntityManagerInterface $manager)
+    {
+        $this->addFlash(
+            "success",
+            "Le motif {$user->getId()} a bien été supprimé"
+        );
+
+        unlink($this->getParameter('uploads_directory').'/'.$user->getAvatar());
+            
+        $manager->remove($user);
+        $manager->flush();
+
+        return $this->redirectToRoute("homepage");
+    }
 
 }

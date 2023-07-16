@@ -25,7 +25,8 @@
                     <p><i>par {{pattern.pattern.idUser.pseudo}}</i></p>
                     </div>
                     
-                    {% if app.user %}
+                </div>
+                {% if app.user %}
                         {% if pattern.pattern.likes | length==0 %}
                             <a href="{{path('like', {'id': pattern.pattern.id})}}">
                                 <div class="like">
@@ -51,9 +52,6 @@
                         {% endif %}
                         
                     {% endif %}
-                    
-                    
-                </div>
 </div>
 
 

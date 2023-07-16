@@ -5,7 +5,6 @@
 {% block body %}
     {% include "partials/intro.html.twig" %}
     <div class="slide fil">
-        
         {% if is_granted('ROLE_USER')  %}
             {% if app.user.id == user.id or app.user.roles[0]=="ROLE_ADMIN" %}
                 <a href="{{path('account_profile',{'slug' : user.slug})}}"><button><i class="fa-solid fa-pen-to-square"></i> Modifier les informations </button></a>
@@ -13,10 +12,11 @@
                
             {% endif %}
         {% endif %}
-        {% if is_granted('ROLE_USER') %}
+        {% if app.user %}
              {% if app.user.id == user.id %}
                 <a href="{{path('account_password',{'slug' : user.slug})}}"><button><i class="fa-solid fa-pen-to-square"></i> Modifier le mot de passe </button></a>
-            {% else %}
+            {% endif %}
+            {% if app.user.roles[0]== "ROLE_ADMIN" %}
                 <a href="{{path('account_password',{'slug' : user.slug})}}"><button><i class="fa-solid fa-pen-to-square"></i> Envoyer un nouveau mot de passe </button></a>
             {% endif %}
         {% endif %}
@@ -65,7 +65,7 @@
                     {% endfor %}
                 </div>
                         
-                <a href="{{path('user_patterns', {'slug': user.slug})}}" id="userCreation">Voir toutes ses créations > </a>
+                <a href="{{path('user_patterns', {'slug': user.slug})}}" id="userCreation">Voir toutes les créations > </a>
                 
         </div>
     </div>

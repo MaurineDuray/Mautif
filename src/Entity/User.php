@@ -56,7 +56,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank(message: "L'introduction est obligatoire")]
     private ?string $introduction = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_user', targetEntity: Pattern::class)]
+    #[ORM\OneToMany(mappedBy: 'id_user', targetEntity: Pattern::class,  orphanRemoval: true)]
     private Collection $patterns;
 
     #[ORM\Column(nullable: true)]

@@ -118,7 +118,7 @@ class PatternController extends AbstractController
         $user = $this->getUser();
         $likes = $manager->getRepository(Like::class)->findAll();
         return $this->render('pattern/sort.html.twig', [
-            'patterns' => $pattern,
+            'patterns' => $patterns,
             'user'=> $user,
             'likes'=>$likes
         ]);
