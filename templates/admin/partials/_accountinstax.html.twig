@@ -10,13 +10,34 @@
                     <h6>Collection - {{pattern.title}}</h6>
                     <p><i>par {{pattern.idUser.pseudo}}</i></p>
                     </div>
-                    
-                    {% if app.user %}
-                        <div class="heart"><i class="coeur fa-regular fa-heart"></i></div>
-                    {% else %}
-                        <div class="heart" unlike="true"><i class="coeur fa-regular fa-heart"></i></div>
-                    {% endif %}
                 </div>
+
+        {% if app.user %}
+                        {% if pattern.likes | length==0 %}
+                            <a href="{{path('like', {'id': pattern.id})}}" class="heart">
+                                <div class="like">
+                                    <i class="fa-regular fa-heart"></i>
+                                </div>
+                            </a>
+                        {% else %}
+                            {% for like in pattern.likes %}
+                                {% if like.user.id == app.user.id%}
+                                    <a href="{{path('unlike', {'id': like.id})}}" class="heart">
+                                        <div class="like">
+                                            <i class="fa-solid fa-heart"></i>
+                                        </div>
+                                    </a>
+                                {% else %}
+                                    <a href="{{path('like', {'id': pattern.id})}}" class="heart">
+                                        <div class="like">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </div>
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        
+                    {% endif %}
                 
 </div>
 

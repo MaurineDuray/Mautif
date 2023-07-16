@@ -1,6 +1,6 @@
 /* Media Queries */
 
-@media all and (max-width: 1000px){
+@media all and (max-width: 1100px){
     .filContainer{
         width:90%;
         grid-template-columns: repeat(2, 1fr);

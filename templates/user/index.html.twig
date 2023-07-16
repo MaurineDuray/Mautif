@@ -38,7 +38,12 @@
                 <h5>Pseudo</h5>
                 <p>{{user.pseudo}}</p>
                 <h5>Email</h5>
-                <a href="" style="color: white">Contacter l'utilisateur</a>
+                {% if app.user.id == user.id  %}
+                    {{user.email}}
+                {% else %}
+                    <a href="" style="color: white">Contacter l'utilisateur</a>
+                {% endif %}
+                
                 <h5>Introduction</h5>
                 <p>{{user.introduction}}</p>
                 

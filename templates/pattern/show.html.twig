@@ -27,9 +27,9 @@
                 <p class="license">Licence :<b></br>{{pattern.license}}</b></p>
 
                 {% if pattern.license == "COMMERCIALE" or pattern.license == "PRIVÉE" %}
-                    <a href="/uploads/{{pattern.cover}}" download="{{pattern.title}}.jpeg"><button class="uploadBtn"><i class="fa-solid fa-arrow-up-from-bracket"></i> Télécharger le motif </button></a>
+                    <a href="/uploads/{{pattern.cover}}" download="{{pattern.title}}.jpeg"><button class="uploadBtn"><i class="fa-solid fa-file-arrow-down"></i> Télécharger le motif </button></a>
                 {% else %}
-                    <a href="" ><button class="uploadBtn">Contacter {{pattern.idUser.pseudo}}</button></a>
+                    <a href="" ><button class="uploadBtn"><i class="fa-regular fa-paper-plane"></i> Contacter {{pattern.idUser.pseudo}}</button></a>
                 {% endif%}
             </div>
         </div>
@@ -46,43 +46,38 @@
             </div> #}
             <div class="container">
             {% if pattern.galeries | length > 0 %}
-                <div id="carouselExampleCaptions" class="carousel"  data-bs-ride="false">
-                    <div class="carousel-indicators">
-                    {% for galery in pattern.galeries %}
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{loop.index0}}" {% if loop.first %} class="active" aria-current="true" {% endif %} aria-label="Slide {{loop.index}}"></button>
-                    {% endfor %} 
-                    
-                    </div>
+              
+                 
                     <div class="carousel-inner">
                         {% for galery in pattern.galeries %}
                         
-                            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                <div class="item">
                                 {% if app.user %}
                                     {% if app.user == galery.author or app.user.roles[0] == "ROLE_ADMIN"%}
-                                        <a href="{{path('delete_galery',{'id': galery.id})}}" class="btn btn-danger mx-3 my-3" style="z-index:500; position:absolute"><i class="fa-solid fa-trash"></i></a>    
+                                        <a href="{{path('delete_galery',{'id': galery.id})}}" class="btn deleteBtn" style="z-index:500; position:absolute"><i class="fa-solid fa-trash"></i></a>    
                                     {% endif %}
                                 {% endif %}
                                 <img src="../uploads/{{galery.picture}}" class="d-block w-100" alt="image de {{pattern.title}}" >
-                                
-                            </div>
+                                </div>
+                       
                             
                         {% endfor %}
                     
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
+                    
+                
+                {% if app.user %}
+                    <a  href="{{path('add_galery',{"slug":pattern.slug})}}" style="color: black; text-decoration: none"><button >Ajouter une inspiration</button></a>
+                      
+                {% else %}
+                    <a href="{{path('account_login')}}" style="color: black; text-decoration: none"><button>Je me connecte</button></a>
+                    <a href="{{path('account_register')}}" style="color: black; text-decoration: none"><button>Je n'ai pas de compte</button></a>
+                {% endif %}
             {% else %}
                 <p>Aucun créateur n'a posté d'inspiration pour l'instant !</p>
                 <p><b>Sois le premier à poster une de tes réalisations !</b></p>
                 {% if app.user %}
-                    <a  href="{{path('add_galery',{"slug":pattern.slug})}}" style="color: black; text-decoration: none"><button class="uploadBtn">Ajouter une inspiration</button></a>
+                    <a  href="{{path('add_galery',{"slug":pattern.slug})}}" style="color: black; text-decoration: none"><button>Ajouter une inspiration</button></a>
                       
                 {% else %}
                     <a href="{{path('account_login')}}" style="color: black; text-decoration: none"><button>Je me connecte</button></a>

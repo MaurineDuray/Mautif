@@ -14,15 +14,23 @@
             {{form_start(search)}}
             {{form_end(search)}}
         </div>
-        
-        {% include "partials/filter.html.twig" %}
 
-        <div class="filContainer">
-            {% for pattern in pagination.data %}
-                {% include "partials/_instax.html.twig" %}
-            {% endfor %}
-        </div>
-         {{pagination.display()}}
+        <h3 style="text-align:center">Voici les résultats de votre recherche : {{criteria}}</h3>
+        <a href="{{path('patterns_index')}}"><button>Annuler la recherche</button></a>       
+        {% if patterns is not empty %} 
+            <div class="filContainer">
+                {% for pattern in patterns %}
+                    {% include "partials/_instax.html.twig" %}
+                {% endfor %}
+            </div>
+        {% else %}
+            
+                <p style="width: 100%; text-align: center; margin-top: 50px">Il n'y a pas de résultat correspondant à votre recherche !</p>
+            
+        {% endif %}
+            
+      
+        
     </div>
 
     

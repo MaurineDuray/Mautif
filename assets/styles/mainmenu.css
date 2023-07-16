@@ -66,13 +66,14 @@
     margin-left: -200px;
 }
 .icons{
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     margin-left: 20px;
     background-color: rgb(255, 255, 255);
     border-radius: 25px;
     text-align: center;
     cursor: pointer;
+    overflow: hidden;
 }
 .icon{
     color:rgb(18, 50, 18);

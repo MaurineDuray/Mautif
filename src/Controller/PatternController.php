@@ -7,10 +7,11 @@ use App\Entity\User;
 use App\Entity\Galery;
 use App\Entity\Pattern;
 use App\Form\GaleryType;
+use App\Form\SearchType;
 use App\Form\PatternType;
+use App\Form\PatternImgType;
 use App\Form\PatternUpdateType;
 use App\Entity\PatternImgModify;
-use App\Form\PatternImgType;
 use App\Repository\UserRepository;
 use App\Service\PaginationService;
 use App\Repository\PatternRepository;
@@ -36,15 +37,54 @@ class PatternController extends AbstractController
     #[Route('/patterns/{page<\d+>?1}', name: 'patterns_index')]
     public function index(PatternRepository $repo, PaginationService $pagination, $page, Request $request, EntityManagerInterface $manager): Response
     {
-        $pagination -> setEntityClass(Pattern::class)
-        ->setPage($page)
-        ->setLimit(12);
+        $searchForm = $this->createForm(SearchType::class);
 
+        if ($searchForm->handleRequest($request)->isSubmitted() && $searchForm->isValid()){
+            $criteria = $searchForm['search']->getData();
+            $patterns = $manager->getRepository(Pattern::class)->findPattern($criteria);
+            $user = $this->getUser();
+            $likes = $manager->getRepository(Like::class)->findAll();
+
+            return $this->render('pattern/search.html.twig', [
+                'search'=>$searchForm->createView(),
+                'patterns'=>$patterns,
+                'criteria'=>$criteria,
+                'user'=> $user,
+                'likes'=>$likes
+            ]);
+        }else{    
+            $pagination -> setEntityClass(Pattern::class)
+            ->setPage($page)
+            ->setLimit(12);
+
+            $user = $this->getUser();
+            $likes = $manager->getRepository(Like::class)->findAll();
+
+            return $this->render('pattern/index.html.twig', [
+                'search'=>$searchForm->createView(),
+                'pagination'=> $pagination,
+                'user'=> $user,
+                'likes'=>$likes
+            ]);
+        }
+    }
+
+     /**
+     * Afficher les motifs d'une catégorie 
+     */
+    #[Route('patterns?theme={theme}&color={color}&license={license}', name:'pattern_theme')]
+    public function showCategory(PatternRepository $repo, Request $request, EntityManagerInterface $manager):Response
+    {
+        $theme=$request->get('theme');
+        $color=$request->get('color');
+        $license= $request->get('license');
+
+        $pattern = $repo->findByCategory($theme, $color, $license);
         $user = $this->getUser();
         $likes = $manager->getRepository(Like::class)->findAll();
-
-        return $this->render('pattern/index.html.twig', [
-            'pagination'=> $pagination,
+        
+        return $this->render('patterns/index.html.twig', [
+            'pattern' => $pattern,
             'user'=> $user,
             'likes'=>$likes
         ]);

@@ -6,9 +6,9 @@ const menuResponsive = document.querySelector('#slideMenu')
 const items = document.querySelectorAll('#slideMenu ul li')
 console.log(items)
 
-let search = document.querySelector('#search')
-let input = document.querySelector('#research')
-let loupe = document.querySelector('#search #loupe')
+// let search = document.querySelector('#search')
+// let input = document.querySelector('#research')
+// let loupe = document.querySelector('#search #loupe')
 
 let login = document.querySelector('#user')
 let accountBlock = document.querySelector('#accountBlock')
@@ -46,16 +46,16 @@ items.forEach(item=>{
 
 // gestion de la barre de recherche
 
-loupe.addEventListener('click',function(){
-    console.log('loupe')
+// loupe.addEventListener('click',function(){
+//     console.log('loupe')
 
     
-    input.classList.toggle('actif')
-    menuResponsive.classList.remove('open')
-        burger.classList.remove('open');
-        menuResponsive.style.transition="all 1s";
+//     input.classList.toggle('actif')
+//     menuResponsive.classList.remove('open')
+//         burger.classList.remove('open');
+//         menuResponsive.style.transition="all 1s";
     
-})
+// })
 
 login.addEventListener('click', function(){
     console.log('login click')

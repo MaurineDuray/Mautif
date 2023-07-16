@@ -54,6 +54,48 @@ class PatternRepository extends ServiceEntityRepository
        ;
    }
 
+   //Trouver un motif par la barre de recherche
+   public function findPattern(string $criteria)
+   {
+       $qb = $this->createQueryBuilder('p');
+       $qb
+           ->where(
+               $qb->expr()->andX(
+                   $qb->expr()->orX(
+                       $qb->expr()->like('p.title', ':criteria'),
+                       $qb->expr()->like('p.theme', ':criteria'),
+                       $qb->expr()->like('p.dominantColor', ':criteria'),
+                       $qb->expr()->like('p.description', ':criteria')
+                   ),
+               )
+           )
+           ->setParameter('criteria', '%' . $criteria . '%');
+       return $qb
+           ->getQuery()
+           ->getResult();
+   }
+
+    /**
+    * @return Pattern[] Returns an array of Pattern objects
+    */
+    public function findByCategory(string $theme, string $color, string $license): array
+    {
+       return $this->createQueryBuilder('p')
+           ->select('p as pattern, p.slug, p.dominant_color, p.creation_date, p.cover, p.theme, p.title, p.theme, p.description, p.license')
+           ->groupBy('p')
+           ->orderBy('p.id', 'DESC')
+           ->where('p.theme= :theme')
+           ->andWhere('p.dominant_color: :color')
+           ->andwhere('p.license= :license')
+           ->setParameters([
+            'theme'=> $theme,
+            'color' => $color,
+            'license' => $license
+           ])
+           ->getQuery()
+           ->getResult()
+       ;
+    }
 
 //    /**
 //     * @return Pattern[] Returns an array of Pattern objects
