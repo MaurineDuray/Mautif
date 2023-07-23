@@ -6,11 +6,12 @@ use Cocur\Slugify\Slugify;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use DateInterval;
+use DateTime;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\HasLifecycleCallbacks]
@@ -25,7 +26,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180, unique: true)]
     #[Assert\NotBlank(message:"L'email doit être renseigné")]
     #[Assert\Email(message:"Le format de l'email n'est pas correct")]
-    
     private ?string $email = null;
 
     #[ORM\Column]
@@ -74,12 +74,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Galery::class, orphanRemoval: true)]
     private Collection $galeries;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $tokenRegistration = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $tokenRegistrationLifeTime = null;
+
+    #[ORM\Column]
+    private bool $isVerified = false;
+
     public function __construct()
     {
         $this->patterns = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->likes = new ArrayCollection();
         $this->galeries = new ArrayCollection();
+        $this->isVerified = false;
+        $this->tokenRegistrationLifeTime = (new DateTime('now'))->add(new DateInterval("P1D"));
     }
 
     /**
@@ -356,6 +367,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $galery->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTokenRegistration(): ?string
+    {
+        return $this->tokenRegistration;
+    }
+
+    public function setTokenRegistration(?string $tokenRegistration): self
+    {
+        $this->tokenRegistration = $tokenRegistration;
+
+        return $this;
+    }
+
+    public function getTokenRegistrationLifeTime(): ?\DateTimeInterface
+    {
+        return $this->tokenRegistrationLifeTime;
+    }
+
+    public function setTokenRegistrationLifeTime(\DateTimeInterface $tokenRegistrationLifeTime): self
+    {
+        $this->tokenRegistrationLifeTime = $tokenRegistrationLifeTime;
+
+        return $this;
+    }
+
+    public function isIsVerified(): ?bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }

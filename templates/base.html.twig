@@ -14,12 +14,11 @@
     <body>
         {% include "partials/header.html.twig" %}
 
+        {% include "partials/_flash.html.twig" %}
+
         {% block body %}{% endblock %}
         
         {% include "partials/footer.html.twig" %}
-
-
-
 
          {{ encore_entry_script_tags('app') }}
         {% block javascripts %}
@@ -34,7 +33,6 @@
                     });
                 })
                 
-           
             </script>
         {% endblock %}
     </body>

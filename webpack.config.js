@@ -34,7 +34,7 @@ Encore
     .addEntry('home', './assets/js/home.js')
     .addEntry('like', './assets/js/like.js')
     .addEntry('slider', './assets/js/slider.js')
-    .addEntry('galery', './assets/js/galery.js')
+  
     .addEntry('footer', './assets/js/footer.js')
 
 

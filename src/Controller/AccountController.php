@@ -2,21 +2,28 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Like;
 use App\Entity\User;
 use App\Form\AccountType;
 use App\Form\RegistrationType;
+use App\Service\MailerService;
+use Symfony\Component\Mime\Email;
 use App\Repository\LikeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class AccountController extends AbstractController
 {
@@ -29,6 +36,7 @@ class AccountController extends AbstractController
     #[Route('/login', name: 'account_login')]
     public function index(AuthenticationUtils $utils): Response
     {
+        
         $error = $utils->getLastAuthenticationError();
         $username = $utils->getLastUsername();
 
@@ -72,7 +80,7 @@ class AccountController extends AbstractController
      * @return Response
      */
     #[Route("/register", name:"account_register")]
-    public function register(Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $hasher): Response
+    public function register(Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $hasher, MailerInterface $mailer): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
@@ -101,13 +109,27 @@ class AccountController extends AbstractController
 
             $hash = $hasher->hashPassword($user, $user->getPassword());
             $user->setPassword($hash);
+            $user->setRoles(['ROLE_USER']);
 
             $manager->persist($user);
             $manager->flush();
 
+            // mail send
+            $email = (new TemplatedEmail())
+            ->from($user->getEmail())
+            ->to('site@mautif.com')
+            ->subject('Validation d\'inscription')
+            ->htmlTemplate('mails/registration_confirmation.html.twig')
+            ->context([
+                'user'=>$user
+            ]);
+
+            $mailer->send($email);
+
+
             $this->addFlash(
                 'success',
-                "Votre compte a bien été créé"
+                "Votre compte a bien été créé, vérifier vos emails pour l'activer"
             );
 
             return $this->redirectToRoute('account_login');
@@ -121,12 +143,35 @@ class AccountController extends AbstractController
 
     }
 
+    #[Route('/verify/{id<\d+>}', name:'account_verify', methods: ['GET'])]
+    public function verify( User $user, EntityManagerInterface $em)
+    {
+    //    if($user->getTokenRegistration() !== $token){
+    //     throw new AccessDeniedException();
+    //    }
+
+    //    if($user->getTokenRegistration() === null){
+    //     throw new AccessDeniedException();
+    //    }
+
+    //    if(new DateTime('now') > $user->getTokenRegistrationLifeTime()){
+    //     throw new AccessDeniedException();
+    //    }
+
+       $user->setIsVerified(true);
+       
+       $em->flush();
+
+       $this->addFlash('success','Votre compte a été vérifié avec succès, vous pouvez vous connecter');
+       return $this->redirectToRoute('account_login');
+    }
+
     #[Route('/user/{slug}/delete', name:"unsub")]
     public function userAdminDelete(User $user, EntityManagerInterface $manager)
     {
         $this->addFlash(
             "success",
-            "Le motif {$user->getId()} a bien été supprimé"
+            "Le compte de l'utilisateur n°{$user->getId()} a bien été supprimé"
         );
 
         unlink($this->getParameter('uploads_directory').'/'.$user->getAvatar());

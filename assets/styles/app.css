@@ -54,8 +54,26 @@ html{
     overflow-x: hidden !important;
     
 }
-
-
+.alert{
+    width: auto;
+    color: white;
+    border-radius: 20px;
+    position: absolute;
+    top: 20px;
+    margin: 0 auto;
+    padding: 10px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    z-index: 500;
+    text-align: center;
+}
+.alert-success{
+    background-color: rgba(52, 154, 78, 0.8);
+}
+.alert-danger{
+    background-color: rgba(241, 175, 10, 0.85);
+}
 
 
 

@@ -66,3 +66,13 @@ login.addEventListener('click', function(){
 
 
 })
+
+const alert = document.querySelectorAll('.alert')
+if (alert) {
+    setTimeout(alertdelete,2000)
+}   
+function alertdelete(){
+    alert.forEach(element => {
+        element.style.display= "none"
+    });
+}
