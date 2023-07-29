@@ -18,7 +18,10 @@ class PatternType extends ApplicationType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('submit', SubmitType::class,['label' => 'Enregistrer'])
+            ->add('submit', SubmitType::class,['label' => 'Enregistrer'],
+            [
+                'attr' => ['class' => 'btn'],
+            ])
             ->add('title', TextType::class, $this->getConfiguration("Titre", "Titre du motif"))
             ->add('theme', ChoiceType::class,[
                 'choices'=>[

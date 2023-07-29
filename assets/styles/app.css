@@ -74,6 +74,18 @@ html{
 .alert-danger{
     background-color: rgba(241, 175, 10, 0.85);
 }
+.btn{
+    background-color: white;
+    color: black;
+    height: 35px;
+    border: none;
+    border-radius: 20px;
+    padding: 0px 10px 0px 10px;
+    box-shadow:  3px 3px 15px rgb(0, 0, 0) !important;
+}
+button{
+    box-shadow:  3px 3px 15px rgb(0, 0, 0) !important;
+}
 
 
 

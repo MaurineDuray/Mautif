@@ -11,7 +11,9 @@ use App\Form\PasswordUpdateType;
 use App\Repository\UserRepository;
 use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -246,5 +248,42 @@ class AdminUserController extends AbstractController
         return $this->redirectToRoute("admin_user");
     }
 
-    
+    #[Route('/usernewmdp/{slug}', name:"new_mdp")]
+    public function newmdp(User $user, EntityManagerInterface $manager, MailerInterface $mailer, UserPasswordHasherInterface $hasher):Response
+    {
+            $password=random_bytes(10);
+            
+            // mail send
+            $email = (new TemplatedEmail())
+            ->from('design@maurine.be')
+            ->to($user->getEmail())
+            ->subject('Changement de mot de passe')
+            ->htmlTemplate('mails/password.html.twig')
+            ->context([
+                'user'=>$user,
+                'password'=>$password
+            ]);
+
+            $mailer->send($email);
+
+            $this->addFlash(
+                "success",
+                "Le nouveau mot de passe a bien été envoyé !"
+            );
+
+
+            $newPassword = $password;
+            $hash = $hasher->hashPassword($user, $newPassword);
+
+            $user->setPassword($hash);
+            $manager->persist($user);
+            $manager->flush();
+
+            $slug= $user->getSlug();
+
+            return $this->redirectToRoute('user_profile',[
+                'slug'=> $slug
+            ]);
+        
+    }
 }

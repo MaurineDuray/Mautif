@@ -1,6 +1,6 @@
 /* Menu principal */
 .mainMenu{
-    z-index: 1500;
+    z-index: 3500;
     position: fixed;
     top:0;
     left: 0;
@@ -21,6 +21,7 @@
     cursor: pointer;
     width: 55px;
     height: 55px;
+    z-index: 3000;
 }
 #burgerMenu .bar{
     height: 3px;
@@ -90,7 +91,7 @@
     top: 75px;
     border-radius: 10px;
     color: var(--darkgreen);
-    z-index: 1010;
+    z-index: 5000;
 }
 .account{
     display: flex !important;

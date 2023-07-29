@@ -34,7 +34,7 @@ footer{
     /* à changer dans le JS pour faire apparaître */
     position: fixed;
     width: 100%;
-    z-index: 999;
+    z-index: 5500;
     transition: all 0.5s;
 }
 
@@ -61,6 +61,7 @@ footer{
 #conditions a{
     width:100%;
     text-align: center;
+    color: black;
 }
 #copyright{
     background-color: var(--darkgreen);

@@ -9,8 +9,8 @@
             <a href="{{path('legacy')}}">Conditions générales</a>
             <a href="{{path('legacy')}}">Confidentialité</a>
             {% if app.user %}
-                {% if app.user.id != 11 %}
-                    <a href="{{path('unsub',{'slug':app.user.slug})}}">Me désinscrire</a>
+                {% if app.user.id != 11 or app.user.roles != "ROLE_ADMIN" %}
+                    <a href="{{path('confirm_unsub')}}">Me désinscrire</a>
                 {% endif %}
             {% endif %}
             

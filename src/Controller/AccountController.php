@@ -116,8 +116,8 @@ class AccountController extends AbstractController
 
             // mail send
             $email = (new TemplatedEmail())
-            ->from($user->getEmail())
-            ->to('site@mautif.com')
+            ->from('design@maurine.be')
+            ->to($user->getEmail())
             ->subject('Validation d\'inscription')
             ->htmlTemplate('mails/registration_confirmation.html.twig')
             ->context([
@@ -164,6 +164,14 @@ class AccountController extends AbstractController
 
        $this->addFlash('success','Votre compte a été vérifié avec succès, vous pouvez vous connecter');
        return $this->redirectToRoute('account_login');
+    }
+
+    #[Route('/confirm', name:'confirm_unsub')]
+    public function confirm_unsub():Response
+    {
+        return $this->render("account/unsub.html.twig",[
+           
+        ]);
     }
 
     #[Route('/user/{slug}/delete', name:"unsub")]

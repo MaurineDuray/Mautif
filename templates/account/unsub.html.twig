@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Inscription au site {% endblock %}
+{% block body %}
+    <div class="slide" id="connexion">
+        <div class="inscriptionContent">
+            <h1>Voulez-vous vraiment vous désinscrire ?</h1>
+            <a href="{{path('unsub',{'slug':app.user.slug})}}"><button class="btn">Me désinscrire</button></a>
+            <a href="{{path('homepage')}}"><button class="btn">Retour à la page d'accueil</button></a>
+        </div>
+        
+    </div>
+{% endblock %}
