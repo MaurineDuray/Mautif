@@ -7,8 +7,11 @@
     
 
     <div class="slide fil">
-        {% if app.user.id == user.id %}
-            <h2>Votre profil </h2>
+       
+        {% if app.user %}
+            {% if app.user.id == user.id %}
+                <h2>Votre profil </h2>
+            {% endif %}
         {% endif %}
         <div id="actions">
         {% if is_granted('ROLE_USER')  %}
@@ -50,10 +53,10 @@
                     {% if app.user.id == user.id  %}
                         {{user.email}}
                     {% else %}
-                        <a href="" style="color: white"><button class="uploadBtn">Contacter l'utilisateur</button></a>
+                        <a href={{path('contact',{'id':user.id})}}" style="color: white"><button class="uploadBtn">Contacter l'utilisateur</button></a>
                     {% endif %} 
                 {% else %}
-                         <a href="" style="color: white"><button class="uploadBtn">Contacter l'utilisateur</button></a>
+                         <a href="{{path('contact',{'id':user.id})}}" style="color: white"><button class="uploadBtn">Contacter l'utilisateur</button></a>
                 
                 {% endif %}
                 

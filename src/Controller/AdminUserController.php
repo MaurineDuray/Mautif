@@ -251,7 +251,7 @@ class AdminUserController extends AbstractController
     #[Route('/usernewmdp/{slug}', name:"new_mdp")]
     public function newmdp(User $user, EntityManagerInterface $manager, MailerInterface $mailer, UserPasswordHasherInterface $hasher):Response
     {
-            $password=random_bytes(10);
+            $password=random_int(100, 999999);
             
             // mail send
             $email = (new TemplatedEmail())

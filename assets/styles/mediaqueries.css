@@ -79,6 +79,12 @@
     .caroussel img{
         width: 100%;
     }
+    #homeContainer img{
+        width: 70% !important;
+    }
+    #homeContainer h2{
+        font-size: 15pt;
+    }
 }
 
 

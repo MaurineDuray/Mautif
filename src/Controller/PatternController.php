@@ -177,7 +177,7 @@ class PatternController extends AbstractController
              */
             $this->addFlash(
                 'success',
-                "L'annonce <strong>{$pattern->getTitle()} - {$pattern->getTheme()}</strong> a bien été enregistrée!"
+                "Le motif <strong>{$pattern->getTitle()} - {$pattern->getTheme()}</strong> a bien été enregistrée!"
             );
 
             return $this->redirectToRoute('pattern_show', [
