@@ -8,6 +8,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LegacyController extends AbstractController
 {
+    /**
+     * Permet d'afficher les conditions légales
+     *
+     * @return Response
+     */
     #[Route('/legacy', name: 'legacy')]
     public function index(): Response
     {

@@ -3,11 +3,11 @@
 <div class="d-flex justify-content-center">
     <ul class="pagination pagination-sm">
         <li class="page-item {% if page == 1 %}disabled{% endif %}">
-            <a class="page-link" href="{{path(route,{'page': page - 1})}}"><button>&laquo; Précédent</button></a>
+            <a class="page-link" href="{{path(route,{'page': page - 1})}}"><button class="btn">&laquo; Précédent</button></a>
         </li>
        
         <li class="page-item {% if page == pages %}disabled{% endif %}">
-            <a class="page-link" href="{{path(route,{'page': page + 1})}}"><button>Suivant &raquo; </button></a>
+            <a class="page-link" href="{{path(route,{'page': page + 1})}}"><button class="btn">Suivant &raquo; </button></a>
         </li>
     </ul>
 </div>

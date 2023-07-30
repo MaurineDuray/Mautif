@@ -143,6 +143,9 @@ class AccountController extends AbstractController
 
     }
 
+    /**
+     * Permet de vérifier le compte d'un utilistauer à l'inscription
+     */
     #[Route('/verify/{id<\d+>}', name:'account_verify', methods: ['GET'])]
     public function verify( User $user, EntityManagerInterface $em)
     {
@@ -166,6 +169,11 @@ class AccountController extends AbstractController
        return $this->redirectToRoute('account_login');
     }
 
+    /**
+     * Route qui permet d'afficher la page de la confirmation de désinscription du site
+     *
+     * @return Response
+     */
     #[Route('/confirm', name:'confirm_unsub')]
     public function confirm_unsub():Response
     {
@@ -174,6 +182,9 @@ class AccountController extends AbstractController
         ]);
     }
 
+    /**
+     * Permet la suppression d'un compte utilisateur
+     */
     #[Route('/user/{slug}/delete', name:"unsub")]
     public function userAdminDelete(User $user, EntityManagerInterface $manager)
     {

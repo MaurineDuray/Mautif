@@ -3,13 +3,39 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+
+
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="icon" type="image/jpg" href="../../favicon.ico"/>
+        <meta name="application-name" content="Mautif">
+        <meta property="og:title" content="Mautif">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="./favicon.ico">
+        <meta property="og:image:width" content="1800">
+        <meta property="og:image:height" content="945">
+        <meta property="og:url" content="https://mautif.maurine.be/">
+        <meta property="og:description" content="Mautif, la jungle de motifs"> 
+        <meta property="og:locale" content="fr_FR">
+        <meta property="og:site_name" content="Mautif">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@Mautif">
+        <meta name="twitter:title" content="Mautif">
+        <meta name="twitter:description" content="Mautif, la jungle des motifs">
+        <meta name="twitter:image" content="./favicon.ico">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css"  />
+
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       
+
+
     </head>
     <body>
         {% include "partials/header.html.twig" %}

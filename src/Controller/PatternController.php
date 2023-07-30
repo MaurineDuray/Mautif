@@ -77,14 +77,14 @@ class PatternController extends AbstractController
     {
        
         $theme = $request->query->get('theme');
-    $color = $request->query->get('color');
-    $license = $request->query->get('license');
+        $color = $request->query->get('color');
+        $license = $request->query->get('license');
 
-    $repository = $manager->getRepository(Pattern::class);
-    $queryBuilder = $repository->createQueryBuilder('p');
+        $repository = $manager->getRepository(Pattern::class);
+        $queryBuilder = $repository->createQueryBuilder('p');
 
-    $queryBuilder
-        ->orderBy("p.creationDate", "ASC");
+        $queryBuilder
+            ->orderBy("p.creationDate", "ASC");
 
     if ($theme) {
         $queryBuilder

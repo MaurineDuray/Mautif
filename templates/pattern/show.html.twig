@@ -19,17 +19,28 @@
             <div class="right">
                 <p class="theme">{{pattern.theme}}</p>
                 <h4>Collection - {{pattern.title}}</h4>
-                <h6><i>par <a href="{{path('user_profile',  {'slug':pattern.idUser.slug})}}">{{pattern.idUser.pseudo}}</a></i></h6>
-                
+                {% if app.user %}
+                    {% if app.user.id != pattern.idUser.id %}
+                        <h6><i>par <a href="{{path('user_profile',  {'slug':pattern.idUser.slug})}}">{{pattern.idUser.pseudo}}</a></i></h6>
+                    {% else %}
+                        <h6><i>par <a href="{{path('user_profile',  {'slug':pattern.idUser.slug})}}">Vous</a></i></h6>
+                        
+                    {% endif %}
+                {% endif %}
 
                 <h3><b>Description</b></h3>
                 <p>{{pattern.description}}</p>
                 <p class="license">Licence :<b></br>{{pattern.license}}</b></p>
-
+                {% if app.user %}
                 {% if pattern.license == "COMMERCIALE" or pattern.license == "PRIVÉE" %}
                     <a href="/uploads/{{pattern.cover}}" download="{{pattern.title}}.jpeg"><button class="uploadBtn"><i class="fa-solid fa-file-arrow-down"></i> Télécharger le motif </button></a>
                 {% else %}
-                    <a href="{{path('contact',{'id':pattern.idUser.id})}}"><button class="uploadBtn"><i class="fa-regular fa-paper-plane"></i> Contacter {{pattern.idUser.pseudo}}</button></a>
+                    {% if app.user.id != pattern.idUser.id %}
+                        <a href="{{path('contact',{'id':pattern.idUser.id})}}"><button class="uploadBtn"><i class="fa-regular fa-paper-plane"></i> Contacter {{pattern.idUser.pseudo}}</button></a>
+                    {% endif %}
+                {% endif%}
+                {% else %}
+                    <br><p>Connectez-vous pour télécharger le motif ou contacter l'auteur...</p>
                 {% endif%}
             </div>
         </div>

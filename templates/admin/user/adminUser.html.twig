@@ -46,14 +46,15 @@
                                    
                                 {% endif %}
                                 {% if user.id != 1 %}
-
+                                    {% if user.roles[0] != "ROLE_ADMIN" %}
                                     <a href="{{path('admin_user_delete',{'slug': user.slug })}}" class="btn-red" ><i class="fas fa-trash"></i></a>
-
-                                    {% if user.roles[0] == "ROLE_ADMIN" %}
-                                        <a href="{{path('user_change', {'slug':user.slug})}}" style="color: white"><i class="fa-solid fa-arrows-spin"></i></a>
-                                    {% else %}
-                                         <a href="{{path('role_change', {'slug':user.slug})}}" style="color: white"><i class="fa-solid fa-arrows-spin"></i></a>
                                     {% endif %}
+                                    {% if user.roles[0] == "ROLE_ADMIN" %}
+                                        <a href="{{path('user_change', {'slug':user.slug})}}" style="color: white"><i class="fa-solid fa-arrows-spin"></i>User</a>
+                                    {% endif %}
+                                    {% if user.roles[0] == "ROLE_USER" %}
+                                     <a href="{{path('role_change', {'slug':user.slug})}}" style="color: white"><i class="fa-solid fa-arrows-spin"></i>Admin</a>
+                                     {% endif %}
                                 {% endif %}
                                  
                             </td>

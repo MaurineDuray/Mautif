@@ -1,3 +1,4 @@
 framework:
     mailer:
-        dsn: 'smtp://sezu0088:AeqG-naJe-83r!@bois.o2switch.net:465?encryption=tls'
+        #dsn: 'smtp://sezu0088:AeqG-naJe-83r!@bois.o2switch.net:465?encryption=tls'
+        dsn: '%env(MAILER_DSN)%'

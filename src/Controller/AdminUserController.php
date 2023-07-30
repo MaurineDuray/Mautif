@@ -190,15 +190,17 @@ class AdminUserController extends AbstractController
         ]);
     }
 
-    
-    #[Route('/adminuser/{slug}/change', name:"role_change")]
+    /**
+     * PErmet à l'administrateur de changer le rôle d'un user en admin à partir de l'administration
+     */
+    #[Route('/adminuser/{slug}/changeadmin', name:"role_change")]
     #[IsGranted('ROLE_ADMIN')]
     public function adminChange(User $user, EntityManagerInterface $manager)
     {
 
         $this->addFlash(
             "success",
-            "Le rôle de {$user->getPseudo()} a bien été changé"
+            "Le rôle de {$user->getPseudo()} a bien été changé en ADMIN"
         );
 
        
@@ -210,14 +212,16 @@ class AdminUserController extends AbstractController
         return $this->redirectToRoute("admin_user");
     }
 
-    #[Route('/adminuser/{slug}/d', name:"user_change")]
+    /**
+     * PErmet à l'administrateur de changer le rôle d'un admin en user à partir de l'administration
+     */
+    #[Route('/adminuser/{slug}/changeuser', name:"user_change")]
     #[IsGranted('ROLE_ADMIN')]
     public function userChange(User $user, EntityManagerInterface $manager)
     {
-
         $this->addFlash(
             "success",
-            "Le rôle de {$user->getPseudo()} a bien été changé"
+            "Le rôle de {$user->getPseudo()} a bien été changé en USER"
         );
 
             $user->setRoles(["ROLE_USER"]);
@@ -248,6 +252,9 @@ class AdminUserController extends AbstractController
         return $this->redirectToRoute("admin_user");
     }
 
+    /**
+     * Permet d'envoi d'un code par un admin pour la récupération de mot de passe 
+     */
     #[Route('/usernewmdp/{slug}', name:"new_mdp")]
     public function newmdp(User $user, EntityManagerInterface $manager, MailerInterface $mailer, UserPasswordHasherInterface $hasher):Response
     {
