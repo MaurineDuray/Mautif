@@ -9,7 +9,7 @@
     {% include "partials/intro.html.twig" %}
     <div class="slide fil">
         <h2>"{{pattern.title}}" <i>par {{pattern.idUser.pseudo}}</i></h2>
-        <a href={{path('patterns_index')}}><button class="backButton">Retour à la galerie</button></a>
+        <a href={{path('patterns_index')}}><button class="backButton btn">Retour à la galerie</button></a>
         <div class="showContent">
             <div class="left">
                 <a href="uploads/{{pattern.cover}}" target="_blank">
@@ -33,10 +33,10 @@
                 <p class="license">Licence :<b></br>{{pattern.license}}</b></p>
                 {% if app.user %}
                 {% if pattern.license == "COMMERCIALE" or pattern.license == "PRIVÉE" %}
-                    <a href="/uploads/{{pattern.cover}}" download="{{pattern.title}}.jpeg"><button class="uploadBtn"><i class="fa-solid fa-file-arrow-down"></i> Télécharger le motif </button></a>
+                    <a href="/uploads/{{pattern.cover}}" download="{{pattern.title}}.jpeg"><button class="uploadBtn btn"><i class="fa-solid fa-file-arrow-down"></i> Télécharger le motif </button></a>
                 {% else %}
                     {% if app.user.id != pattern.idUser.id %}
-                        <a href="{{path('contact',{'id':pattern.idUser.id})}}"><button class="uploadBtn"><i class="fa-regular fa-paper-plane"></i> Contacter {{pattern.idUser.pseudo}}</button></a>
+                        <a href="{{path('contact',{'id':pattern.idUser.id})}}"><button class="uploadBtn btn"><i class="fa-regular fa-paper-plane"></i> Contacter {{pattern.idUser.pseudo}}</button></a>
                     {% endif %}
                 {% endif%}
                 {% else %}
@@ -78,21 +78,21 @@
                     
                 
                 {% if app.user %}
-                    <a  href="{{path('add_galery',{"slug":pattern.slug})}}" style="color: black; text-decoration: none"><button >Ajouter une inspiration</button></a>
+                    <a  href="{{path('add_galery',{"slug":pattern.slug})}}" style="color: black; text-decoration: none"><button class="btn">Ajouter une inspiration</button></a>
                       
                 {% else %}
-                    <a href="{{path('account_login')}}" style="color: black; text-decoration: none"><button>Je me connecte</button></a>
-                    <a href="{{path('account_register')}}" style="color: black; text-decoration: none"><button>Je n'ai pas de compte</button></a>
+                    <a href="{{path('account_login')}}" style="color: black; text-decoration: none"><button class="btn">Je me connecte</button></a>
+                    <a href="{{path('account_register')}}" style="color: black; text-decoration: none"><button class="btn">Je n'ai pas de compte</button></a>
                 {% endif %}
             {% else %}
                 <p>Aucun créateur n'a posté d'inspiration pour l'instant !</p>
                 <p><b>Sois le premier à poster une de tes réalisations !</b></p>
                 {% if app.user %}
-                    <a  href="{{path('add_galery',{"slug":pattern.slug})}}" style="color: black; text-decoration: none"><button>Ajouter une inspiration</button></a>
+                    <a  href="{{path('add_galery',{"slug":pattern.slug})}}" style="color: black; text-decoration: none"><button class="btn">Ajouter une inspiration</button></a>
                       
                 {% else %}
-                    <a href="{{path('account_login')}}" style="color: black; text-decoration: none"><button>Je me connecte</button></a>
-                    <a href="{{path('account_register')}}" style="color: black; text-decoration: none"><button>Je n'ai pas de compte</button></a>
+                    <a href="{{path('account_login')}}" style="color: black; text-decoration: none"><button class="btn">Je me connecte</button></a>
+                    <a href="{{path('account_register')}}" style="color: black; text-decoration: none"><button class="btn">Je n'ai pas de compte</button></a>
                 {% endif %}
                 
             {% endif %}

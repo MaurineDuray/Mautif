@@ -16,25 +16,25 @@
         <div id="actions">
         {% if is_granted('ROLE_USER')  %}
             {% if app.user.id == user.id or app.user.roles[0]=="ROLE_ADMIN" %}
-                <a href="{{path('account_profile',{'slug' : user.slug})}}"><button><i class="fa-solid fa-pen-to-square"></i> Modifier les informations </button></a>
-                <a href="{{path('avatar_edit', {'slug': user.slug})}}"><button><i class="fa-solid fa-user"></i> Modifier l'avatar</button></a>
+                <a href="{{path('account_profile',{'slug' : user.slug})}}"><button class="btn"><i class="fa-solid fa-pen-to-square"></i> Modifier les informations </button></a>
+                <a href="{{path('avatar_edit', {'slug': user.slug})}}"><button class="btn"><i class="fa-solid fa-user"></i> Modifier l'avatar</button></a>
                
             {% endif %}
         {% endif %}
         {% if app.user %}
              {% if app.user.id == user.id %}
-                <a href="{{path('account_password',{'slug' : user.slug})}}"><button><i class="fa-solid fa-pen-to-square"></i> Modifier le mot de passe </button></a>
+                <a href="{{path('account_password',{'slug' : user.slug})}}"><button class="btn"><i class="fa-solid fa-pen-to-square"></i> Modifier le mot de passe </button></a>
             {% endif %}
         {% endif %}
        {% if app.user %}
             {% if app.user.roles[0] == "ROLE_ADMIN" %}
-                <a href="{{path('new_mdp',{'slug' : user.slug})}}"><button><i class="fa-solid fa-pen-to-square"></i> Envoyer un nouveau mot de passe </button></a>
+                <a href="{{path('new_mdp',{'slug' : user.slug})}}"><button class="btn"><i class="fa-solid fa-pen-to-square"></i> Envoyer un nouveau mot de passe </button></a>
             {% endif %}
         {% endif %}
        </div>
        
          
-        <a href={{path('patterns_index')}}><button class="backButton"> <i class="fa-solid fa-camera-retro"></i> Retour à la galerie</button></a>
+        <a href={{path('patterns_index')}}><button class="backButton btn"> <i class="fa-solid fa-camera-retro"></i> Retour à la galerie</button></a>
         
         <div class="profileContent">
             <div class="left">
@@ -53,10 +53,10 @@
                     {% if app.user.id == user.id  %}
                         {{user.email}}
                     {% else %}
-                        <a href={{path('contact',{'id':user.id})}}" style="color: white"><button class="uploadBtn">Contacter l'utilisateur</button></a>
+                        <a href={{path('contact',{'id':user.id})}}" style="color: white"><button class="uploadBtn btn">Contacter l'utilisateur</button></a>
                     {% endif %} 
                 {% else %}
-                         <a href="{{path('contact',{'id':user.id})}}" style="color: white"><button class="uploadBtn">Contacter l'utilisateur</button></a>
+                         <a href="{{path('contact',{'id':user.id})}}" style="color: white"><button class="uploadBtn btn">Contacter l'utilisateur</button></a>
                 
                 {% endif %}
                 
