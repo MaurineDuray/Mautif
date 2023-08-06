@@ -86,7 +86,7 @@ html{
 button{
     box-shadow:  3px 3px 15px rgb(0, 0, 0) !important;
 }
-
+.disabled{display: none;}
 
 
 
