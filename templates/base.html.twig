@@ -43,10 +43,14 @@
         {% include "partials/_flash.html.twig" %}
 
         {% block body %}{% endblock %}
+
+        {% include "partials/_cookies.html.twig" %}
         
         {% include "partials/footer.html.twig" %}
 
          {{ encore_entry_script_tags('app') }}
+         {{ encore_entry_script_tags('cookies') }}
+        
         {% block javascripts %}
             <script>
             console.log('test js')
@@ -58,6 +62,8 @@
                     e.preventDefault();
                     });
                 })
+
+
                 
             </script>
         {% endblock %}
