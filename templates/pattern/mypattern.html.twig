@@ -9,11 +9,16 @@
             <h2>Vos créations - {{user.pseudo}} </h2>
             <a href={{path('patterns_index')}}><button class="backButton bnt">Retour à la galerie</button></a>
             <div class="filContainer" id="mypatternContent">
+            {% if patterns is not empty %}
                 {% for pattern in patterns %}
                     {% if pattern.idUser == app.user %}
                         {% include "admin/partials/_accountinstax.html.twig" %}
                     {% endif %}
                 {% endfor %}
+            {% else %}
+                         <p style="width: 100%; text-align: center; margin-top: 50px">Vous n'avez pas encore de créations à votre actif !</p>
+                         <br>
+            {% endif %}
             </div>
 
             

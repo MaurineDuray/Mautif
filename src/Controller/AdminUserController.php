@@ -241,10 +241,13 @@ class AdminUserController extends AbstractController
     {
         $this->addFlash(
             "success",
-            "Le motif {$user->getId()} a bien été supprimé"
+            "Le user {$user->getId()} a bien été supprimé"
         );
 
-        unlink($this->getParameter('uploads_directory').'/'.$user->getAvatar());
+        if($user->getAvatar()){
+            unlink($this->getParameter('uploads_directory').'/'.$user->getAvatar());
+        }
+        
             
         $manager->remove($user);
         $manager->flush();

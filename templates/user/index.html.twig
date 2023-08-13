@@ -28,7 +28,7 @@
         {% endif %}
        {% if app.user %}
             {% if app.user.roles[0] == "ROLE_ADMIN" %}
-                <a href="{{path('new_mdp',{'slug' : user.slug})}}"><button class="btn"><i class="fa-solid fa-pen-to-square"></i> Envoyer un nouveau mot de passe </button></a>
+                <a href="{{path('new_mdp',{'slug' : user.slug})}}"><button class="btn"><i class="fa-solid fa-pen-to-square"></i> Envoyer un code de récupération de mot de passe </button></a>
             {% endif %}
         {% endif %}
        </div>

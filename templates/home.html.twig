@@ -3,6 +3,7 @@
 {% block title %}Homepage{% endblock %}
 
 {% block body %}
+    {% include "partials/_cookies.html.twig" %}
     <div class="slide" id="home">
        <div id="homeContent">
             <div id="homeContainer">
@@ -54,6 +55,6 @@ mais surtout amusez-vous&nbsp!  </p>
 
 {% block javascripts %}
     {{encore_entry_script_tags('home')}}
-     {{encore_entry_script_tags('cookies')}}
+    {{ encore_entry_script_tags('cookies') }}
 
 {% endblock %}

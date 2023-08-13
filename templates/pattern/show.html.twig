@@ -41,6 +41,8 @@
                 {% endif%}
                 {% else %}
                     <br><p>Connectez-vous pour télécharger le motif ou contacter l'auteur...</p>
+                    <a href="{{path('account_login')}}" style="color: black; text-decoration: none"><button class="btn">Je me connecte</button></a>
+                    <br><a href="{{path('account_register')}}" style="color: black; text-decoration: none"><button class="btn">Je n'ai pas de compte</button></a>
                 {% endif%}
             </div>
         </div>
@@ -57,9 +59,11 @@
             </div> #}
             <div class="container">
             {% if pattern.galeries | length > 0 %}
-              
-                 
+                    {% if pattern.galeries | length > 2 %}
+                    <img src={{asset('images/scroll.png')}} alt="">
+                    {% endif %}
                     <div class="carousel-inner">
+                    
                         {% for galery in pattern.galeries %}
                         
                                 <div class="item">
@@ -73,7 +77,7 @@
                        
                             
                         {% endfor %}
-                    
+                       
                     </div>
                     
                 

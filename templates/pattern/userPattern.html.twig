@@ -22,7 +22,7 @@
             <a href={{path('user_profile', {'slug': user.slug})}}><button class="backButton btn">Profil de {{user.pseudo}}</button></a>
 
             <div class="filContainer" id="mypatternContent">
-
+            
                 {% if not app.user %}
                     {% for pattern in patterns %}
                         {% if pattern.idUser.slug == user.slug %}
@@ -45,7 +45,10 @@
                 {% endif %}
                     
                 {% endif %}
-
+           
             </div>
+             {% if patterns | length==0 %}
+                <p style="color: white; text-align: center">L'utilisateur {{user.pseudo}} n'a pas encore de Créations à son actif !</p>
+            {% endif %}
     </div>
 {% endblock %}
