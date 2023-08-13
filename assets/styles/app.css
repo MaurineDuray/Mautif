@@ -36,7 +36,7 @@ body, html{
 }
 html{
     background-color: #020202;
-    overflow-x: hidden;
+    overflow-y:inherit;
 }
 .container{
     width: 90%;
@@ -49,7 +49,7 @@ html{
 
 .slide{
     width: 100vw;
-    min-height: 100vh;
+    min-height: 75vh;
     color: white;
     overflow-x: hidden !important;
     
@@ -111,7 +111,15 @@ button{
 }
 
 
-
+/* Conditions générales  et mentions légales*/
+.conditionsContainer{
+    width: 80%;
+    margin: 0 auto;
+}
+.conditionsContainer h2{
+    position: relative;
+    margin-top: 50px;
+}
 
 
 

@@ -53,9 +53,10 @@
                     {% if app.user.id == user.id  %}
                         {{user.email}}
                     {% else %}
-                        <a href={{path('contact',{'id':user.id})}}" style="color: white"><button class="uploadBtn btn">Contacter l'utilisateur</button></a>
+                        <a href="{{path('contact',{'id':user.id})}}" style="color: white"><button class="uploadBtn btn">Contacter l'utilisateur</button></a>
                     {% endif %} 
                 {% else %}
+                        
                          <a href="{{path('contact',{'id':user.id})}}" style="color: white"><button class="uploadBtn btn">Contacter l'utilisateur</button></a>
                 
                 {% endif %}
@@ -75,8 +76,12 @@
                         {% include "./partials/_instax.html.twig" %}
                     {% endfor %}
                 </div>
-                        
-                <a href="{{path('user_patterns', {'slug': user.slug})}}" id="userCreation">Voir toutes les créations > </a>
+                {% if patterns | length==0 %}
+                    <p style="text-align: center">L'utilisateur n'a pas encore publié de créations ! Revenez plus tard vous aurez peut-être de bonnes surprises...</p>
+                {% else %}
+                    <a href="{{path('user_patterns', {'slug': user.slug})}}" id="userCreation">Voir toutes les créations > </a>
+                {% endif %}
+                
                 
         </div>
     </div>

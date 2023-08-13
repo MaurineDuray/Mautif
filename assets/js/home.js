@@ -47,7 +47,7 @@ if(!local){
     feuille2.style.top="-100px"
     feuille2.style.transition="all 2s"
 
-    feuille3.style.marginLeft="-35%"
+    feuille3.style.marginLeft="-25%"
     feuille3.style.transform='rotate(30deg)'
     feuille3.style.transformOrigin="center"
 

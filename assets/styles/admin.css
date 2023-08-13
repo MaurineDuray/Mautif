@@ -1,5 +1,8 @@
 /* dashboard */
-
+.dash .table{
+    overflow-x: scroll;
+    display: block !important;
+}
 .dashboard{
     display: flex;
     justify-content: center;

@@ -8,8 +8,8 @@
         <img src={{asset('images/miniLogo.png')}} id="footLogo" alt="">
          <div id="socialMedia"> </div>
         <div id="conditions">
-            <a href="{{path('legacy')}}">Conditions générales</a>
-            <a href="{{path('legacy')}}">Confidentialité</a>
+            <a href="{{path('legacy')}}">Mentions légales</a>
+            <a href="{{path('conditions')}}">Conditions générales</a>
             {% if app.user %}
                 {% if app.user.roles[0] != "ROLE_ADMIN" %}
                     <a href="{{path('confirm_unsub')}}">Me désinscrire</a>

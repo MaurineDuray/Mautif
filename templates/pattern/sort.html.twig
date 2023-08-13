@@ -11,7 +11,7 @@
         <h2>Bienvenue dans le patchwork !</h2>
 
         {% include "partials/filter.html.twig" %}
-         <a href="{{path('patterns_index')}}"><button>Annuler la recherche</button></a>   
+         <a class="uplodBtn" href="{{path('patterns_index')}}" style="display:flex; justify-content:center; text-decoration: none"><button >Annuler la recherche</button></a>    
         {% if patterns is not empty %} 
             <div class="filContainer">
                 {% for pattern in patterns %}

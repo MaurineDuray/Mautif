@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class LegacyController extends AbstractController
 {
     /**
-     * Permet d'afficher les conditions légales
+     * Permet d'afficher les mentions légales
      *
      * @return Response
      */
@@ -17,7 +17,20 @@ class LegacyController extends AbstractController
     public function index(): Response
     {
         return $this->render('legacy/legacy.html.twig', [
-            'controller_name' => 'LegacyController',
+            
+        ]);
+    }
+
+    /**
+     * Permet d'afficher les conditions générales
+     *
+     * @return Response
+     */
+    #[Route('/conditions', name: 'conditions')]
+    public function condition():Response
+    {
+        return $this->render('legacy/conditions.html.twig', [
+            
         ]);
     }
 }

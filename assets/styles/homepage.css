@@ -1,5 +1,10 @@
 /* Homepage et about  */ 
-
+#feuillage{
+    width: 100vw;
+    max-height: 100vh;
+    overflow: visible;
+    
+}
 #home{
     background-color: rgb(5, 48, 5);
     background-image: url(../../public/images/HomeBackground.png);
@@ -46,7 +51,7 @@
 
 #feuille3{
     position: absolute;
-    width: 90vw;
+    width: 80vh;
     top: 20vh;
     left: -100px;
     z-index: 500;
@@ -76,7 +81,7 @@
 
 #feuille4{
     position: absolute;
-    width: 60%;
+    width: 50%;
     right: 0px;
     top: -20vw;
     transition: all 2s;

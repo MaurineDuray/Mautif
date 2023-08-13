@@ -12,7 +12,7 @@
     
             <img src="../uploads/{{pattern.cover}}" alt="" class="card-img img-fluid" style="width: 200px">
         
-        <a href="{{path('pattern_edit', {'slug': pattern.slug})}}"><button class="btn btn-warning m-3">
+        <a href="{{path('pattern_edit', {'slug': pattern.slug})}}" style="display:flex; justify-content:center; text-decoration: none"><button class="btn">
             <i class="fa-solid fa-arrow-left"></i> Retour à l'édition </button></a>
         {{form_start(myform)}}
             <div class="container" style="background-color:  rgba(255, 170, 22, 0.1); padding: 20px; border-radius: 20px;">

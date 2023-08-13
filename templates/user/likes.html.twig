@@ -5,9 +5,19 @@
 {% block body %}
 
     {% include "partials/intro.html.twig" %}
-    <div class="slide fil">
+    <div class="slide fil" style="min-height:70vh">
     <h2>Vos likes </h2>
+    {% if user.likes | length==0 %}
+         <p style="font-size:24pt;  margin-top:150px; text-align:center;">QUOI ?!</p>
+        <p style="width: 100%; text-align:center;">Vous n'avez pas encore liké de motifs !? Rendez-vous vite dans le patchwork !</p>
+         <a href={{path('patterns_index')}}><button class="backButton btn"> <i class="fa-solid fa-camera-retro"></i> Retour à la galerie</button></a>
+       
+    {% endif %}
+    {% if user.likes | length > 0 %}
+    <a href={{path('patterns_index')}}><button class="backButton btn"> <i class="fa-solid fa-camera-retro"></i> Retour à la galerie</button></a>
+    {% endif %}
     <div class="filContainer">
+     
     {% if user.likes | length > 0 %}
         {% for pattern in user.likes %}
         
@@ -52,10 +62,11 @@
                         {% endif %}
                         
                     {% endif %}
-</div>
+            </div>
 
 
         {% endfor %}
+    
     {% endif %}
     </div>
     </div>
