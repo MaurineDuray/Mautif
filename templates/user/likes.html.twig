@@ -26,7 +26,7 @@
                     {{pattern.pattern.likes | length}}  <i class="fa-solid fa-heart"></i>
                 </div>
 
-               <a href={{path('pattern_show',  {'slug':pattern.pattern.slug})}} class="noContextMenu">
+             <a href={{path('pattern_show',  {'slug':pattern.pattern.slug})}} class="noContextMenu">
                <img class="filigrane" src="../../images/filigrane.png" alt="">
                <img class="noContextMenu" src="../../uploads/{{pattern.pattern.cover}}" alt="image de "></a>
                 <div class="instaxContent">
@@ -47,7 +47,7 @@
                            
                                 
                                     <a href="{{path('unlike', {'id': pattern.id})}}">
-                                        <div class="like">
+                                        <div class="heart">
                                             <i class="fa-solid fa-heart"></i>
                                         </div>
                                     </a>

@@ -196,6 +196,9 @@
 #topPattern{
     padding-bottom: 0;
 }
+#topPattern .instaxContent{
+    bottom: -5px;
+}
 #patchwork button{
     background-color: azure;
     color: green;

@@ -34,7 +34,10 @@
                 <p class="license">Licence :<b></br>{{pattern.license}}</b></p>
                 {% if app.user %}
                 {% if pattern.license == "COMMERCIALE" or pattern.license == "PRIVÉE" %}
-                    <a href="/uploads/{{pattern.cover}}" download="{{pattern.title}}.jpeg"><button class="uploadBtn btn"><i class="fa-solid fa-file-arrow-down"></i> Télécharger le motif </button></a>
+                    <a href="/uploads/{{pattern.cover}}" download="{{pattern.title}}.jpeg"><button class="uploadBtn btn"><i class="fa-solid fa-file-arrow-down"></i> Télécharger le motif </button></a><br>
+                    {% if app.user.id != pattern.idUser.id %}
+                        <a href="{{path('contact',{'id':pattern.idUser.id})}}"><button class="uploadBtn btn"><i class="fa-regular fa-paper-plane"></i> Contacter {{pattern.idUser.pseudo}}</button></a>
+                    {% endif %}
                 {% else %}
                     {% if app.user.id != pattern.idUser.id %}
                         <a href="{{path('contact',{'id':pattern.idUser.id})}}"><button class="uploadBtn btn"><i class="fa-regular fa-paper-plane"></i> Contacter {{pattern.idUser.pseudo}}</button></a>
