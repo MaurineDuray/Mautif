@@ -13,16 +13,12 @@
 
         <div class="addContainer">
             
-            <div class="left">
-                 <div class="instax">
-                    <div class="contentInstax">
-                        <img src="{{pattern.cover}}" alt="image de {{pattern.slug}}">
-                    </div>
-                    
-                </div>
-                
-            </div>
+           
+               
+            
             <div class="right">
+             
+                <a id="editimg" style="color: white; text-decoration: none; font-size: 14pt:  "href="{{path('pattern_img',{'slug': pattern.slug})}}" ><i class="fa-solid fa-image"></i> Editer l'image</a>
                 {{form_row(myform.title)}}
                 {{form_row(myform.theme)}}
                 {{form_row(myform.dominantColor)}}

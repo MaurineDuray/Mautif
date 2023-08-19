@@ -7,29 +7,18 @@
     {% include "partials/intro.html.twig" %}
     <div class="slide fil">
         <h2>Ajout d'un motif</h2>
-        <a href={{path('patterns_index')}}><button class="backButton btn"> <i class="fa-solid fa-camera-retro"></i> Retour à la galerie</button></a>
-        {{form_start(myform)}}
+        <a href={{path('patterns_index')}}><button class="backButton btn" > <i class="fa-solid fa-camera-retro"></i> Retour à la galerie</button></a>
+       
         
 
         <div class="addContainer">
             
-            <div class="left">
-                <div class="instax">
-                    <div class="contentInstax">
-                        {{form_row(myform.cover)}}
-                    </div>
-                     
-                </div>
-                
-            </div>
+    
             <div class="right">
-                {{form_row(myform.title)}}
-                {{form_row(myform.theme)}}
-                {{form_row(myform.dominantColor)}}
-                {{form_row(myform.description)}}
-                {{form_row(myform.license)}}
-                {{form_widget(myform.submit)}}
+             {{form_start(myform)}}
+                  {{form_widget(myform)}}
                 {{form_end(myform)}}
+                
             </div>
             
         </div>

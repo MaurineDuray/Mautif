@@ -10,19 +10,35 @@
     flex-wrap: wrap;
     position: relative;
 }
-.addContainer .left p{
+#editimg{
+    border: 2px white solid;
+    padding: 20px;
+}
+.addContainer .right{
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.addContainer .right form{
+    display: flex;
     width: 100%;
 }
-
-.addContainer .right{
-    width: 50%;
-    display: flex;
-    flex-wrap: wrap;
+.addContainer .right form input{
+    padding: 10px;
+}
+.addContainer .right form label{
+    padding: 10px;
 }
 .addContainer .right div{
     width: 100%;
     margin-top: 20px;
+    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr;
 }
+
 .addContainer .right input, .addContainer .right select, .addContainer .left input{
     height: 30px;
     padding: 0px 5px 0px 5px;
@@ -32,30 +48,20 @@
 .addContainer .instax{
    width: 40%;
 }
-
-
-
-.addContainer #pattern_cover{
-    opacity: 0;
-    position: absolute;
+#pattern{
+    width: 100%;
 }
-.addContainer label[for=pattern_cover]{
-    background-color: rgba(57, 188, 102, 1);
-    color: white;
-    font-size: 30pt;
-    height: 50px;
-    border-radius: 50%;
-    padding: 8px 23px 12px 23px;
-    font-weight: bolder;
-    line-height: 50px;
+#pattern_description{
+    height: 100px;
+    border: none;
+}
+#pattern_title{
+    border: none;
 }
 
-.addContainer .instax{
-    height: 300px;
-    width: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: gainsboro;
-    border:  rgb(153, 153, 153) thick double;
-}
+
+
+
+
+
+

@@ -49,7 +49,18 @@ tel que </br>ProCreate, Illustrator, Affinity Designer...</p>
         <h3>Partagez, likez et inspirez-vous !</h3>
         <p id="emploi">Surfez dans la galerie, likez les créations d’autres utilisateurs, développez votre réseau et inspirez-vous...
 mais surtout amusez-vous&nbsp!  </p>
-        <a href={{path('patterns_index')}}><button>C'est parti ! →</button></a>
+        
+
+    <h3 style="text-align: center; margin-top:30px" >Voici les trois pépites les plus likées...</h3>
+    <div class="filContainer" id="topPattern">
+        
+        {% for patternData in patterns %}
+                {% include "./partials/_instax.html.twig" with {'pattern': patternData.0} %}
+        {% endfor %}
+        
+    </div>
+        <a style="margin-top:-150px !important" href={{path('patterns_index')}} id="patchwork"><button> Voir le patchwork →</button></a>
+
     </div>
 
     

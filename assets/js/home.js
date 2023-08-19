@@ -36,7 +36,7 @@ if(!local){
     
         body.style.overflowY="scroll"
     
-        localStorage.setItem('Mautifs','true')
+        // localStorage.setItem('Mautifs','true')
     })
 }else{
     feuille1.style.marginLeft="-20%"
@@ -58,7 +58,7 @@ if(!local){
     more.style.display="block"
 
     body.style.overflowY="scroll"
-    localStorage.setItem('Mautifs','true')
+    // localStorage.setItem('Mautifs','true')
 }
 
 

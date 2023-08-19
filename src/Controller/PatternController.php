@@ -16,17 +16,43 @@ use App\Repository\UserRepository;
 use App\Service\PaginationService;
 use App\Repository\PatternRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Mailer\MailerInterface;
 
 class PatternController extends AbstractController
 {
+    #[Route('/signaler/{id}', name: 'signaler')]
+    public function signalement(Pattern $pattern, Request $request, MailerInterface $mailer):Response
+    {
+            // mail send
+            $email = (new TemplatedEmail())
+            ->from('design@maurine.be')
+            ->to('design@maurine.be')
+            ->subject('Signalement')
+            ->htmlTemplate('mails/signal.html.twig')
+            ->context([
+                'pattern'=>$pattern
+            ]);
+            $mailer->send($email);
+
+        $this->addFlash(
+            "success",
+            "Le motif a bien été signalé !"
+        );
+
+        $referer = $request->headers->get('referer');
+
+        return new RedirectResponse($referer);
+    }
 
     /**
      * Permet d'afficher la page reprenant tous les motifs 
@@ -72,10 +98,10 @@ class PatternController extends AbstractController
      /**
      * Afficher les motifs triés
      */
-   
+    #[Route('/patterns/sort', name: 'patterns_sort')]
     public function index(PatternRepository $repo, Request $request, EntityManagerInterface $manager):Response
     {
-       
+
         $theme = $request->query->get('theme');
         $color = $request->query->get('color');
         $license = $request->query->get('license');
@@ -141,6 +167,10 @@ class PatternController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /*** */
+            $pattern->setIdUser($this->getUser());
+            $pattern->setCreationDate(new \DateTime());
+
             /**Gestion de l'image de couverture */
             $file = $form['cover']->getData();
             if (!empty($file)) {
@@ -160,14 +190,8 @@ class PatternController extends AbstractController
 
             /**Gestion des images de la galerie */
 
-            foreach ($pattern->getImages() as $picture) {
-
-                $picture->setIdPattern($pattern);
-                $manager->persist($picture);
-            }
-            /*** */
-            $pattern->setIdUser($this->getUser());
-            $pattern->setCreationDate(new \DateTime());
+           
+            
 
             $manager->persist($pattern);
             $manager->flush();
@@ -202,13 +226,12 @@ class PatternController extends AbstractController
     }
 
      /**
-     * Permet dd'ajouter une photo à la galerie de résultat
+     * Permet d'ajouter une photo à la galerie de résultat
      */
     #[Route('/pattern/{slug}/galery', name:'add_galery')]
     #[IsGranted("ROLE_USER")]
     public function addGalery(string $slug, Pattern $pattern, Request $request,EntityManagerInterface $manager):Response
     {
-
         $galery = new Galery();
         $form = $this->createForm(GaleryType::class, $galery);
         $form->handleRequest($request);
@@ -285,7 +308,7 @@ class PatternController extends AbstractController
      * Permet d'afficher le formulaire pour éditer un motif
      */
     #[Route('/pattern/{slug}/edit', name: 'pattern_edit')]
-    #[Security("(is_granted('ROLE_USER') and user === pattern.getIdUser()) or is_granted('ROLE_ADMIN')", message:"Cette annonce ne vous appartient pas, vous ne pouvez pas la modifier")]
+    #[Security("(is_granted('ROLE_USER') and user === pattern.getIdUser()) or is_granted('ROLE_ADMIN')", message:"Ce motif ne vous appartient pas, vous ne pouvez pas la modifier")]
     public function editPattern(Pattern $pattern, Request $request, EntityManagerInterface $manager):Response
     {
         $user = $this->getUser(); //récupération de l'utilisateur connecté
@@ -331,6 +354,7 @@ class PatternController extends AbstractController
      * @return Response
      */
     #[Route("/pattern/{slug}/imgmodify", name:"pattern_img")]
+    #[Security("(is_granted('ROLE_USER') and user === pattern.getIdUser()) or is_granted('ROLE_ADMIN')", message:"Ce motif ne vous appartient pas, vous ne pouvez pas la modifier")]
     public function imgModify(Pattern $pattern, Request $request, EntityManagerInterface $manager): Response
     {
         $imgModify = new PatternImgModify();
@@ -383,12 +407,20 @@ class PatternController extends AbstractController
         ]);
     }
 
-
+    #[Route('/pattern/{slug}/confirmdelete', name:"confirmdelete")]
+    #[Security("(is_granted('ROLE_USER') and user === pattern.getIdUser()) or is_granted('ROLE_ADMIN')", message:"Ce motif ne vous appartient pas, vous ne pouvez pas la supprimer")]
+    public function confirmDelete(Pattern $pattern, EntityManagerInterface $manager)
+    {
+        return $this->render('pattern/confirmdelete.html.twig', [
+            'pattern'=>$pattern,
+            'slug'=>$pattern->getSlug()
+         ]);
+    }
     /**
      * Permet de supprimer un motif
      */
     #[Route('/pattern/{slug}/delete', name:"pattern_delete")]
-    #[Security("(is_granted('ROLE_USER') and user === pattern.getIdUser()) or is_granted('ROLE_ADMIN')", message:"Cette annonce ne vous appartient pas, vous ne pouvez pas la supprimer")]
+    #[Security("(is_granted('ROLE_USER') and user === pattern.getIdUser()) or is_granted('ROLE_ADMIN')", message:"Ce motif ne vous appartient pas, vous ne pouvez pas la supprimer")]
     public function patternDelete(Pattern $pattern, EntityManagerInterface $manager)
     {
         $this->addFlash(
@@ -397,7 +429,16 @@ class PatternController extends AbstractController
         );
 
         unlink($this->getParameter('uploads_directory').'/'.$pattern->getCover());
-            
+
+        $images = $pattern->getGaleries();
+        if($images){
+            foreach($images as $image){
+                unlink($this->getParameter('uploads_directory').'/'.$image->getPicture());
+
+                $manager->remove($image);
+                $manager->flush();
+            }
+        }         
         $manager->remove($pattern);
         $manager->flush();
 

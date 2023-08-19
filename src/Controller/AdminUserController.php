@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -44,6 +45,7 @@ class AdminUserController extends AbstractController
      * Permet d'éditer l'image avatar d'un user
      */
     #[Route('admin/user/{slug}/avataredit', name:"avatar_edit")]
+    #[Security("(is_granted('ROLE_USER')) or is_granted('ROLE_ADMIN')", message:"Ce profil ne vous appartient pas, vous ne pouvez pas y accéder")]
     public function imgEdit(User $user, EntityManagerInterface $manager, Request $request):Response
     {
         $imgModify = new AvatarModify();
@@ -98,6 +100,7 @@ class AdminUserController extends AbstractController
      * Permet d'éditer les info d'un user
      */
     #[Route('admin/user/{slug}/edit', name:'account_profile')]
+    #[Security("(is_granted('ROLE_USER')) or is_granted('ROLE_ADMIN')", message:"Ce profil ne vous appartient pas, vous ne pouvez pas y accéder")]
     public function userEdit(User $user, EntityManagerInterface $manager, Request $request):Response
     {
         $form = $this->createForm(AccountType::class, $user);
@@ -149,6 +152,7 @@ class AdminUserController extends AbstractController
      * @return Response
      */
     #[Route("/account/password-update", name:'account_password')]
+    #[Security("(is_granted('ROLE_USER'))", message:"Ce profil ne vous appartient pas, vous ne pouvez pas y accéder")]
     public function updatePassword(Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $hasher): Response
     {
         $passwordUpdate = new PasswordUpdate();
@@ -247,6 +251,28 @@ class AdminUserController extends AbstractController
         if($user->getAvatar()){
             unlink($this->getParameter('uploads_directory').'/'.$user->getAvatar());
         }
+
+        // suppression des patterns du user et des images associées et de la galerie d'images associée aux motif
+        $patterns= $user->getPatterns();
+        if($patterns){
+            foreach($patterns as $pattern){
+                unlink($this->getParameter('uploads_directory').'/'.$pattern->getCover());
+                $images = $pattern->getGaleries();
+                if($images){
+                foreach($images as $image){
+                unlink($this->getParameter('uploads_directory').'/'.$image->getPicture());
+
+                $manager->remove($image);
+                $manager->flush();
+            }
+        } 
+
+                $manager->remove($pattern);
+                $manager->flush();
+            }
+        }
+
+
         
             
         $manager->remove($user);
@@ -259,6 +285,7 @@ class AdminUserController extends AbstractController
      * Permet d'envoi d'un code par un admin pour la récupération de mot de passe 
      */
     #[Route('/usernewmdp/{slug}', name:"new_mdp")]
+    #[IsGranted('ROLE_ADMIN')]
     public function newmdp(User $user, EntityManagerInterface $manager, MailerInterface $mailer, UserPasswordHasherInterface $hasher):Response
     {
             $password=random_int(100, 999999);

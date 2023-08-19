@@ -7,9 +7,18 @@
             <h1>Inscription</h1>
             {{form_start(myform)}}
                 {{form_widget(myform)}}
-                <input type="submit" class="btn btn-success" value="Confirmer mon inscription"> 
+                <div>
+                    <input type="checkbox" name="condition" id="check" onclick="conditionoke()">
+                    <label for="condition">Je déclare avoir lu et j'accepte les <a style="color:white" href="{path('conditions')}">Conditions générales</a> et les <a style="color:white" href="{path('legacy')}">mentions légales </a></label>
+                </div>
+            <input id="submitBtn" type="submit" class="btn btn-success" value="Confirmer mon inscription" style="margin-top: 50px" disabled><br>
             {{form_end(myform)}}
+            
         </div>
         
     </div>
+{% endblock %}
+
+{% block javascripts %}
+     {{ encore_entry_script_tags('registration') }}
 {% endblock %}

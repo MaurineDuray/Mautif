@@ -2,6 +2,8 @@
 .backButton{
     margin-left: 50%;
     transform: translateX(-50%);
+    width: auto;
+    height: auto;
 }
 .showContent{
     display: flex;
@@ -37,8 +39,20 @@ h6 a{
 .showContent .license{
     margin-top: 15px;
 }
+.showContent .left{
+    display: flex !important;
+    flex-wrap: wrap !important;
+}
 .showContent .left .instax{
     width: 80%;
+}
+.showContent .left .signaler{
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    font-size: 10pt;
+    padding-top: 20px;
+    color: rgb(188, 88, 88);
 }
 
 .showContent .right{
@@ -148,4 +162,44 @@ h6 a{
     overflow-x: scroll;
     max-height: 50vh;
     
+}
+
+
+/* Delete un pattern confirmation */
+#deleteConfirm{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#deleteConfirm span{
+    width: 100%;
+    text-align: center;
+}
+#deleteConfirm .instax{
+    width: 300px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+.responses{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+.responses a{
+    color: black;
+    margin: 30px;
+    padding: 15px;
+    border-radius: 10px;
+    text-decoration: none;
+    width: auto;
+    height: 30px;
+    background-color: white;
+}
+#yess{
+    background-color: rgb(24, 227, 34);
+    width: auto;
+    height: 30px;
+    color: black;
+    font-weight: bold;
 }

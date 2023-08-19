@@ -11,7 +11,6 @@ use App\Service\MailerService;
 use Symfony\Component\Mime\Email;
 use App\Repository\LikeRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
@@ -19,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -63,6 +63,7 @@ class AccountController extends AbstractController
      * @return Response
      */
     #[Route("/profile/likes", name:"user_likes")]
+    #[Security("(is_granted('ROLE_USER')) or is_granted('ROLE_ADMIN')", message:"Ce profil ne vous appartient pas, vous ne pouvez pas y accéder")]
     public function myLikes():Response
     {
         return $this->render('user/likes.html.twig',[
@@ -175,6 +176,7 @@ class AccountController extends AbstractController
      * @return Response
      */
     #[Route('/confirm', name:'confirm_unsub')]
+    #[Security("(is_granted('ROLE_USER')) or is_granted('ROLE_ADMIN')", message:"Ce profil ne vous appartient pas, vous ne pouvez pas y accéder")]
     public function confirm_unsub():Response
     {
         return $this->render("account/unsub.html.twig",[
@@ -186,6 +188,7 @@ class AccountController extends AbstractController
      * Permet la suppression d'un compte utilisateur
      */
     #[Route('/user/{slug}/delete', name:"unsub")]
+    #[Security("(is_granted('ROLE_USER')) or is_granted('ROLE_ADMIN')", message:"Ce profil ne vous appartient pas, vous ne pouvez pas y accéder")]
     public function userAdminDelete(User $user, EntityManagerInterface $manager)
     {
         $this->addFlash(
@@ -193,12 +196,34 @@ class AccountController extends AbstractController
             "Le compte de l'utilisateur n°{$user->getId()} a bien été supprimé"
         );
 
-        unlink($this->getParameter('uploads_directory').'/'.$user->getAvatar());
-            
+        if($user->getAvatar()){
+            unlink($this->getParameter('uploads_directory').'/'.$user->getAvatar());
+        }
+        
+        //suppression des motifs et de leurs images liées à cet utilisateur
+        $patterns= $user->getPatterns();
+        if($patterns){
+            foreach($patterns as $pattern){
+                unlink($this->getParameter('uploads_directory').'/'.$pattern->getCover());
+                $images = $pattern->getGaleries();
+                if($images){
+                foreach($images as $image){
+                unlink($this->getParameter('uploads_directory').'/'.$image->getPicture());
+
+                $manager->remove($image);
+                $manager->flush();
+            }
+        } 
+
+                $manager->remove($pattern);
+                $manager->flush();
+            }
+        }
+        
         $manager->remove($user);
         $manager->flush();
 
-        return $this->redirectToRoute("homepage");
+        return $this->redirectToRoute("account_login");
     }
 
 }

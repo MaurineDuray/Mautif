@@ -103,6 +103,9 @@
     width: 100%;
     padding: 10px 10px 10px 10px;
     box-sizing: border-box;
+    margin-bottom: 30px;
+    
+
 }
 
 .filigrane{
@@ -110,10 +113,14 @@
     width: 100%;
     padding: 10px 10px 10px 10px;
     box-sizing: border-box;
+    height: 100%;
 }
 .instaxContent{
     width: 85%;
-    
+    position: absolute;
+    bottom: 15px;
+    padding-top: 20px;
+    text-align: left !important;
 }
 .instaxTitle{
     width: 85%;
@@ -139,7 +146,7 @@
     font-weight: 100;
     margin-left: 80%  !important;
     margin-top: -40px  !important;
-
+    bottom: 15px;
 }
 
 .btnactions{

@@ -1,8 +1,11 @@
+
+
+
  <div class="instax">
                 <div class="btnactions">
                     <a href="{{path('pattern_img',{'slug': pattern.slug})}}" ><i class="fa-solid fa-image"></i></a>
                     <a href="{{path('pattern_edit',{'slug': pattern.slug})}}" ><i class="fas fa-edit"></i></a>
-                    <a href="{{path('pattern_delete', {'slug': pattern.slug})}}" ><i class="fas fa-trash"></i></a>
+                    <a href="{{path('confirmdelete',{'slug': pattern.slug})}}" ><i class="fas fa-trash"></i></a>
                 </div>
                <a href={{path('pattern_show',  {'slug':pattern.slug})}}><img src="/uploads/{{pattern.cover}}" alt="image de "></a>
                 <div class="instaxContent">

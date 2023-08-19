@@ -62,9 +62,6 @@ class PatternUpdateType extends ApplicationType
     {
         $resolver->setDefaults([
             'data_class' => Pattern::class,
-            'validation_groups' => [
-                'front'
-            ]
         ]);
     }
 }

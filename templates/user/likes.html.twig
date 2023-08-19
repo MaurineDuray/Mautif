@@ -44,21 +44,15 @@
                                 </div>
                             </a>
                         {% else %}
-                            {% for like in pattern.pattern.likes %}
-                                {% if like.user.id == app.user.id%}
-                                    <a href="{{path('unlike', {'id': like.id})}}">
+                           
+                                
+                                    <a href="{{path('unlike', {'id': pattern.id})}}">
                                         <div class="like">
                                             <i class="fa-solid fa-heart"></i>
                                         </div>
                                     </a>
-                                {% else %}
-                                    <a href="{{path('like', {'id': pattern.pattern.id})}}">
-                                        <div class="like">
-                                            <i class="fa-regular fa-heart"></i>
-                                        </div>
-                                    </a>
-                                {% endif %}
-                            {% endfor %}
+                               
+                            
                         {% endif %}
                         
                     {% endif %}

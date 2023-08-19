@@ -1,7 +1,9 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Mes créations{% endblock %}
+{% block title %}Créations{% endblock %}
 {% block body %}
+
+
     {% include "partials/intro.html.twig" %}
     <div class="slide fil">
 
@@ -19,10 +21,20 @@
 
 
             <a href={{path('patterns_index')}}><button class="backButton btn">Retour à la galerie</button></a>
-            <a href={{path('user_profile', {'slug': user.slug})}}><button class="backButton btn">Profil de {{user.pseudo}}</button></a>
+            <a href={{path('user_profile', {'slug': user.slug})}}><button class="backButton btn">Voir le profil de {{user.pseudo}}</button></a>
+            
+            {% if user.patterns | length == 0 %}
+                {% if app.user.id == user.id %}
+                     <p style="text-align: center">Malheureusement vous n'avez pas encore de créations à votre actif ! N'attendez plus... créez et amusez vous !</p>
+                {% else %}
+                    <p>Malheureusement, cet utilisateur n'a pas encore publié de motifs, revenez plus tard vous aurez peut-être de belles surprises !</p>
+                {% endif %}
+               
+               
+            {% endif %}
 
             <div class="filContainer" id="mypatternContent">
-            
+                
                 {% if not app.user %}
                     {% for pattern in patterns %}
                         {% if pattern.idUser.slug == user.slug %}
@@ -31,6 +43,8 @@
                     {% endfor %}
                 {% else %}
                 {% if app.user.id == user.id or app.user.roles[0] == "ROLE_ADMIN" %}
+                       
+                        
                        {% for pattern in patterns %}
                             {% if pattern.idUser.slug == user.slug %}
                                 {% include "admin/partials/_accountinstax.html.twig" %}
@@ -47,8 +61,6 @@
                 {% endif %}
            
             </div>
-             {% if patterns | length==0 %}
-                <p style="color: white; text-align: center">L'utilisateur {{user.pseudo}} n'a pas encore de Créations à son actif !</p>
-            {% endif %}
+             
     </div>
 {% endblock %}

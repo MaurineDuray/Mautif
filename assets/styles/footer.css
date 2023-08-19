@@ -11,6 +11,7 @@
     text-align: center;
     padding-top: 10px;
     cursor: pointer;
+    z-index: 1000;
 }
 #arrow{
     width: 20px;
@@ -66,8 +67,9 @@ footer{
     color: black;
     padding: 5px;
 }
-#copyright{
-    background-color: var(--darkgreen);
+.copyright{
+    padding: 15px;
+    background-color: rgb(7, 29, 4);
     color: var(--white);
     text-align: center;
 }

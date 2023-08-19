@@ -193,4 +193,11 @@
     margin-bottom: 50px;
     cursor: pointer;
 }
-
+#topPattern{
+    padding-bottom: 0;
+}
+#patchwork button{
+    background-color: azure;
+    color: green;
+    font-weight: bold;
+}

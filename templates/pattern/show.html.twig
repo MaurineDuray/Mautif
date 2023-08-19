@@ -15,6 +15,7 @@
                 <a href="uploads/{{pattern.cover}}" target="_blank">
                 {% include "partials/_instaxProtect.html.twig" %}
                 </a>
+                <a href="{{path('signaler',{'id': pattern.id})}}" class="signaler"><i class="fa-solid fa-bell-concierge"></i> Signaler</a>
             </div>
             <div class="right">
                 <p class="theme">{{pattern.theme}}</p>
@@ -75,7 +76,7 @@
                                 <img src="../uploads/{{galery.picture}}" class="d-block w-100" alt="image de {{pattern.title}}" >
                                 </div>
                        
-                            
+        
                         {% endfor %}
                        
                     </div>

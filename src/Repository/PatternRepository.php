@@ -40,6 +40,7 @@ class PatternRepository extends ServiceEntityRepository
     }
 
    /**
+    * Trouver les trois dernières créations par utilisateurs
     * @return Pattern[] Returns an array of Pattern objects
     */
    public function findLastByUser($value): array
@@ -76,6 +77,7 @@ class PatternRepository extends ServiceEntityRepository
    }
 
     /**
+     * Recherche des motifs par filtre
     * @return Pattern[] Returns an array of Pattern objects
     */
     public function findByCategory(string $theme, string $color, string $license): array
@@ -97,6 +99,18 @@ class PatternRepository extends ServiceEntityRepository
        ;
     }
 
+    public function findPatternsWithMostLikes($limit)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p as pattern, p.slug, p.dominant_color, p.creation_date, p.cover, p.theme, p.title, p.description, p.license')
+            ->leftJoin('p.likes', 'l') // Utilisation de l'association "likes" de l'entité "Pattern"
+            ->select('p, COUNT(l.id) as likeCount')
+            ->groupBy('p')
+            ->orderBy('likeCount', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
 //    /**
 //     * @return Pattern[] Returns an array of Pattern objects
 //     */

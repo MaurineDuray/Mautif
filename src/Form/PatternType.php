@@ -18,10 +18,6 @@ class PatternType extends ApplicationType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('submit', SubmitType::class,['label' => 'Enregistrer'],
-            [
-                'attr' => ['class' => 'btn'],
-            ])
             ->add('title', TextType::class, $this->getConfiguration("Titre", "Titre du motif"))
             ->add('theme', ChoiceType::class,[
                 'choices'=>[
@@ -53,7 +49,8 @@ class PatternType extends ApplicationType
             ->add('description', TextType::class, $this->getConfiguration("Description","Ecrivez ici une petite description de votre motif"))
             ->add('cover', FileType::class, [
                 "data_class" =>  null,
-                "label"=>"+"
+                "label"=> "Image de la recette(jpg, jpeg, png)",
+                
             ])
             ->add('license',ChoiceType::class, [
                 'choices'=>[
@@ -62,6 +59,10 @@ class PatternType extends ApplicationType
                     'PROTÉGÉE'=>"PROTÉGÉE"
                 ]
             ])
+            ->add('submit', SubmitType::class,['label' => 'Enregistrer'],
+            [
+                'attr' => ['class' => 'btn'],
+            ])
         ;
     }
 
@@ -69,9 +70,7 @@ class PatternType extends ApplicationType
     {
         $resolver->setDefaults([
             'data_class' => Pattern::class,
-            'validation_groups' => [
-                'front'
-            ]
+            // 'validation_groups' => 'front'
         ]);
     }
 }

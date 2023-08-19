@@ -33,6 +33,11 @@ class LikeController extends AbstractController
         $manager->persist($pattern);
         $manager->flush();
 
+        $this->addFlash(
+            "success",
+            "Vous avez liké le motif :{$pattern->getTitle()}"
+        );
+
         $referer = $request->headers->get('referer');
 
         return new RedirectResponse($referer);
@@ -46,8 +51,14 @@ class LikeController extends AbstractController
     #[IsGranted("ROLE_USER")]
     public function unlike(EntityManagerInterface $manager, Like $like, Request $request):Response
     {
+        
         $referer = $request->headers->get('referer');
 
+        $this->addFlash(
+            "success",
+            "Vous avez retiré votre like du motif {$like->getPattern()->getTitle()}"
+        );
+        
         $manager->remove($like);
         $manager->flush();
 

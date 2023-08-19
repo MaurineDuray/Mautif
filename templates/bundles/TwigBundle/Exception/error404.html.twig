@@ -1,10 +1,10 @@
-{% extends "base.html.twig" %}
+{% extends "./base.html.twig" %}
 {% block title %} 404{% endblock %}
 {% block body %}
-    <div id="intro">
-        <img src={{asset('images/logoHeader.png')}} alt="">
-    </div>
+    {% include "partials/intro.html.twig" %}
     <div class="slide fil">
-        <p> OUPS ! Le motif que vous cherchez n'existe pas ou plus ! </p>
+  
+        <p style="text-align: center; font-size:24pt"> OUPS ! Le motif que vous cherchez n'existe pas ou plus ! </p>
+        <a href="{{path('homepage')}}" class="btn btn-primary m-2">Retour à l'accueil</a>
     </div>
 {% endblock %}

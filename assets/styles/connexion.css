@@ -15,6 +15,15 @@
     transform: translateX(-50%) !important;
     margin-bottom: 20px !important;
 }
+.inscriptionContent{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.inscriptionContent h1{
+    width: 100%;
+    text-align: center;
+}
 #connexion form{
     width: auto;
     border: white 2px solid;
@@ -26,8 +35,11 @@
 #connexion form input{
     height: 25px;
     border-radius: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     padding: 5px;
     width: 100%;
+    border: none;
 }
 #connexion form input[type="submit"]{
     height: 45px;
@@ -43,3 +55,25 @@
     padding-right: 20px;
 }
 
+.btnUnsub a{
+    width: 100%;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    
+    text-decoration: none;
+}
+
+.btnUnsub a button{
+    font-size: 13pt;
+    font-weight: bold;
+}
+#confirmUnsub button{
+    background-color: rgb(94, 232, 56);
+}
+.btnUnsub{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+}

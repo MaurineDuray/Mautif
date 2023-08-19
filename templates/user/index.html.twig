@@ -53,7 +53,8 @@
                     {% if app.user.id == user.id  %}
                         {{user.email}}
                     {% else %}
-                        <a href="{{path('contact',{'id':user.id})}}" style="color: white"><button class="uploadBtn btn">Contacter l'utilisateur</button></a>
+                        <p>En cliquant sur ce bouton, <b>{{user.pseudo}} </b> sera notifié par mail de votre demande de contact. <br>Attendez son mail de réponse !</p>
+                        <a href="{{path('contact',{'id':user.id})}}" style="color: white"><button class="uploadBtn btn">Contacter {{user.pseudo}}</button></a>
                     {% endif %} 
                 {% else %}
                         
@@ -77,12 +78,15 @@
                     {% endfor %}
                 </div>
                 {% if patterns | length==0 %}
-                    <p style="text-align: center">L'utilisateur n'a pas encore publié de créations ! Revenez plus tard vous aurez peut-être de bonnes surprises...</p>
+                    {% if app.user.id == user.id %}
+                        <p style="text-align: center">Vous n'avez pas encore publié de créations ! </p>
+                    {% else %}
+                        <p style="text-align: center">L'utilisateur n'a pas encore publié de créations ! Revenez plus tard vous aurez peut-être de bonnes surprises...</p>
+                    {% endif %}
+                    
                 {% else %}
                     <a href="{{path('user_patterns', {'slug': user.slug})}}" id="userCreation">Voir toutes les créations > </a>
                 {% endif %}
-                
-                
         </div>
     </div>
 {% endblock %}

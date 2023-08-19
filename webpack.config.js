@@ -35,6 +35,7 @@ Encore
     .addEntry('like', './assets/js/like.js')
     .addEntry('slider', './assets/js/slider.js')
     .addEntry('cookies', './assets/js/cookies.js')
+    .addEntry('registration', './assets/js/registration.js')
     .addEntry('footer', './assets/js/footer.js')
 
 

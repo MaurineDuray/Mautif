@@ -35,17 +35,14 @@ class Pattern
     private ?string $dominantColor = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Assert\NotBlank(message:"La date de création doit être mentionnée")]
-   
-    #[Assert\Type('datetime')]
     private ?\DateTimeInterface $creationDate = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\Image(mimeTypes:["image/png","image/jpeg","image/jpg"], mimeTypesMessage:"Vous devez upload un fichier jpg, jpeg, png ou gif")]
-    #[Assert\Image(maxSize:"1024k", maxSizeMessage:"Votre fichier dépasse le poid maximal autorisé")]
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Image(mimeTypes:["image/png","image/jpeg","image/jpg","image/gif"], mimeTypesMessage:"Vous devez upload un fichier jpg, jpeg, png ou gif")]
+    #[Assert\File(maxSize:"1024k", maxSizeMessage:"La taille du fichier est trop grande")]
     private ?string $cover = null;
 
     #[ORM\Column(length: 255)]
@@ -54,8 +51,6 @@ class Pattern
     private ?string $license = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:'Le slug doit être mentionné')]
-    #[Assert\Length(min:2, max:255, minMessage:"Le slug doit posséder au minimum deux caractères", maxMessage:"Le slug ne peut atteindre plue de 255 caractères")]
     private ?string $slug = null;
 
     #[ORM\ManyToOne(inversedBy: 'patterns')]
@@ -100,6 +95,7 @@ class Pattern
             $this->slug = $slugify->slugify($this->title.'-'.rand());
         }
     }
+
 
     public function getId(): ?int
     {
