@@ -43,6 +43,24 @@ class AdminPatternController extends AbstractController
         );
 
         unlink($this->getParameter('uploads_directory').'/'.$pattern->getCover());
+        
+        $comments = $pattern->getComments();
+        foreach($comments as $comment){
+            $manager->remove($comment);
+            $manager->flush();
+        }
+
+        $images = $pattern->getGaleries();
+        if($images){
+            foreach($images as $image){
+                unlink($this->getParameter('uploads_directory').'/'.$image->getPicture());
+
+                $manager->remove($image);
+                $manager->flush();
+            }
+        }         
+        $manager->remove($pattern);
+        $manager->flush();
             
         $manager->remove($pattern);
         $manager->flush();

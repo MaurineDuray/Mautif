@@ -16,8 +16,6 @@ class Comment
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Assert\Type(type:'datetime', message:"La date doit être de type yyy-mm-dd")]
-    #[Assert\NotBlank(message:"La date est obligatoire")]
     private ?\DateTimeInterface $Date = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -25,13 +23,9 @@ class Comment
     private ?string $content = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
-    #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank(message:"Le pattern est obligatoire")]
     private ?Pattern $id_pattern = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
-    #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank(message:"L'utilisateur doit être mentionné")]
     private ?User $id_user = null;
 
     public function getId(): ?int

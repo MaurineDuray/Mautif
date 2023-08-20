@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Suppression{% endblock %}
+
+{% block body %}
+{% include "partials/intro.html.twig" %}
+      <div class="slide fil" id="deleteConfirm">
+                <h1>Etes-vous certain ?</h1>
+
+                <span>Voulez-vous vraiment supprimer le user ?</span>
+                <div class="contentDelete" style="width: 50%">
+                    <p>Id : {{user.id}}</p>
+                    <p>Pseudo : {{user.pseudo}}</p>
+                    <p>Email : {{user.email}}</p>
+                </div>
+                <div class="responses">
+                    <a id="yess" href="{{path('admin_user_delete', {'slug': user.slug})}}" ><i class="fas fa-trash"></i> OUI </a>
+                    <a href="{{path('admin_user')}}" >Annuler </a>
+                </div>
+               
+    </div>
+{% endblock %}                 

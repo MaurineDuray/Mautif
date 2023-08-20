@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Like;
 use App\Entity\User;
 use App\Entity\Galery;
@@ -12,6 +13,7 @@ use App\Form\PatternType;
 use App\Form\PatternImgType;
 use App\Form\PatternUpdateType;
 use App\Entity\PatternImgModify;
+use App\Form\CommentType;
 use App\Repository\UserRepository;
 use App\Service\PaginationService;
 use App\Repository\PatternRepository;
@@ -215,13 +217,42 @@ class PatternController extends AbstractController
     }
 
     /**
-    * Permet d'afficher un motif individuel à partir du slug
+    * Permet d'afficher un motif individuel à partir du slug + ajout de commentaire
     */
     #[Route('/pattern/{slug}', name:'pattern_show')]
-    public function show(string $slug, Pattern $pattern ):Response
+    public function show(string $slug, Pattern $pattern, Request $request, EntityManagerInterface $manager ):Response
     {
+
+        $comment = New Comment();
+
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /*** */
+            $comment->setIdUser($this->getUser());
+            $comment->setDate(new \DateTime());
+            $comment->setIdPattern($pattern);
+
+            $manager->persist($comment);
+            $manager->flush();
+
+            /**
+             * Message flash pour alerter l'utilisateur de l'état de la tâche
+             */
+            $this->addFlash(
+                'success',
+                "Votre commentaire a bien été enregistré!"
+            );
+
+            return $this->redirectToRoute('pattern_show',[
+                'slug' => $pattern->getSlug(),
+            ]);
+        }
+
         return $this->render('pattern/show.html.twig', [
             'pattern' => $pattern,
+            'myform' => $form->createView()
         ]);
     }
 
@@ -407,6 +438,9 @@ class PatternController extends AbstractController
         ]);
     }
 
+    /**
+     * Permet de valider la suppression
+     */
     #[Route('/pattern/{slug}/confirmdelete', name:"confirmdelete")]
     #[Security("(is_granted('ROLE_USER') and user === pattern.getIdUser()) or is_granted('ROLE_ADMIN')", message:"Ce motif ne vous appartient pas, vous ne pouvez pas la supprimer")]
     public function confirmDelete(Pattern $pattern, EntityManagerInterface $manager)
@@ -416,6 +450,7 @@ class PatternController extends AbstractController
             'slug'=>$pattern->getSlug()
          ]);
     }
+
     /**
      * Permet de supprimer un motif
      */
@@ -429,6 +464,12 @@ class PatternController extends AbstractController
         );
 
         unlink($this->getParameter('uploads_directory').'/'.$pattern->getCover());
+
+        $comments = $pattern->getComments();
+        foreach($comments as $comment){
+            $manager->remove($comment);
+            $manager->flush();
+        }
 
         $images = $pattern->getGaleries();
         if($images){

@@ -106,7 +106,56 @@
             {% endif %}
             </div>
         </div>
+
+        <hr class="sep" style="margin-bottom: 100px">
+
+        <div class="comments">
+            <h2 >Découvrez l'avis des internautes</h2>
+            
+            <div class="contentComment">
+                {% if pattern.comments | length>0 %}
+                    {% for comment in pattern.comments %}
+                        <div class="com">
+                            <div class="avatar">
+                                {% if comment.idUser.avatar %}
+                                    <img src="../uploads/{{comment.idUser.avatar}}" class="avatar" alt="Avatar de {{comment.idUser.pseudo}}">
+                                {% else %}
+                                    <img src="../images/director.png" class="avatar" alt="Avatar de {{comment.idUser.pseudo}}">
+                                {% endif %}
+                            </div>
+                            <div class="message">
+                                <p>{{comment.content}}</p>
+                                <p class="user">par <i>{{comment.idUser.pseudo}}</i></p>
+                                {% if app.user %}
+                                    {% if app.user.roles[0]== "ROLE_ADMIN" or comment.idUser == app.user.id %}
+                                        <a href="#" class=""><i class="fa-solid fa-trash"></i>Supprimer</a> 
+                                    
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                            
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p style="text-align: center; margin-top: 50px; width: 80%; margin-left: 50%; transform: translateX(-50%)">Aucun créateur n'a posté de commentaires pour l'instant !</p>
+                    <p style="text-align: center; padding-bottom: 20px"><b>Sois le premier à donner ton avis sur cette réalisation !</b></p>
+                {% endif %}
+            </div>
+             {% if app.user %}
+                <div class="formComment">
+                 {{form_start(myform)}}
+                  {{form_widget(myform)}}
+                {{form_end(myform)}}
+                </div>
+            {% else %}
+                <p style="width:80%; margin: 0 auto; text-align: center; padding-bottom: 30px">Connecte toi pour commenter les réalisations !</p>
+                
+            {% endif %}
+        </div>
+         <a href={{path('patterns_index')}}><button class="backButton btn">Retour à la galerie</button></a>
     </div>
+
+    
    
 {% endblock %}
 

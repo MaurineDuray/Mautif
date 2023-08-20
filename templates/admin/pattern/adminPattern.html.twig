@@ -14,6 +14,7 @@
                         <th>ID</th>
                         <th>Vignette</th>
                         <th>Titre du motif</th>
+                        <th>Voir le Motif</th>
                         <th>Auteur</th>
                         <th>Voir le profil</th>
                         {# <th>Date de création</th> #}
@@ -27,6 +28,9 @@
                             <td>{{pattern.id}}</td>
                             <td><img class="vignette" src="../uploads/{{pattern.cover}}" alt=""></td>
                             <td>{{pattern.title}}</td>
+                            <td> 
+                            <a href="{{path('pattern_show',{'slug': pattern.slug })}}" class="btn-green"><i class="fa-solid fa-eye"></i></a>
+                            </td>
                             <td>{{pattern.idUser.pseudo}}</td>
                             <td> 
                             <a href="{{path('user_profile',{'slug': pattern.idUser.slug })}}" class="btn-green"><i class="fa-solid fa-eye"></i></a>
@@ -34,7 +38,7 @@
                             {# <td>{{pattern.creationDate | date('d/m/Y')}}</td> #}
                             <td class="actions">
                                 <a href="{{path('pattern_edit',{'slug': pattern.slug })}}" class="btn-yellow"><i class="fas fa-edit"></i></a>
-                                <a href="{{path('admin_pattern_delete',{'slug': pattern.slug })}}" class="btn-red" ><i class="fas fa-trash"></i></a>
+                                <a href="{{path('confirmdelete',{'slug': pattern.slug })}}" class="btn-red" ><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                     {% endfor %}

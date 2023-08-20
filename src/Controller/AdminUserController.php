@@ -237,6 +237,20 @@ class AdminUserController extends AbstractController
     }
 
     /**
+     * Permet de valider la suppression
+     */
+    #[Route('/user/{slug}/confirmdelete', name:"confirmdeleteuser")]
+    #[Security("(is_granted('ROLE_USER')) or is_granted('ROLE_ADMIN')", message:"Ce profil ne vous appartient pas, vous ne pouvez pas y accéder")]
+    public function confirmDelete(User $user, EntityManagerInterface $manager)
+    {
+        return $this->render('admin/user/confirmdelete.html.twig', [
+            'user'=>$user,
+            'slug'=>$user->getSlug()
+         ]);
+    }
+
+
+    /**
      * Permet de supprimer un user à partir de l'administration (liste des motifs)
      */
     #[Route('/adminuser/{slug}/delete', name:"admin_user_delete")]
@@ -261,6 +275,7 @@ class AdminUserController extends AbstractController
                 if($images){
                 foreach($images as $image){
                 unlink($this->getParameter('uploads_directory').'/'.$image->getPicture());
+
 
                 $manager->remove($image);
                 $manager->flush();

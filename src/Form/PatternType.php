@@ -49,7 +49,7 @@ class PatternType extends ApplicationType
             ->add('description', TextType::class, $this->getConfiguration("Description","Ecrivez ici une petite description de votre motif"))
             ->add('cover', FileType::class, [
                 "data_class" =>  null,
-                "label"=> "Image de la recette(jpg, jpeg, png)",
+                "label"=> "Image de votre motif, préférez une image carrée pour un meilleur résultat(jpg, jpeg, png)",
                 
             ])
             ->add('license',ChoiceType::class, [

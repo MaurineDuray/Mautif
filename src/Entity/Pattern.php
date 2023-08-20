@@ -63,13 +63,13 @@ class Pattern
     #[ORM\Column(nullable: true)]
     private ?int $nb_like = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_pattern', targetEntity: Comment::class)]
+    #[ORM\OneToMany(mappedBy: 'id_pattern', targetEntity: Comment::class, orphanRemoval: true,cascade:["persist"])]
     private Collection $comments;
 
     #[ORM\OneToMany(mappedBy: 'pattern', targetEntity: Like::class, orphanRemoval: true,cascade:["persist"])]
     private Collection $likes;
 
-    #[ORM\OneToMany(mappedBy: 'pattern', targetEntity: Galery::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'pattern', targetEntity: Galery::class, orphanRemoval: true,cascade:["persist"])]
     private Collection $galeries;
 
     public function __construct()

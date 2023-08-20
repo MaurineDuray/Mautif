@@ -47,7 +47,7 @@
                                 {% endif %}
                                 {% if user.id != 1 %}
                                     {% if user.roles[0] != "ROLE_ADMIN" %}
-                                    <a href="{{path('admin_user_delete',{'slug': user.slug })}}" class="btn-red" ><i class="fas fa-trash"></i></a>
+                                    <a href="{{path('confirmdeleteuser',{'slug': user.slug })}}" class="btn-red" ><i class="fas fa-trash"></i></a>
                                     {% endif %}
                                     {% if user.roles[0] == "ROLE_ADMIN" %}
                                         <a href="{{path('user_change', {'slug':user.slug})}}" style="color: white"><i class="fa-solid fa-arrows-spin"></i>User</a>
