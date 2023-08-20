@@ -128,7 +128,7 @@
                                 <p class="user">par <i>{{comment.idUser.pseudo}}</i></p>
                                 {% if app.user %}
                                     {% if app.user.roles[0]== "ROLE_ADMIN" or comment.idUser == app.user.id %}
-                                        <a href="#" class=""><i class="fa-solid fa-trash"></i>Supprimer</a> 
+                                        <a href="{{path('delete_comment',{'id': comment.id})}}" class=""><i class="fa-solid fa-trash"></i>Supprimer</a> 
                                     
                                     {% endif %}
                                 {% endif %}
