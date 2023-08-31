@@ -19,7 +19,7 @@
                         {# <th>Rôle(s)</th> #}
                         <th>Le profil</th>
                         <th>Les créations</th>
-                        
+                        <th>Supprimer</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
@@ -38,7 +38,11 @@
                             <td> 
                             <a href="{{path('user_patterns',{'slug': user.slug })}}" class="btn-green"><i class="fa-solid fa-eye"></i></a>
                             </td>
-                            
+                            <td>
+                            {% if user.roles[0] != "ROLE_ADMIN" %}
+                                    <a href="{{path('confirmdeleteuser',{'slug': user.slug })}}" class="btn-red" ><i class="fas fa-trash" style="color: red; margin: 20px"></i></a>
+                                    {% endif %}
+                            </td>
                             <td class="actions">
                                 
                                 {% if user.roles[0] == "ROLE_USER" or not app.user.id == user.id %}
@@ -46,14 +50,12 @@
                                    
                                 {% endif %}
                                 {% if user.id != 1 %}
-                                    {% if user.roles[0] != "ROLE_ADMIN" %}
-                                    <a href="{{path('confirmdeleteuser',{'slug': user.slug })}}" class="btn-red" ><i class="fas fa-trash"></i></a>
-                                    {% endif %}
+                                    
                                     {% if user.roles[0] == "ROLE_ADMIN" %}
-                                        <a href="{{path('user_change', {'slug':user.slug})}}" style="color: white"><i class="fa-solid fa-arrows-spin"></i>User</a>
+                                        <a href="{{path('user_change', {'slug':user.slug})}}" style="color: white"><i class="fa-solid fa-arrows-spin"></i> Changer le rôle en User</a>
                                     {% endif %}
                                     {% if user.roles[0] == "ROLE_USER" %}
-                                     <a href="{{path('role_change', {'slug':user.slug})}}" style="color: white"><i class="fa-solid fa-arrows-spin"></i>Admin</a>
+                                     <a href="{{path('role_change', {'slug':user.slug})}}" style="color: white"><i class="fa-solid fa-arrows-spin"></i> Changer le rôle en Admin</a>
                                      {% endif %}
                                 {% endif %}
                                  

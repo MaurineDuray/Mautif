@@ -44,7 +44,7 @@
                     {% endif %}
                 {% endif%}
                 {% else %}
-                    <br><p>Connectez-vous pour télécharger le motif ou contacter l'auteur...</p>
+                    <br><p>Connecte-toi pour télécharger le motif ou contacter l'auteur...</p>
                     <a href="{{path('account_login')}}" style="color: black; text-decoration: none"><button class="btn">Je me connecte</button></a>
                     <br><a href="{{path('account_register')}}" style="color: black; text-decoration: none"><button class="btn">Je n'ai pas de compte</button></a>
                 {% endif%}
@@ -63,7 +63,7 @@
             </div> #}
             <div class="container">
             {% if pattern.galeries | length > 0 %}
-                    {% if pattern.galeries | length > 2 %}
+                    {% if pattern.galeries | length > 3 %}
                     <img src={{asset('images/scroll.png')}} alt="">
                     {% endif %}
                     <div class="carousel-inner">
@@ -148,7 +148,11 @@
                 {{form_end(myform)}}
                 </div>
             {% else %}
-                <p style="width:80%; margin: 0 auto; text-align: center; padding-bottom: 30px">Connecte toi pour commenter les réalisations !</p>
+                <p style="width:80%; margin: 0 auto; text-align: center; padding-bottom: 30px">Connecte-toi pour poster ton propre commentaire !</p>
+                    <div class="container" style="display: flex; flex-wrap: wrap; justify-content:center">
+                    <a href="{{path('account_login')}}" style="color: black; text-decoration: none; margin:20px"><button class="btn">Je me connecte</button></a>
+                    <a href="{{path('account_register')}}" style="color: black; text-decoration: none; margin:20px"><button class="btn">Je n'ai pas de compte</button></a>
+                    </div>
                 
             {% endif %}
         </div>

@@ -3,6 +3,7 @@
     overflow-x: scroll;
     display: block !important;
 }
+
 .dashboard{
     display: flex;
     justify-content: center;
@@ -39,14 +40,15 @@
 
 table{
     width:90%;
-    margin-left: 50%;
-    transform: translateX(-50%);
+    margin: 0 auto;
 }
-table tr{
-    width: 100%;
-    height: 60px;
-    border: 1px solid white;
+
+table th{
     
+    height: 60px;
+    padding: 20px;
+    background-color: aliceblue;
+    color: black;
 }
 table td{
     text-align: center;
