@@ -1,8 +1,12 @@
 /* Homepage et about  */ 
 #feuillage{
     width: 100vw;
-    max-height: 100vh;
-    overflow: visible;
+    height: 100vh;
+    overflow: hidden;
+    position: absolute;
+    z-index: 400;
+    top: 0;
+    left: 0;
     
 }
 #home{
@@ -51,40 +55,54 @@
 
 #feuille3{
     position: absolute;
-    width: 80vh;
+    width: 100vh;
     top: 20vh;
-    left: -100px;
-    z-index: 500;
-    transition: all 2s;
+    left: -25vh;
+    z-index: 1;
+    transition: all 3s;
+}
+@media all and (max-width: 1000px){
+    #feuille3{
+        position: absolute;
+        width: 70vh;
+        top: 20vh;
+        left: -25vh;
+        z-index: 1;
+        transition: all 3s;
+    }
 }
 #feuille2{
     position: absolute;
-    width: 100%;
-    height: 100vh;
-    right: -0%;
+    width: 80%;
+    right: -20%;
     top: 0px;
-    z-index: 501;
-
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: top right;
-    background-image: url(../../public/images/feuillage2.png);
-  
+    z-index: 1000;  
+    transition: all 3s;
 }
 
 #feuille1{
     position: absolute;
-    width: 80%;
-    top: 0px;
-    transition: all 2s;
+    height: 120vh;
+    top: -100px;
+    transition: all 3s;
+}
+@media all and (max-width: 1000px){
+    #feuille1{
+        position: absolute;
+        height: 90vh;
+        top: -100px;
+        transition: all 3s;
+    }
 }
 
 #feuille4{
     position: absolute;
-    width: 50%;
+    width: 100%;
     right: 0px;
-    top: -20vw;
-    transition: all 2s;
+    bottom: -0vw;
+    transition: all 3s;
+
+    
 }
 
 #more{

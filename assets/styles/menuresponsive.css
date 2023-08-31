@@ -2,8 +2,8 @@
 
 #slideMenu{
     display: block;
-    margin-left: -35%;
-    width: 30%;
+    margin-left: -45%;
+    width: 40%;
     height: 100vh;
     position: fixed;
     z-index: 2800;
