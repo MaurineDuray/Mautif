@@ -14,8 +14,8 @@
                 </div>
                 {% if app.user %}
                         {% if pattern.likes | length==0 %}
-                            <a href="{{path('like', {'id': pattern.id})}}" class="heart">
-                                <div class="like">
+                            <a href="{{path('like', {'id': pattern.id})}}" class="heart" data-action='like'>
+                                <div class="like" >
                                     <i class="fa-regular fa-heart"></i>
                                 </div>
                             </a>
@@ -38,6 +38,21 @@
                         {% endif %}
                         
                     {% endif %}
+
+                    {# {% if app.user %}
+                        <a href="{{path('like', {'id': pattern.id})}}" class="heart" data-action="like" liked="false" style="display:none">
+
+                            <div class="like">
+                                <i class="fa-regular fa-heart"></i>
+                            </div>
+                        </a>
+                        <a href="{{path('unlike', {'id': pattern.id})}}" class="heart" data-action="unlike" liked="false" >
+
+                            <div class="like">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                        </a>
+                    {% endif %}  #}
 </div>
 
 {% block javascripts %}

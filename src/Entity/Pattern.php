@@ -312,6 +312,21 @@ class Pattern
         return $this;
     }
 
+    public function isLikedByUser(User $user):bool
+    {
+        return $this->likes->contains($user);
+    }
+
+    /**
+     * Retourne le nombre de likes
+     *
+     * @return integer
+     */
+    public function howManyLikes():int
+    {
+        return count($this->likes);
+    }
+
     /**
      * @return Collection<int, Galery>
      */

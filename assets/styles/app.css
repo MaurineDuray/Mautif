@@ -39,6 +39,9 @@ html{
     background-color: #020202;
     overflow-y:inherit;
 }
+.hidden{
+    display: none;
+}
 .container{
     width: 90%;
     margin: 0 auto;
