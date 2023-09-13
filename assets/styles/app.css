@@ -24,7 +24,9 @@
     --normal:'Barlow', sans-serif;
     --fond: rgb(10,45,24)
 }
-
+.blush{
+    color: red !important;
+}
 *{
     margin:0;
     padding: 0;

@@ -14,7 +14,7 @@
     flex-wrap: wrap;
 }
 .showContent a{
-    color : red;
+    color : rgba(180, 180, 180, 0.624);
 }
 h6 a{
     color :greenyellow !important;

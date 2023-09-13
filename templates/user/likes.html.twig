@@ -37,17 +37,15 @@
                     
                 </div>
                 {% if app.user %}
-                        {% if pattern.pattern.likes | length==0 %}
-                            <a href="{{path('like', {'id': pattern.pattern.id})}}">
+                         {% if pattern.pattern.likes | length==0 %}
+                            <a href="{{path('like', {'id': pattern.pattern.id, 'action': 'remove'})}}" class="heart">
                                 <div class="like">
                                     <i class="fa-regular fa-heart"></i>
                                 </div>
                             </a>
                         {% else %}
-                           
-                                
-                                    <a href="{{path('unlike', {'id': pattern.id})}}">
-                                        <div class="heart">
+                                     <a href="{{path('like', {'id': pattern.pattern.id, 'action': 'remove'})}}" class="heart blush">
+                                        <div class="like">
                                             <i class="fa-solid fa-heart"></i>
                                         </div>
                                     </a>

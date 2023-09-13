@@ -137,7 +137,7 @@
     text-align: left;
 }
 .instax a{
-    color: red;
+    color: rgba(171, 171, 171, 0.541);
     font-size: 20pt;
 }
 .heart{
