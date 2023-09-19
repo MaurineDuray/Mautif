@@ -28,8 +28,8 @@
 
 import axios from "axios";
 
-const hearts = document.querySelectorAll('.heart')
-console.log(hearts)
+// const hearts = document.querySelectorAll('.heart')
+// console.log(hearts)
 // export default class Like{
 //     constructor(likeElements){
 //         this.likeElements = likeElements;

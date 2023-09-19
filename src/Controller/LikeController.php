@@ -17,13 +17,7 @@ class LikeController extends AbstractController
 {
     #[Route('/like/{id}/{action}', name: 'like')]
     #[IsGranted("ROLE_USER")]
-    public function like(
-        EntityManagerInterface $manager,
-        Pattern $pattern,
-        Request $request,
-        $action,
-        LikeRepository $likeRepo
-    ): Response {
+    public function like(EntityManagerInterface $manager,Pattern $pattern, Request $request,$action, LikeRepository $likeRepo): Response {
         $user = $this->getUser();
     
         // Vérifiez si l'utilisateur a déjà aimé ce motif

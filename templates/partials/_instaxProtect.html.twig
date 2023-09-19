@@ -12,28 +12,28 @@
 
                  {% if app.user %}
                         {% if pattern.likes | length == 0 %}
-                            <a href="{{path('like', {'id': pattern.id, 'action': 'add'})}}" class="heart" data-action="like" data-like="false">
-                                <div class="like">
-                                    <i class="fa-heart fa-solid"></i>
-                                </div>
-                            </a>
-                        {% else %}
-                            {% for like in pattern.likes %}
-                                {% if like.user.id == app.user.id%}
-                                    <a href="{{path('like', {'id': pattern.id, 'action': 'remove'})}}" class="heart blush" data-action="like" data-like="true">
-                                    <div class="like">
-                                        <i class="fa-heart fa-solid"></i>
-                                    </div>
-                            </a>
-                                {% else %}
-                                    <a href="{{path('like', {'id': pattern.id, 'action': 'add'})}}" class="heart" data-action="like" data-like="false">
-                                    <div class="like">
+                            <a href="{{path('like', {'id': pattern.id, 'action': 'add'})}}" class="heart" data-action="like" data-like="false" >
+                                    <div class="like"  style="z-index:10">
                                       <i class="fa-heart fa-solid"></i>
                                     </div>
                             </a>
+                            {% endif %}
+                            {% for like in pattern.likes %}
+                                {% if like.user.id == app.user.id %}
+                                    <a href="{{path('like', {'id': pattern.id, 'action': 'remove'})}}" class="heart blush" data-action="unlike" data-like="true" style="position: absolute; z-index:500">
+                                    <div class="like">
+                                        <i class="fa-heart fa-solid"></i>
+                                    </div>
+                                    </a>
+                                {% else %}
+                                    <a href="{{path('like', {'id': pattern.id, 'action': 'add'})}}" class="heart" data-action="like" data-like="false"  >
+                                    <div class="like"  >
+                                      <i class="fa-heart fa-solid"></i>
+                                    </div>
+                                    </a>
                                 {% endif %}
                             {% endfor %}
-                        {% endif %}
+                        
                         
                     {% endif %}
 </div>

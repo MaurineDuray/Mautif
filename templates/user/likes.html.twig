@@ -22,7 +22,7 @@
         {% for pattern in user.likes %}
         
              <div class="instax noContextMenu">
-                <div class="nblikes">
+                <div class="nblikes" id='nb{{pattern.pattern.id}}'>
                     {{pattern.pattern.likes | length}}  <i class="fa-solid fa-heart"></i>
                 </div>
 
@@ -31,7 +31,7 @@
                <img class="noContextMenu" src="../../uploads/{{pattern.pattern.cover}}" alt="image de "></a>
                 <div class="instaxContent">
                     <div class="instaxTitle">
-                    <h6>Collection - {{pattern.pattern.title}}</h6>
+                    <h6>{{pattern.pattern.title}}</h6>
                     <p><i>par {{pattern.pattern.idUser.pseudo}}</i></p>
                     </div>
                     
