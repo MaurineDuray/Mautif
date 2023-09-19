@@ -10,11 +10,12 @@
         <div id="conditions">
             <a href="{{path('legacy')}}">Mentions légales</a>
             <a href="{{path('conditions')}}">Conditions générales</a>
-            {% if app.user %}
+            {# {% if app.user %}
                 {% if app.user.roles[0] != "ROLE_ADMIN" %}
-                    <a href="{{path('confirm_unsub',{'slug': app.user.slug})}}">Me désinscrire</a>
+                    <a href="{{path('confirm_unsub',{'id': app.user.id})}}">Me désinscrire</a>
                 {% endif %}
-            {% endif %}
+            {% endif %} #}
+           
            <a href="mailto:design@maurine.be" target="_blank"> Contact </a>
             
         </div>

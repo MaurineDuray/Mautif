@@ -10,6 +10,7 @@ use App\Form\RegistrationType;
 use App\Service\MailerService;
 use Symfony\Component\Mime\Email;
 use App\Repository\LikeRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use SebastianBergmann\CodeCoverage\Report\Html\Renderer;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -174,20 +175,20 @@ class AccountController extends AbstractController
      *
      * @return Response
      */
-    #[Route('/confirm/{slug}', name:'confirm_unsub')]
+    #[Route('user/confirm/{id}', name:'confirm_unsub')]
     #[Security("(is_granted('ROLE_USER')) or is_granted('ROLE_ADMIN')", message:"Ce profil ne vous appartient pas, vous ne pouvez pas y accéder")]
-    public function confirm_unsub( User $user):Response
+    public function confirm_unsub( User $user, UserRepository $repo):Response
     {
 
         return $this->render("account/unsub.html.twig",[
-           
+           'user'=>$this->getUser()
         ]);
     }
 
     /**
      * Permet la suppression d'un compte utilisateur
      */
-    #[Route('/user/{slug}/delete', name:"unsub")]
+    #[Route('/user/delete/{id}', name:"unsub")]
     #[Security("(is_granted('ROLE_USER')) or is_granted('ROLE_ADMIN')", message:"Ce profil ne vous appartient pas, vous ne pouvez pas y accéder")]
     public function userAdminDelete(User $user, EntityManagerInterface $manager)
     {
@@ -200,7 +201,15 @@ class AccountController extends AbstractController
         if($user->getAvatar()){
             unlink($this->getParameter('uploads_directory').'/'.$user->getAvatar());
         }
-        
+
+        if ($user->getComments()) {
+            $comments = $user->getComments();
+             foreach ($comments as $comment) {
+                 $manager->remove($comment);
+                 $manager->flush();
+             }
+         }
+
         //suppression des motifs et de leurs images liées à cet utilisateur
         $patterns= $user->getPatterns();
         if($patterns){

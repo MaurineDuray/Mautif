@@ -7,7 +7,7 @@
             <h1 style="text-align: center ">Voulez-vous vraiment vous désinscrire ?</h1>
             <p style="width: 80%; margin: 0 auto; text-align: center ">Attention, la suppression de votre compte entrainera la suppression de l'entièreté de vos données et publications sur le site. Cette acction est <b>irréversible </b>!</p>
             <div class="btnUnsub">
-                <a href="{{path('unsub',{'slug':app.user.slug})}}" id="confirmUnsub"><button class="btn">Me désinscrire</button></a>
+                <a href="{{path('unsub',{'id':user.id})}}" id="confirmUnsub"><button class="btn">Me désinscrire</button></a>
                 <a href="{{path('homepage')}}"><button class="btn">Retour à la page d'accueil</button></a>
             </div>
            

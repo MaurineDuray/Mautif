@@ -68,7 +68,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?int $nb_like = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_user', targetEntity: Comment::class)]
+    #[ORM\OneToMany(mappedBy: 'id_user', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comments;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Like::class, orphanRemoval: true)]

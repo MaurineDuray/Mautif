@@ -267,6 +267,14 @@ class AdminUserController extends AbstractController
             unlink($this->getParameter('uploads_directory').'/'.$user->getAvatar());
         }
 
+        if ($user->getComments()) {
+           $comments = $user->getComments();
+            foreach ($comments as $comment) {
+                $manager->remove($comment);
+                $manager->flush();
+            }
+        }
+
         // suppression des patterns du user et des images associées et de la galerie d'images associée aux motif
         $patterns= $user->getPatterns();
         if($patterns){
