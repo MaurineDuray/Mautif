@@ -21,6 +21,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AdminUserController extends AbstractController
 {
@@ -100,7 +101,7 @@ class AdminUserController extends AbstractController
      * Permet d'éditer les info d'un user
      */
     #[Route('admin/user/{slug}/edit', name:'account_profile')]
-    #[Security("(is_granted('ROLE_USER')) or is_granted('ROLE_ADMIN')", message:"Ce profil ne vous appartient pas, vous ne pouvez pas y accéder")]
+    #[Security("(is_granted('ROLE_USER') and user == slug ) or is_granted('ROLE_ADMIN')", message:"Ce profil ne vous appartient pas, vous ne pouvez pas y accéder")]
     public function userEdit(User $user, EntityManagerInterface $manager, Request $request):Response
     {
         $form = $this->createForm(AccountType::class, $user);
@@ -151,7 +152,7 @@ class AdminUserController extends AbstractController
      * @param UserPasswordHasherInterface $hasher
      * @return Response
      */
-    #[Route("/account/password-update", name:'account_password')]
+    #[Route("/account/password-update/{slug}", name:'account_password')]
     #[Security("(is_granted('ROLE_USER'))", message:"Ce profil ne vous appartient pas, vous ne pouvez pas y accéder")]
     public function updatePassword(Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $hasher): Response
     {
@@ -254,7 +255,7 @@ class AdminUserController extends AbstractController
      * Permet de supprimer un user à partir de l'administration (liste des motifs)
      */
     #[Route('/adminuser/{slug}/delete', name:"admin_user_delete")]
-    #[IsGranted('ROLE_ADMIN')]
+    #[Security("(is_granted('ROLE_USER')) or is_granted('ROLE_ADMIN')", message:"Ce profil ne vous appartient pas, vous ne pouvez pas y accéder")]
     public function userAdminDelete(User $user, EntityManagerInterface $manager)
     {
         $this->addFlash(
@@ -287,13 +288,10 @@ class AdminUserController extends AbstractController
             }
         }
 
-
-        
-            
         $manager->remove($user);
         $manager->flush();
 
-        return $this->redirectToRoute("admin_user");
+        return $this->redirectToRoute("homepage");
     }
 
     /**

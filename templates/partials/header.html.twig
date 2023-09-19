@@ -27,7 +27,22 @@
 </nav>
 
 <div id="accountBlock">
-    {% if app.user %}
+    {% if  not app.user %}
+        <a href="{{path('account_login')}}">Connexion</a>
+        <a href="{{path('account_register')}}">Créer un compte</a>
+    {% else %}
+         <p>Bonjour, <i><b>{{app.user.pseudo}}</b></i></p>
+        <a href="{{path('pattern_add')}}">Publier un motif</a>
+        <a href="{{path('user_profile',{'slug': app.user.slug})}}">Mon compte</a>
+        <a href="{{path('user_patterns',{'slug': app.user.slug})}}">Mes créations</a>
+       <a href="{{path('user_likes',{'slug': app.user.slug})}}">Mes likes</a>
+        {% if is_granted('ROLE_ADMIN') %}
+             <a href="{{path('admin')}}">ADMINISTRATION</a>
+        {% endif %}
+        <a href="{{path('account_logout')}}" id="logout"><b>DÉCONNEXION</b></a>
+    {% endif %}
+
+    {# {% if app.user %}
         <p>Bonjour, <i><b>{{app.user.pseudo}}</b></i></p>
         <a href="{{path('pattern_add')}}">Publier un motif</a>
         <a href="{{path('user_profile',{'slug': app.user.slug})}}">Mon compte</a>
@@ -41,7 +56,7 @@
     {% else %}
         <a href="{{path('account_login')}}">Connexion</a>
         <a href="{{path('account_register')}}">Créer un compte</a>
-    {% endif %}
+    {% endif %} #}
 
     
 </div>

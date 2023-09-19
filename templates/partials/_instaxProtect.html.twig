@@ -1,4 +1,7 @@
  <div class="instax noContextMenu">
+                <div class="nblikes" id='nb{{pattern.id}}'>
+                    {{pattern.likes | length}}  <i class="fa-solid fa-heart"></i>
+                </div>
                <a href={{path('pattern_show',  {'slug':pattern.slug})}} class="noContextMenu" style="cursor: unset">
                <img class="filigrane" src="../../images/filigrane.png" alt="">
                <img class="noContextMenu" src="../../uploads/{{pattern.cover}}" alt="image de "></a>

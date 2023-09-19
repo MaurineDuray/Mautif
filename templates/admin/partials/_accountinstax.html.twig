@@ -7,6 +7,9 @@
                     <a href="{{path('pattern_edit',{'slug': pattern.slug})}}" ><i class="fas fa-edit"></i></a>
                     <a href="{{path('confirmdelete',{'slug': pattern.slug})}}" ><i class="fas fa-trash"></i></a>
                 </div>
+                <div class="nblikes" id='nb{{pattern.id}}'>
+                    {{pattern.likes | length}}  <i class="fa-solid fa-heart"></i>
+                </div>
                <a href={{path('pattern_show',  {'slug':pattern.slug})}}><img src="/uploads/{{pattern.cover}}" alt="image de "></a>
                 <div class="instaxContent">
                     <div class="instaxTitle">
@@ -15,7 +18,7 @@
                     </div>
                 </div>
 
-         {% if app.user %}
+        {% if app.user %}
                         {% if pattern.likes | length == 0 %}
                             <a href="{{path('like', {'id': pattern.id, 'action': 'add'})}}" class="heart" data-action="like" data-like="false" >
                                     <div class="like"  style="z-index:10">

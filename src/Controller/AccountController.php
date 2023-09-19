@@ -11,19 +11,18 @@ use App\Service\MailerService;
 use Symfony\Component\Mime\Email;
 use App\Repository\LikeRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use SebastianBergmann\CodeCoverage\Report\Html\Renderer;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
+
 
 class AccountController extends AbstractController
 {
@@ -175,10 +174,11 @@ class AccountController extends AbstractController
      *
      * @return Response
      */
-    #[Route('/confirm', name:'confirm_unsub')]
+    #[Route('/confirm/{slug}', name:'confirm_unsub')]
     #[Security("(is_granted('ROLE_USER')) or is_granted('ROLE_ADMIN')", message:"Ce profil ne vous appartient pas, vous ne pouvez pas y accéder")]
-    public function confirm_unsub():Response
+    public function confirm_unsub( User $user):Response
     {
+
         return $this->render("account/unsub.html.twig",[
            
         ]);
@@ -191,6 +191,7 @@ class AccountController extends AbstractController
     #[Security("(is_granted('ROLE_USER')) or is_granted('ROLE_ADMIN')", message:"Ce profil ne vous appartient pas, vous ne pouvez pas y accéder")]
     public function userAdminDelete(User $user, EntityManagerInterface $manager)
     {
+
         $this->addFlash(
             "success",
             "Le compte de l'utilisateur n°{$user->getId()} a bien été supprimé"
@@ -223,7 +224,6 @@ class AccountController extends AbstractController
         $manager->remove($user);
         $manager->flush();
 
-        return $this->redirectToRoute("account_login");
+        return $this->render('nouser.html.twig');
     }
-
 }
