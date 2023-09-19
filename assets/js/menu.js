@@ -69,7 +69,7 @@ login.addEventListener('click', function(){
 
 const alert = document.querySelectorAll('.alert')
 if (alert) {
-    setTimeout(alertdelete,2000)
+    setTimeout(alertdelete,5000)
 }   
 function alertdelete(){
     alert.forEach(element => {
