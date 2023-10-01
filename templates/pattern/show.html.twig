@@ -13,7 +13,7 @@
         <div class="showContent">
             <div class="left">
                 <a href="uploads/{{pattern.cover}}" target="_blank">
-                {% include "partials/_instaxProtect.html.twig" %}
+                {% include "partials/_instax.html.twig" %}
                 </a>
                 {% if app.user %}
                     <a href="{{path('signaler',{'id': pattern.id})}}" class="signaler"><i class="fa-solid fa-bell-concierge"></i> Signaler</a>

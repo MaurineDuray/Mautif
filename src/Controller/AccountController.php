@@ -212,17 +212,6 @@ class AccountController extends AbstractController
     #[Route('/verify/{id<\d+>}', name:'account_verify', methods: ['GET'])]
     public function verify( User $user, EntityManagerInterface $em)
     {
-    //    if($user->getTokenRegistration() !== $token){
-    //     throw new AccessDeniedException();
-    //    }
-
-    //    if($user->getTokenRegistration() === null){
-    //     throw new AccessDeniedException();
-    //    }
-
-    //    if(new DateTime('now') > $user->getTokenRegistrationLifeTime()){
-    //     throw new AccessDeniedException();
-    //    }
 
        $user->setIsVerified(true);
        
