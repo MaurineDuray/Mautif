@@ -12,21 +12,31 @@ use Symfony\Component\Mime\Email;
 use App\Repository\LikeRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use SebastianBergmann\CodeCoverage\Report\Html\Renderer;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Renderer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 
 class AccountController extends AbstractController
 {
+
+    private $tokenStorage;
+
+    public function __construct(TokenStorageInterface $tokenStorage)
+    {
+        $this->tokenStorage = $tokenStorage;
+    }
+    
     /**
      * Route dédiée à la connexion de l'utilisateur
      *
@@ -55,6 +65,58 @@ class AccountController extends AbstractController
     public function logout():void
     {
         //
+    }
+
+    #[Route("/unregister", name:"unregister")]
+    public function unregister(Request $request, EntityManagerInterface $manager, SessionInterface $session):Response
+    {
+        $user = $this->getUser();
+
+        if($user){
+            if($user->getAvatar()){
+                unlink($this->getParameter('uploads_directory').'/'.$user->getAvatar());
+            }
+    
+            if ($user->getComments()) {
+                $comments = $user->getComments();
+                 foreach ($comments as $comment) {
+                     $manager->remove($comment);
+                     $manager->flush();
+                 }
+             }
+    
+            //suppression des motifs et de leurs images liées à cet utilisateur
+            $patterns= $user->getPatterns();
+            if($patterns){
+                foreach($patterns as $pattern){
+                    unlink($this->getParameter('uploads_directory').'/'.$pattern->getCover());
+                    $images = $pattern->getGaleries();
+                    if($images){
+                    foreach($images as $image){
+                    unlink($this->getParameter('uploads_directory').'/'.$image->getPicture());
+    
+                    $manager->remove($image);
+                    $manager->flush();
+                }
+            } 
+    
+                    $manager->remove($pattern);
+                    $manager->flush();
+                }
+            }
+
+            $manager->remove($user);
+            $manager->flush();
+
+            $this->tokenStorage->setToken(null);
+            $session->invalidate();
+
+            $this->addFlash('success','Votre compte a été désinscrit avec succès');
+
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $this->redirectToRoute('account_login');
     }
 
     /**
@@ -185,54 +247,5 @@ class AccountController extends AbstractController
         ]);
     }
 
-    /**
-     * Permet la suppression d'un compte utilisateur
-     */
-    #[Route('/user/delete/{id}', name:"unsub")]
-    #[Security("(is_granted('ROLE_USER')) or is_granted('ROLE_ADMIN')", message:"Ce profil ne vous appartient pas, vous ne pouvez pas y accéder")]
-    public function userAdminDelete(User $user, EntityManagerInterface $manager)
-    {
-
-        $this->addFlash(
-            "success",
-            "Le compte de l'utilisateur n°{$user->getId()} a bien été supprimé"
-        );
-
-        if($user->getAvatar()){
-            unlink($this->getParameter('uploads_directory').'/'.$user->getAvatar());
-        }
-
-        if ($user->getComments()) {
-            $comments = $user->getComments();
-             foreach ($comments as $comment) {
-                 $manager->remove($comment);
-                 $manager->flush();
-             }
-         }
-
-        //suppression des motifs et de leurs images liées à cet utilisateur
-        $patterns= $user->getPatterns();
-        if($patterns){
-            foreach($patterns as $pattern){
-                unlink($this->getParameter('uploads_directory').'/'.$pattern->getCover());
-                $images = $pattern->getGaleries();
-                if($images){
-                foreach($images as $image){
-                unlink($this->getParameter('uploads_directory').'/'.$image->getPicture());
-
-                $manager->remove($image);
-                $manager->flush();
-            }
-        } 
-
-                $manager->remove($pattern);
-                $manager->flush();
-            }
-        }
-        
-        $manager->remove($user);
-        $manager->flush();
-
-        return $this->render('nouser.html.twig');
-    }
+    
 }

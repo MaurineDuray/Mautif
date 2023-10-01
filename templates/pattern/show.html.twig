@@ -15,7 +15,10 @@
                 <a href="uploads/{{pattern.cover}}" target="_blank">
                 {% include "partials/_instaxProtect.html.twig" %}
                 </a>
-                <a href="{{path('signaler',{'id': pattern.id})}}" class="signaler"><i class="fa-solid fa-bell-concierge"></i> Signaler</a>
+                {% if app.user %}
+                    <a href="{{path('signaler',{'id': pattern.id})}}" class="signaler"><i class="fa-solid fa-bell-concierge"></i> Signaler</a>
+                {% endif %}
+               
             </div>
             <div class="right">
                 <p class="theme">{{pattern.theme}}</p>
@@ -76,7 +79,7 @@
                                         <a href="{{path('delete_galery',{'id': galery.id})}}" class="btn deleteBtn" style="z-index:500; position:absolute"><i class="fa-solid fa-trash"></i></a>    
                                     {% endif %}
                                 {% endif %}
-                                <img src="../uploads/{{galery.picture}}" class="d-block w-100" alt="image de {{pattern.title}}" >
+                                <img src="../uploads/{{galery.picture}}" class="d-block w-100" alt="image d'inspiration : {{pattern.title}}" >
                                 </div>
                        
         

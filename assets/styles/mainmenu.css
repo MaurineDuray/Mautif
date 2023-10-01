@@ -17,7 +17,7 @@
     box-sizing: border-box;
 }
 #burgerMenu{
-    margin-top: -20px;
+    margin-top: 5px;
     cursor: pointer;
     width: 55px;
     height: 55px;

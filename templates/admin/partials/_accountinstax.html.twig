@@ -10,7 +10,7 @@
                 <div class="nblikes" id='nb{{pattern.id}}'>
                     {{pattern.likes | length}}  <i class="fa-solid fa-heart"></i>
                 </div>
-               <a href={{path('pattern_show',  {'slug':pattern.slug})}}><img src="/uploads/{{pattern.cover}}" alt="image de "></a>
+               <a href={{path('pattern_show',  {'slug':pattern.slug})}}><img src="/uploads/{{pattern.cover}}" alt="image de {{pattern.title}}"></a>
                 <div class="instaxContent">
                     <div class="instaxTitle">
                     <h6>{{pattern.title}}</h6>

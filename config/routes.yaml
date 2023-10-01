@@ -7,3 +7,7 @@ controllers:
 pattern_index:
     path: /pattern
     controller: App\Controller\PatternController::index
+
+app_unregister:
+    path: /unregister
+    controller: App\Controller\AccountController::unregister

@@ -5,9 +5,11 @@ const tab = document.querySelector('#tab')
 
 pins.addEventListener('click',function()
 {
-    footer.style.bottom="0"
+    footer.style.bottom="0";
+    
 })
 
 tab.addEventListener('click', function(){
-    footer.style.bottom="-100%"
+    footer.style.bottom="-200%";
+    
 })

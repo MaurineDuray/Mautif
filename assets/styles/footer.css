@@ -31,7 +31,8 @@
     padding-top: 10px; 
 }
 footer{
-    bottom: -50%; 
+    display: block;
+    bottom: -200%; 
     /* à changer dans le JS pour faire apparaître */
     position: fixed;
     width: 100%;
