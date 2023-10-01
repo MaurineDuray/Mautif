@@ -138,13 +138,14 @@ h6 a{
 
 .item{
     min-width: 300px !important;
-    min-height: 300px !important;
+   
     overflow: hidden;
     position: relative;
+    display: flex;
 }
 .item img{
-    min-width: 300px;
-    max-width: 301px;
+    min-height: 100%;
+    width: 100%;
     position: relative;
     
 }
@@ -164,15 +165,16 @@ h6 a{
 
 .carousel-inner{
     display: flex;
-    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.114);
     width: 100%;
     overflow-x: scroll;
-    max-height: 50vh;
-    
+    max-height: 45vh;
+    align-items: start;
+    overflow-y: hidden;
 }
 .carousel-inner::-webkit-scrollbar {
     display: none;
-  }
+}
 
 
 /* Delete un pattern confirmation */

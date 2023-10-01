@@ -100,7 +100,7 @@ button{
     color: white;
     padding: 20px;
     box-sizing: border-box;
-    display: flex;
+    display: none;
     position: fixed;
     bottom: 0;
     z-index: 5000;

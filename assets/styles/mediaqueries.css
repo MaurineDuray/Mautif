@@ -85,6 +85,20 @@
     }
 }
 @media all and (max-width: 650px){
+    #homeContainer h2{
+        font-size: 12pt !important;
+        margin-top: 15px;
+    }
+    #more img{
+        width: 30px;
+    }
+    #more p{
+        font-size: 12pt;
+    }
+    #more{
+        position: absolute;
+        bottom: 10px;
+    }
     #footContent{
         display: flex;
         justify-content: center;
