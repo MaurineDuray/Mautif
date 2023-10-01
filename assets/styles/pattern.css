@@ -59,6 +59,11 @@ h6 a{
     padding-top: 50px;
     text-align: center;
 }
+.showContent.nblikes{
+    position: absolute !important;
+    background-color: aliceblue;
+    margin-top: 15px;
+}
 .uploadBtn{
     margin: 0 auto !important;
     transform: translateX(1%) !important;
