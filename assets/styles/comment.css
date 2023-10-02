@@ -94,3 +94,6 @@
     font-size: 12pt;
     text-align: left;
 }
+#comment_submit{
+    background-color: white !important;
+}

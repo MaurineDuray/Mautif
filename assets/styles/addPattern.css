@@ -5,6 +5,9 @@
     flex-wrap: wrap;
     padding-bottom: 20px;
 }
+.addContainer .right div{
+    width: 100% !important;
+}
 .addContainer .left{
     display: flex;
     flex-wrap: wrap;
@@ -58,8 +61,15 @@
 #pattern_title{
     border: none;
 }
+#pattern_submit{
+    background-color: white !important;
+}
+#pattern_update_submit{
+    background-color: white !important;
+}
 
 
+/* Pattern update */
 
 
 
