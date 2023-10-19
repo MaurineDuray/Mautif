@@ -63,9 +63,11 @@
 }
 #pattern_submit{
     background-color: white !important;
+    color: black;
 }
 #pattern_update_submit{
     background-color: white !important;
+    color: black;
 }
 
 
