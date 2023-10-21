@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Patterns{% endblock %}
+{% block title %}Patchwork{% endblock %}
 
 {% block body %}
     <div class="noContextMenu">
@@ -16,7 +16,10 @@
         </div>
         
         {% include "partials/filter.html.twig" %}
-
+        
+        {% if not app.user %}
+            <p style="text-align: center; width: 100%; margin-top: 20px"><i class="fa-solid fa-message"></i> Crée un compte ou connecte-toi pour liker, publier et commenter !</p>
+        {% endif %}
         <div class="filContainer">
             {% for pattern in pagination.data %}
                 {% include "partials/_instax.html.twig" %}

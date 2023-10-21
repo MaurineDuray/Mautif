@@ -23,7 +23,7 @@ class SearchType extends AbstractType
         ])
         ->add('rechercher', SubmitType::class, [
             'attr' => [
-                'class' => 'btn btn-warning'
+                'class' => 'btn btn-warning',
             ]
         ]);
     }

@@ -49,6 +49,9 @@
     justify-content: center;
     z-index: 1001;
 }
+#click p{
+    margin-bottom: 10px;
+}
 #click img{
     width: 50px;
 }

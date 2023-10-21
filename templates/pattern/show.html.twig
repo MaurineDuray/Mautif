@@ -8,8 +8,20 @@
    
     {% include "partials/intro.html.twig" %}
     <div class="slide fil">
+        
         <h2>"{{pattern.title}}" <i>par {{pattern.idUser.pseudo}}</i></h2>
-        <a href={{path('patterns_index')}}><button class="backButton btn">Retour à la galerie</button></a>
+        <a href={{path('patterns_index')}}><button class="backButton btn"><i class="fa-solid fa-camera"></i> Retour à la galerie</button></a>
+
+        {% if app.user %}
+            {% if (pattern.idUser.id == app.user.id) or (app.user.roles[0]=="ROLE_ADMIN" ) %}
+                <div class="btnactions btn showActions" >
+                    <a href="{{path('pattern_img',{'slug': pattern.slug})}}" ><i class="fa-solid fa-image"></i></a>
+                    <a href="{{path('pattern_edit',{'slug': pattern.slug})}}" ><i class="fas fa-edit"></i></a>
+                    <a href="{{path('confirmdelete',{'slug': pattern.slug})}}" ><i class="fas fa-trash"></i></a>
+                </div>
+            {% endif %}
+        {% endif %}
+
         <div class="showContent">
             <div class="left">
                
@@ -48,8 +60,8 @@
                 {% endif%}
                 {% else %}
                     <br><p>Connecte-toi pour télécharger le motif ou contacter l'auteur...</p>
-                    <a href="{{path('account_login')}}" style="color: black; text-decoration: none"><button class="btn">Je me connecte</button></a>
-                    <br><a href="{{path('account_register')}}" style="color: black; text-decoration: none"><button class="btn">Je n'ai pas de compte</button></a>
+                    <a href="{{path('account_login')}}" style="color: black; text-decoration: none"><button class="btn"><i class="fa-solid fa-user"></i> Je me connecte</button></a>
+                    <br><a href="{{path('account_register')}}" style="color: black; text-decoration: none"><button class="btn"><i class="fa-solid fa-user-plus"></i> Je n'ai pas de compte</button></a>
                 {% endif%}
             </div>
         </div>
@@ -92,8 +104,8 @@
                     <a  href="{{path('add_galery',{"slug":pattern.slug})}}" style="color: black; text-decoration: none"><button class="btn">Ajouter une inspiration</button></a>
                       
                 {% else %}
-                    <a href="{{path('account_login')}}" style="color: black; text-decoration: none"><button class="btn">Je me connecte</button></a>
-                    <a href="{{path('account_register')}}" style="color: black; text-decoration: none"><button class="btn">Je n'ai pas de compte</button></a>
+                    <a href="{{path('account_login')}}" style="color: black; text-decoration: none"><button class="btn"><i class="fa-solid fa-user"></i> Je me connecte</button></a>
+                    <a href="{{path('account_register')}}" style="color: black; text-decoration: none"><button class="btn"><i class="fa-solid fa-user-plus"></i> Je n'ai pas de compte</button></a>
                 {% endif %}
             {% else %}
                 <p>Aucun créateur n'a posté d'inspiration pour l'instant !</p>
@@ -102,8 +114,8 @@
                     <a  href="{{path('add_galery',{"slug":pattern.slug})}}" style="color: black; text-decoration: none"><button class="btn">Ajouter une inspiration</button></a>
                       
                 {% else %}
-                    <a href="{{path('account_login')}}" style="color: black; text-decoration: none"><button class="btn">Je me connecte</button></a>
-                    <a href="{{path('account_register')}}" style="color: black; text-decoration: none"><button class="btn">Je n'ai pas de compte</button></a>
+                    <a href="{{path('account_login')}}" style="color: black; text-decoration: none"><button class="btn"><i class="fa-solid fa-user"></i> Je me connecte</button></a>
+                    <a href="{{path('account_register')}}" style="color: black; text-decoration: none"><button class="btn"><i class="fa-solid fa-user-plus"></i> Je n'ai pas de compte</button></a>
                 {% endif %}
                 
             {% endif %}
@@ -152,14 +164,14 @@
                 </div>
             {% else %}
                 <p style="width:80%; margin: 0 auto; text-align: center; padding-bottom: 30px">Connecte-toi pour poster ton propre commentaire !</p>
-                    <div class="container" style="display: flex; flex-wrap: wrap; justify-content:center">
-                    <a href="{{path('account_login')}}" style="color: black; text-decoration: none; margin:20px"><button class="btn">Je me connecte</button></a>
-                    <a href="{{path('account_register')}}" style="color: black; text-decoration: none; margin:20px"><button class="btn">Je n'ai pas de compte</button></a>
+                    <div class="container" style="justify-content:center">
+                    <a href="{{path('account_login')}}" style="color: black; text-decoration: none; margin:20px"><button class="btn"><i class="fa-solid fa-user"></i> Je me connecte</button></a><br>
+                    <a href="{{path('account_register')}}" style="color: black; text-decoration: none; margin:20px"><button class="btn"><i class="fa-solid fa-user-plus"></i> Je n'ai pas de compte</button></a>
                     </div>
-                
+                    
             {% endif %}
         </div>
-         <a href={{path('patterns_index')}}><button class="backButton btn">Retour à la galerie</button></a>
+         <a href={{path('patterns_index')}}><button class="backButton btn"><i class="fa-solid fa-camera"></i> Retour à la galerie</button></a>
     </div>
 
     

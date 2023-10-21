@@ -93,6 +93,7 @@
     color: red;
     font-size: 12pt;
     text-align: left;
+    width: 100%;
 }
 #comment_submit{
     background-color: white !important;

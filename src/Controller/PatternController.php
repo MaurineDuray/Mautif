@@ -423,7 +423,7 @@ class PatternController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'L\'image de du motif a bien été modifiée'
+                'L\'image de couverture du motif a bien été modifiée'
             );
 
             return $this->redirectToRoute('pattern_show', [
