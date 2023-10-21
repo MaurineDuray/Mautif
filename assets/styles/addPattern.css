@@ -71,8 +71,31 @@
 }
 
 
-/* Pattern update */
+/* Pattern img update */
+#pattern_img div label{
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
 
+.oldImg{
+    width: 300px;
+    margin-left: 50% ;
+    transform: translateX(-50%);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Ajouter image */
+#galery div label{
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
 
 
 

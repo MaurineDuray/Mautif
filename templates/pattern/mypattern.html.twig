@@ -7,7 +7,7 @@
 
         
             <h2>Vos créations - {{user.pseudo}} </h2>
-            <a href={{path('patterns_index')}}><button class="backButton bnt">Retour à la galerie</button></a>
+            <a href={{path('patterns_index')}}><button class="backButton bnt"><i class="fa-solid fa-camera"></i> Retour à la galerie</button></a>
             <div class="filContainer" id="mypatternContent">
             {% if patterns is not empty %}
                 {% for pattern in patterns %}

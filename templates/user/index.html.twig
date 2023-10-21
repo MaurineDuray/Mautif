@@ -32,8 +32,8 @@
             {% endif %}
         {% endif %}
         {% if app.user %}
-                {% if app.user.roles[0] != "ROLE_ADMIN" %}
-                    <a href="{{path('confirm_unsub',{'id': app.user.id})}}"><button class="btn">Me désinscrire</button></a>
+                {% if (app.user.roles[0] != "ROLE_ADMIN") and (app.user.id == user.id) %}
+                    <a href="{{path('confirm_unsub',{'id': app.user.id})}}"><button class="btn" style="background-color: #17E321"><i class="fa-solid fa-right-to-bracket"></i> Me désinscrire</button></a>
                 {% endif %}
         {% endif %}
        </div>

@@ -8,13 +8,15 @@
 {% block body %}
     {% include "./partials/intro.html.twig" %}
     <div class="slide fil ">
+        <a href="{{path('patterns_index')}}"><button class="btn btn-warning m-3" style="margin-left:50%; transform: translateX(-50%)">
+            <i class="fa-solid fa-arrow-left"></i> Retour au patchwork </button></a>
         <h1 style="margin-bottom: 50px; margin-top: 30px; text-align:center;">Ajout de ton résultat à la galerie</h1>
         <p style="text-align:center;"><b>Tu as fait une création avec ce motif: "{{pattern.title}}", poste ton résultat !</b></p>
        
-            <img src="../uploads/{{pattern.cover}}" alt="" class="card-img img-fluid" style="width: 200px">
+            <img src="../../uploads/{{pattern.cover}}" alt="" class="oldImg" style="width: 200px">
         
-        <a href="{{path('patterns_index')}}"><button class="btn btn-warning m-3" style="margin-left:50%; transform: translateX(-50%)">
-            <i class="fa-solid fa-arrow-left"></i> Retour au patchwork </button></a>
+        
+            
         {{form_start(myform)}}
             <div class="container" style="background-color:  rgba(255, 170, 22, 0.1); padding: 20px; border-radius: 20px;">
                 <div>

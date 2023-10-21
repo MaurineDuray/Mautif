@@ -15,7 +15,7 @@ class GaleryType extends AbstractType
         $builder
             ->add('picture', FileType::class, [
                 "required"=>true,
-                'label'=>"Ajoute la photo de ton inspiration(jpg, png, gif)"
+                'label'=>"Ajoute la photo de ton projet (jpg, png, gif)"
             ])
         ;
     }

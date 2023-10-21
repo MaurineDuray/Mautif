@@ -143,6 +143,7 @@ h6 a{
     overflow: hidden;
     position: relative;
     display: flex;
+    height: 300px;
 }
 .item img{
     height: 100%;

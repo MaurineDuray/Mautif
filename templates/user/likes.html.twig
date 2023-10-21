@@ -44,11 +44,11 @@
                                 </div>
                             </a>
                         {% else %}
-                                     <a href="{{path('like', {'id': pattern.pattern.id, 'action': 'remove'})}}" class="heart blush">
-                                        <div class="like">
-                                            <i class="fa-solid fa-heart"></i>
-                                        </div>
-                                    </a>
+                            <a href="{{path('like', {'id': pattern.pattern.id, 'action': 'remove'})}}" class="heart blush">
+                            <div class="like">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            </a>   
                                
                             
                         {% endif %}
