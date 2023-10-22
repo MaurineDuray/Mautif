@@ -135,19 +135,19 @@ h6 a{
     height: 200px;
 }
 
+#comment_submit{
+    color: black !important;
+}
 
 /* carousel */
 
 .item{
-    min-width: 300px !important;
-    overflow: hidden;
+    width: 300px !important;
     position: relative;
     display: flex;
-    height: 300px;
 }
 .item img{
-    height: 100%;
-    width: 100%;
+    width: 300px;
     position: relative;
     margin: 0;
 }
@@ -168,11 +168,12 @@ h6 a{
 .carousel-inner{
     display: flex;
     background-color: rgba(255, 255, 255, 0.114);
-    width: 100%;
+   
     overflow-x: scroll;
     max-height: 45vh;
     align-items: start;
     overflow-y: hidden;
+    flex-wrap: nowrap;
 }
 .carousel-inner::-webkit-scrollbar {
     display: none;
