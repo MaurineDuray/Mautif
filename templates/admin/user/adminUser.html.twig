@@ -19,6 +19,7 @@
                         {# <th>Rôle(s)</th> #}
                         <th>Le profil</th>
                         <th>Les créations</th>
+                        <th>Validité du compte</th>
                         <th>Supprimer</th>
                         <th class="text-center">Actions</th>
                     </tr>
@@ -33,10 +34,18 @@
                             <td>{{user.email}}</td>
                             {# <td>{{user.roles[0]}}</td> #}
                             <td> 
-                            <a href="{{path('user_profile',{'slug': user.slug })}}" class="btn-green"><i class="fa-solid fa-eye"></i></a>
+                                <a href="{{path('user_profile',{'slug': user.slug })}}" class="btn-green"><i class="fa-solid fa-eye"></i></a>
                             </td>
                             <td> 
-                            <a href="{{path('user_patterns',{'slug': user.slug })}}" class="btn-green"><i class="fa-solid fa-eye"></i></a>
+                                <a href="{{path('user_patterns',{'slug': user.slug })}}" class="btn-green"><i class="fa-solid fa-eye"></i></a>
+                            </td>
+                            <td>
+                                {% if user.isVerified == 1 %}
+                                    <i class="fa-solid fa-check"></i>
+                                    {% else %}
+                                    <a href="{{path('account_verify',{'id':user.id})}}" class="btn">Valider le compte</a>      
+                                {% endif %}
+                                
                             </td>
                             <td>
                             {% if user.roles[0] != "ROLE_ADMIN" %}
