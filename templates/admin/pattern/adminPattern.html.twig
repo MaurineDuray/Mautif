@@ -14,6 +14,7 @@
                         <th>ID</th>
                         <th>Vignette</th>
                         <th>Titre du motif</th>
+                        <th>Nb like</th>
                         <th>Voir le Motif</th>
                         <th>Auteur</th>
                         <th>Voir le profil</th>
@@ -28,6 +29,7 @@
                             <td>{{pattern.id}}</td>
                             <td><img class="vignette" src="../uploads/{{pattern.cover}}" alt=""></td>
                             <td>{{pattern.title}}</td>
+                            <td> {{pattern.likes | length}}</td>
                             <td> 
                             <a href="{{path('pattern_show',{'slug': pattern.slug })}}" class="btn-green"><i class="fa-solid fa-eye"></i></a>
                             </td>
