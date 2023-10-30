@@ -116,6 +116,9 @@
     #homeContainer h2{
         font-size: 15pt;
     }
+    .searchType{
+        margin-top: 50px;
+    }
 }
 
 

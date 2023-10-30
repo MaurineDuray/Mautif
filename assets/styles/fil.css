@@ -23,6 +23,8 @@
     position: absolute;
     font-size: 18pt;
     font-family: var(--serif);
+   
+    height: auto;
 }
 .fil h1{
     text-align: center;
@@ -35,6 +37,7 @@
     align-items: center;
     transform: translateX(-50%);
     justify-content: center;
+    margin-top:10px;
 }
 .fil .searchType form input{
    background-color: transparent;

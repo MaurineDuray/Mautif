@@ -168,9 +168,8 @@ h6 a{
 .carousel-inner{
     display: flex;
     background-color: rgba(255, 255, 255, 0.114);
-   
     overflow-x: scroll;
-    max-height: 45vh;
+    max-height: 300px;
     align-items: start;
     overflow-y: hidden;
     flex-wrap: nowrap;
