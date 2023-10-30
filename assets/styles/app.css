@@ -76,7 +76,7 @@ html{
     text-align: center;
 }
 .alert-success{
-    background-color: rgba(52, 154, 78, 0.8);
+    background-color: rgba(68, 153, 89, 0.915);
 }
 .alert-danger{
     background-color: rgba(241, 175, 10, 0.85);
@@ -89,9 +89,14 @@ html{
     border-radius: 20px;
     padding: 0px 10px 0px 10px;
     box-shadow:  3px 3px 15px rgb(0, 0, 0) !important;
+    
+}
+button:hover{
+    box-shadow: inset 0 0 10px #1f1e1d34 !important;
 }
 button{
     box-shadow:  3px 3px 15px rgb(0, 0, 0) !important;
+    transition: all 1s;
 }
 .disabled{display: none;}
 

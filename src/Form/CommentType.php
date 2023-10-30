@@ -15,7 +15,7 @@ class CommentType extends ApplicationType
     {
         $builder
             ->add('content', TextType::class, $this->getConfiguration("Commentaire","Ecrivez ici votre commentaire..."))
-            ->add('submit', SubmitType::class,['label' => 'Partager'],
+            ->add('submit', SubmitType::class,['label' => 'Partager mon commentaire'],
             [
                 'attr' => ['class' => 'btn'],
             ])

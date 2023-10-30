@@ -10,7 +10,7 @@
     <div class="slide fil">
         
         <h2>"{{pattern.title}}" <i>par {{pattern.idUser.pseudo}}</i></h2>
-        <a href={{path('patterns_index')}}><button class="backButton btn"><i class="fa-solid fa-camera"></i> Retour à la galerie</button></a>
+        <a href={{path('patterns_index')}}><button class="backButton btn"><i class="fa-solid fa-camera"></i> Retour au patchwork</button></a>
 
         {% if app.user %}
             {% if (pattern.idUser.id == app.user.id) or (app.user.roles[0]=="ROLE_ADMIN" ) %}
@@ -109,13 +109,9 @@
                 {% endif %}
             {% else %}
                 <p>Aucun créateur n'a posté d'inspiration pour l'instant !</p>
-                <p><b>Sois le premier à poster une de tes réalisations !</b></p>
+                <p><b>Connecte-toi et sois le premier à poster une de tes réalisations !</b></p>
                 {% if app.user %}
                     <a  href="{{path('add_galery',{"slug":pattern.slug})}}" style="color: black; text-decoration: none"><button class="btn">Ajouter une inspiration</button></a>
-                      
-                {% else %}
-                    <a href="{{path('account_login')}}" style="color: black; text-decoration: none"><button class="btn"><i class="fa-solid fa-user"></i> Je me connecte</button></a>
-                    <a href="{{path('account_register')}}" style="color: black; text-decoration: none"><button class="btn"><i class="fa-solid fa-user-plus"></i> Je n'ai pas de compte</button></a>
                 {% endif %}
                 
             {% endif %}
@@ -163,15 +159,11 @@
                 {{form_end(myform)}}
                 </div>
             {% else %}
-                <p style="width:80%; margin: 0 auto; text-align: center; padding-bottom: 30px">Connecte-toi pour poster ton propre commentaire !</p>
-                    <div class="container" style="justify-content:center">
-                    <a href="{{path('account_login')}}" style="color: black; text-decoration: none; margin:20px"><button class="btn"><i class="fa-solid fa-user"></i> Je me connecte</button></a><br>
-                    <a href="{{path('account_register')}}" style="color: black; text-decoration: none; margin:20px"><button class="btn"><i class="fa-solid fa-user-plus"></i> Je n'ai pas de compte</button></a>
-                    </div>
-                    
+                <br><b><p style="width:80%; margin: 0 auto; text-align: center; padding-bottom: 30px">Connecte-toi pour poster ton propre commentaire !</p></b>
+                   
             {% endif %}
         </div>
-         <a href={{path('patterns_index')}}><button class="backButton btn"><i class="fa-solid fa-camera"></i> Retour à la galerie</button></a>
+         <a href={{path('patterns_index')}}><button class="backButton btn"><i class="fa-solid fa-camera"></i> Retour au patchwork</button></a>
     </div>
 
     

@@ -20,7 +20,7 @@
             
 
 
-            <a href={{path('patterns_index')}}><button class="backButton btn"><i class="fa-solid fa-camera"></i> Retour à la galerie</button></a>
+            <a href={{path('patterns_index')}}><button class="backButton btn"><i class="fa-solid fa-camera"></i> Retour au patchwork</button></a>
             {% if app.user %}
                 {% if app.user.id == user.id %}
                     <a href={{path('user_profile', {'slug': user.slug})}}><button class="backButton btn">Voir mon profil</button></a>

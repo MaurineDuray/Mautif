@@ -2,6 +2,7 @@
     {% for message in messages %}
         <div class="alert alert-{{ label }}">
             {{ message|raw}}
+            <br><button class="btn okeFlash" style="margin-top:10px">Ok</button>
         </div>
     {% endfor %}
 {% endfor %}

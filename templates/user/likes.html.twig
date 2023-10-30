@@ -10,11 +10,11 @@
     {% if user.likes | length==0 %}
          <p style="font-size:24pt;  margin-top:150px; text-align:center;">QUOI ?!</p>
         <p style="width: 100%; text-align:center;">Vous n'avez pas encore liké de motifs !? Rendez-vous vite dans le patchwork !</p>
-         <a href={{path('patterns_index')}}><button class="backButton btn"> <i class="fa-solid fa-camera-retro"></i> Retour à la galerie</button></a>
+         <a href={{path('patterns_index')}}><button class="backButton btn"> <i class="fa-solid fa-camera-retro"></i> Retour au patchwork</button></a>
        
     {% endif %}
     {% if user.likes | length > 0 %}
-    <a href={{path('patterns_index')}}><button class="backButton btn"> <i class="fa-solid fa-camera-retro"></i> Retour à la galerie</button></a>
+    <a href={{path('patterns_index')}}><button class="backButton btn"> <i class="fa-solid fa-camera-retro"></i> Retour au patchwork</button></a>
     {% endif %}
     <div class="filContainer">
      

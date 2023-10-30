@@ -10,9 +10,10 @@
     <div class="slide fil ">
         <h1 style="margin-bottom: 50px; margin-top: 30px; text-align:center;">Modification de l'image du motif {{pattern.title}}</h1>
            
-        
+         <a href={{path('patterns_index')}}><button class="backButton"> <i class="fa-solid fa-camera-retro"></i> Retour au patchwork</button></a>
         <a href="{{path('pattern_edit', {'slug': pattern.slug})}}" style="display:flex; justify-content:center; text-decoration: none"><button class="btn">
             <i class="fa-solid fa-arrow-left"></i> Retour à l'édition </button></a>
+           
 
              <p style="width: 100%; text-align: center">Aperçu de l'image actuelle</p>
             <img src="../../uploads/{{pattern.cover}}" alt="images du motif" class="oldImg">
