@@ -78,9 +78,11 @@
             </div> #}
             <div class="container">
             {% if pattern.galeries | length > 0 %}
-                    {% if pattern.galeries | length > 2 %}
-                    <img src={{asset('images/scroll.png')}} alt="">
-                    {% endif %}
+                {% if pattern.galeries | length > 2 %}
+                   <div id="scroll-icon">
+                    <img src={{asset('images/scroll.png')}} alt="scroll-icon">
+                   </div>
+                {% endif %}
                     <div class="carousel-inner">
                     
                         {% for galery in pattern.galeries %}
