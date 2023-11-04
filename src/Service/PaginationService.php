@@ -60,9 +60,9 @@ class PaginationService{
     /**
      * Un tableau pour ordonner les résultats
      *
-     * @var array|null
+     * @var array
      */
-    private ?array $order = null;
+    private ?array $order;
 
     /**
      * Constructeur du service de pagination 

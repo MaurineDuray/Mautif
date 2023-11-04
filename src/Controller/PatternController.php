@@ -18,6 +18,7 @@ use App\Repository\UserRepository;
 use App\Service\PaginationService;
 use App\Repository\PatternRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -86,7 +87,8 @@ class PatternController extends AbstractController
         }else{    
             $pagination -> setEntityClass(Pattern::class)
             ->setPage($page)
-            ->setLimit(12);
+            ->setLimit(12)
+            ->setOrder(['id' => 'DESC']);
 
             $user = $this->getUser();
             $likes = $manager->getRepository(Like::class)->findAll();
