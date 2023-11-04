@@ -1,3 +1,4 @@
+// gestion de l'animation d'accueil 
 const home = document.querySelector('#home')
 const body = document.body
 const html = document.html

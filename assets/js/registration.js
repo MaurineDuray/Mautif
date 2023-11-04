@@ -1,3 +1,4 @@
+// gestion de la validation des conditions générales pour l'inscription
 const check = document.querySelector('#check')
 const submitBtn = document.querySelector('#submitBtn')
 

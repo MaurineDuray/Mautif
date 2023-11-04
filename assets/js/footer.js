@@ -1,3 +1,4 @@
+// gestion de l'apparition et de la dispertion du footer
 const pins = document.querySelector('#pins')
 const footer = document.querySelector('footer')
 

@@ -132,7 +132,7 @@ class AdminUserController extends AbstractController
 
             $this->addFlash(
                 'success',
-                "Votre compte a bien été créé"
+                "Vos informations ont bien été modifiées"
             );
 
             return $this->redirectToRoute('user_profile',['slug'=>$user->getSlug()]);

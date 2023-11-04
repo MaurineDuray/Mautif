@@ -1,3 +1,4 @@
+// Gestion des cookies et du pop up cookie
 console.log('cookies')
 const okbtn = document.querySelector(".okbtn")
 const cookies = document.querySelector(".cookies")

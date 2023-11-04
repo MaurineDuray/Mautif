@@ -32,6 +32,9 @@ use Symfony\Component\Mailer\MailerInterface;
 
 class PatternController extends AbstractController
 {
+   /**
+    * Route qui permet de signaler un motif à l'administrateur par mail si il y a du contenu inaproprié
+    */
     #[Route('/signaler/{id}', name: 'signaler')]
     public function signalement(Pattern $pattern, Request $request, MailerInterface $mailer):Response
     {

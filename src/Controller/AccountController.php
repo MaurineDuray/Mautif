@@ -67,6 +67,14 @@ class AccountController extends AbstractController
         //
     }
 
+    /**
+     * Permet à l'utilisateur de se désinscrire du site et de supprimer ses données
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param SessionInterface $session
+     * @return Response
+     */
     #[Route("/unregister", name:"unregister")]
     public function unregister(Request $request, EntityManagerInterface $manager, SessionInterface $session):Response
     {

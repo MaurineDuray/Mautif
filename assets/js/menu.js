@@ -44,19 +44,7 @@ items.forEach(item=>{
     }
 })
 
-// gestion de la barre de recherche
-
-// loupe.addEventListener('click',function(){
-//     console.log('loupe')
-
-    
-//     input.classList.toggle('actif')
-//     menuResponsive.classList.remove('open')
-//         burger.classList.remove('open');
-//         menuResponsive.style.transition="all 1s";
-    
-// })
-
+// gestion du menu de connexion
 login.addEventListener('click', function(){
     console.log('login click')
 
@@ -67,6 +55,7 @@ login.addEventListener('click', function(){
 
 })
 
+// gestion du pop up alerte 
 const alert = document.querySelectorAll('.alert')
 const okflash = document.querySelectorAll('.okeFlash')
 if (alert) {

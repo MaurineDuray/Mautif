@@ -95,6 +95,7 @@ button:hover{
     box-shadow: inset 0 0 10px #1f1e1d34 !important;
 }
 button{
+    color: black !important;
     box-shadow:  3px 3px 15px rgb(0, 0, 0) !important;
     transition: all 1s;
 }

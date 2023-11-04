@@ -15,6 +15,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class LikeController extends AbstractController
 {
+    /**
+     * Route qui permet de liker et unliker un motif
+     */
     #[Route('/like/{id}/{action}', name: 'like')]
     #[IsGranted("ROLE_USER")]
     public function like(EntityManagerInterface $manager,Pattern $pattern, Request $request,$action, LikeRepository $likeRepo): Response {
@@ -51,6 +54,8 @@ class LikeController extends AbstractController
         return new Response();
         }
 
+
+    /**Ancienne version avant évolution */
     // /**
     //  * Permet de retirer le like d'un motif
     //  */

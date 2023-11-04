@@ -1,3 +1,4 @@
+// gestion du slider galery
 console.log('galery')
 
 var slideIndex = 1;
